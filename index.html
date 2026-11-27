@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
-  <title>Oriptos TikTok Engine — Scale & Dominate Short-Form Video Automation</title>
-  <meta name="description" content="Oriptos TikTok Engine helps businesses scale with organized TikTok accounts, bulk video scheduling, official API integrations, and AI automation."/>
+  <title>Oriptos TikTok Engine — Dominate Short-Form Video with Precision Automation</title>
+  <meta name="description" content="Official TikTok Content Posting & Multi-Account Scheduler. High ROI, zero bans, full API integration."/>
   <link rel="icon" href="/assets/pandaping-icon-blink.avif" type="image/avif"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
@@ -19,16 +19,17 @@
             sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
           },
           colors: {
-            brandDark: '#0B0E14',
-            brandGreen: '#01A095',
-            brandTeal: '#00877D',
-            brandAccent: '#27C97A',
-            brandYellow: '#FFC72C',
-            bgLight: '#F5F5F2',
-            bgCard: '#FFFFFF',
+            ttBlack: '#010101',
+            ttDark: '#0B0E14',
+            ttCard: '#12161F',
+            ttBorder: '#1F2430',
+            ttCyan: '#25F4EE',
+            ttMagenta: '#FE2C55',
+            ttGreen: '#27C97A',
+            ttYellow: '#FFC72C',
           },
           borderRadius: {
-            'custom': '24px',
+            'card': '20px',
             'pill': '999px',
           }
         }
@@ -37,236 +38,302 @@
   </script>
   <style>
     body {
-      background-color: #F5F5F2;
-      color: #101613;
+      background-color: #06080C;
+      color: #F3F4F6;
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     }
-    .announcement-bar {
-      min-height: 40px;
-      padding: 8px 24px;
-      background: #01A095;
-      color: #0A0A0A;
-      text-align: center;
-      font-size: 14px;
-      line-height: 1.4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .tiktok-glow {
+      text-shadow: 2px 2px 0px #FE2C55, -2px -2px 0px #25F4EE;
     }
-    .hero-gradient-text {
-      background: linear-gradient(135deg, #01A095 0%, #27C97A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .tt-badge-gradient {
+      background: linear-gradient(90deg, #25F4EE 0%, #FE2C55 100%);
     }
-    .pill-btn-primary {
-      background: linear-gradient(135deg, #01A095 0%, #00877D 100%);
+    .tt-btn-primary {
+      background: #FFFFFF;
+      color: #000000;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 20px rgba(37, 244, 238, 0.25);
+    }
+    .tt-btn-primary:hover {
+      background: #25F4EE;
+      color: #000000;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37, 244, 238, 0.45);
+    }
+    .tt-btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       color: #FFFFFF;
       transition: all 0.2s ease;
     }
-    .pill-btn-primary:hover {
+    .tt-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: #FE2C55;
       transform: translateY(-2px);
-      box-shadow: 0 10px 20px -5px rgba(1, 160, 149, 0.4);
     }
-    .soft-card {
-      background: #FFFFFF;
-      border: 1px solid #E5E7EB;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    .feature-card {
+      background: #0E121A;
+      border: 1px solid #1C2230;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+      transition: all 0.25s ease;
     }
-    .soft-card:hover {
+    .feature-card:hover {
+      border-color: #25F4EE;
       transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 12px 35px rgba(37, 244, 238, 0.12);
     }
   </style>
 </head>
-<body class="antialiased">
+<body class="antialiased min-h-screen flex flex-col w-full overflow-x-hidden">
 
   <!-- ==================== TOP ANNOUNCEMENT ==================== -->
-  <div class="announcement-bar">
+  <div class="w-full bg-gradient-to-r from-ttCyan/20 via-black to-ttMagenta/20 border-b border-gray-800 text-xs py-2.5 px-6 flex items-center justify-center text-center">
     <span>
-      <strong class="text-xs font-bold uppercase tracking-wider mr-2">TIKTOK API V2 INTEGRATION</strong>
-      Official Content Posting API is now live. Explore Oriptos TikTok Engine.
-      <a href="/login" class="underline font-bold ml-2">Open Dashboard &rarr;</a>
+      <span class="font-extrabold uppercase tracking-wider text-ttCyan mr-2">TIKTOK API V2 ACTIVE</span>
+      Enterprise-grade bulk content scheduling & automated queue is live.
+      <a href="/login" class="text-ttMagenta font-bold hover:underline ml-2">Access Dashboard &rarr;</a>
     </span>
   </div>
 
-  <!-- ==================== STICKY HEADER ==================== -->
-  <header class="sticky top-0 z-50 bg-[#F5F5F2]/95 backdrop-blur-md border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+  <!-- ==================== FULL-WIDTH STICKY HEADER ==================== -->
+  <header class="sticky top-0 z-50 bg-[#06080C]/90 backdrop-blur-md border-b border-[#1A202C] w-full">
+    <div class="w-full px-6 md:px-12 h-20 flex items-center justify-between">
       
       <!-- Logo -->
       <a href="/" class="flex items-center gap-3">
-        <img src="/assets/pandaping-icon-blink.avif" alt="Oriptos Logo" class="w-10 h-10 rounded-xl object-cover shadow-sm"/>
-        <span class="text-2xl font-extrabold tracking-tight text-gray-900">Oriptos</span>
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-ttCyan to-ttMagenta p-[2px]">
+          <div class="w-full h-full bg-black rounded-[10px] flex items-center justify-center">
+            <svg class="w-5 h-5 fill-current text-white" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl font-black tracking-tight text-white">Oriptos</span>
+          <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-ttMagenta/20 text-ttMagenta border border-ttMagenta/40">TikTok Hub</span>
+        </div>
       </a>
 
       <!-- Center Nav Links -->
-      <nav class="hidden md:flex items-center gap-8 text-[15px] font-bold text-gray-700">
-        <a href="#features" class="hover:text-brandGreen transition">Features</a>
-        <a href="#scheduler" class="hover:text-brandGreen transition">Scheduler</a>
-        <a href="#compliance" class="hover:text-brandGreen transition">Compliance</a>
-        <a href="/privacy" class="hover:text-brandGreen transition">Privacy</a>
-        <a href="/terms" class="hover:text-brandGreen transition">Terms</a>
+      <nav class="hidden lg:flex items-center gap-8 text-[14px] font-bold text-gray-300">
+        <a href="#features" class="hover:text-ttCyan transition">Capabilities</a>
+        <a href="#scheduler" class="hover:text-ttCyan transition">Broadcast Scheduler</a>
+        <a href="#compliance" class="hover:text-ttCyan transition">API Compliance</a>
+        <a href="/privacy" class="hover:text-ttCyan transition">Privacy</a>
+        <a href="/terms" class="hover:text-ttCyan transition">Terms</a>
       </nav>
 
       <!-- Right Action Buttons -->
       <div class="flex items-center gap-3">
-        <a href="/login" target="_blank" class="hidden sm:inline-flex items-center gap-2.5 px-6 py-3 rounded-full text-sm font-bold pill-btn-primary">
-          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2M12.05 20.16C10.57 20.16 9.12 19.76 7.85 19L7.55 18.82L4.43 19.64L5.26 16.6L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.8 7.37 7.5 3.67 12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.05 20.16Z"/></svg>
+        <a href="/login" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-extrabold tt-btn-secondary">
+          <svg class="w-4 h-4 fill-current text-ttCyan" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
           <span>Connect TikTok</span>
         </a>
 
-        <a href="/login" class="inline-flex items-center gap-2.5 pl-6 pr-2.5 py-2.5 rounded-full border-2 border-gray-900 text-sm font-bold text-gray-900 hover:bg-gray-900 hover:text-white transition">
-          <span>Login</span>
-          <span class="w-8 h-8 rounded-full bg-gray-900 text-white flex items-center justify-center">
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 5l7 7-7 7"/></svg>
-          </span>
+        <a href="/login" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-black tt-btn-primary">
+          <span>Sign In</span>
+          <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- ==================== HERO SECTION (EXACT PANDAPING HERO STYLE) ==================== -->
-  <section class="max-w-7xl mx-auto px-6 pt-12 pb-20">
-    <div class="relative bg-gradient-to-br from-[#017F76] via-[#01A095] to-[#006059] rounded-[36px] p-8 md:p-16 overflow-hidden text-white shadow-2xl">
+  <!-- ==================== FULL-WIDTH HERO SECTION ==================== -->
+  <section class="w-full relative overflow-hidden py-16 md:py-24 border-b border-[#1A202C]">
+    <!-- Ambient Glow Background -->
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-ttCyan/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-ttMagenta/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       
-      <!-- Hero Content -->
-      <div class="relative z-10 max-w-2xl">
-        <span class="inline-block px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-xs font-black uppercase tracking-wider mb-6">
-          OFFICIAL TIKTOK PARTNER TOOL
-        </span>
-        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.08] mb-6">
-          Scale your TikTok business.<br/>
-          <span class="text-emerald-200">Without the chaos.</span>
+      <!-- Hero Copy -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
+          <span class="w-2 h-2 rounded-full bg-ttCyan animate-ping"></span>
+          <span class="text-xs font-extrabold uppercase tracking-widest text-ttCyan">Official Content Posting API v2</span>
+        </div>
+
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] text-white">
+          Dominate Short-Form Video.<br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-ttCyan via-white to-ttMagenta">Stop Bleeding Reach.</span>
         </h1>
-        <p class="text-lg md:text-xl text-emerald-50 mb-10 font-medium leading-relaxed">
-          Stop bleeding views and engagement. Oriptos provides multi-account TikTok scheduling, bulk queue automation, and direct response lead management in one central dashboard.
+
+        <p class="text-base sm:text-lg text-gray-300 max-w-2xl leading-relaxed font-medium">
+          Selling and attention is what keeps you alive. Oriptos puts the unfair advantage in your hands: multi-account TikTok bulk scheduling, verified OAuth security, and precision queue execution on complete autopilot.
         </p>
 
-        <div class="flex flex-wrap items-center gap-4">
-          <a href="/login" class="px-8 py-4 rounded-full text-base font-extrabold bg-white text-gray-900 hover:bg-emerald-50 shadow-xl transition transform hover:-translate-y-1">
-            Open TikTok Engine
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center gap-4 pt-4">
+          <a href="/login" class="px-8 py-4 rounded-full text-sm font-black tt-btn-primary flex items-center gap-2">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
+            <span>Launch TikTok Engine</span>
           </a>
-          <a href="/login" target="_blank" class="px-8 py-4 rounded-full text-base font-bold bg-black/30 hover:bg-black/50 text-white border border-white/20 backdrop-blur-md transition">
-            Book Live Demo
+          <a href="/dashboard" class="px-7 py-4 rounded-full text-sm font-bold tt-btn-secondary flex items-center gap-2">
+            <i data-lucide="calendar" class="w-4 h-4 text-ttCyan"></i>
+            <span>Preview Broadcast Calendar</span>
           </a>
+        </div>
+
+        <!-- Social Proof Stats -->
+        <div class="pt-8 border-t border-gray-800/80 grid grid-cols-3 gap-6 max-w-lg">
+          <div>
+            <p class="text-2xl font-black text-ttCyan">100%</p>
+            <p class="text-xs text-gray-400 font-medium">Official API Compliant</p>
+          </div>
+          <div>
+            <p class="text-2xl font-black text-ttMagenta">0 Risk</p>
+            <p class="text-xs text-gray-400 font-medium">No Scrapers or Bots</p>
+          </div>
+          <div>
+            <p class="text-2xl font-black text-white">10x</p>
+            <p class="text-xs text-gray-400 font-medium">Output Speed</p>
+          </div>
         </div>
       </div>
 
-      <!-- Hero Photo Card Asset (From PandaPing Assets) -->
-      <div class="mt-10 md:mt-0 md:absolute md:right-10 md:bottom-0 md:top-10 md:w-[480px] flex items-center justify-center pointer-events-none">
-        <img src="/assets/hero-photo-full.webp" alt="PandaPing Hero Illustration" class="w-full h-auto object-cover rounded-3xl shadow-2xl border-4 border-white/20 transform md:rotate-1"/>
+      <!-- Hero Visual (Professional High-Res Video Creator Asset) -->
+      <div class="lg:col-span-5 relative flex items-center justify-center">
+        <div class="relative w-full max-w-lg rounded-3xl overflow-hidden border-2 border-[#1E2638] shadow-2xl bg-black">
+          <!-- Glow Accent Ring -->
+          <div class="absolute -inset-1 bg-gradient-to-r from-ttCyan to-ttMagenta rounded-3xl blur opacity-30"></div>
+          
+          <div class="relative rounded-3xl overflow-hidden">
+            <img src="/assets/tiktok-hero.jpg" alt="Video Creator Production" class="w-full h-[460px] object-cover"/>
+            
+            <!-- Floating UI Card Overlay -->
+            <div class="absolute bottom-4 left-4 right-4 bg-black/85 backdrop-blur-md p-4 rounded-2xl border border-gray-700/80">
+              <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-ttCyan animate-pulse"></span>
+                  <span class="text-xs font-black text-white">Live Content Queue</span>
+                </div>
+                <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-ttMagenta/20 text-ttMagenta border border-ttMagenta/30">Auto-Publish</span>
+              </div>
+              <p class="text-xs text-gray-300 font-medium truncate">Video: "Black Friday Launch Strategy 2026.mp4"</p>
+              <div class="flex items-center justify-between text-[10px] text-gray-400 mt-2">
+                <span>Account: @oriptos.official</span>
+                <span class="text-ttCyan font-bold">14:00 UTC Scheduled</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </section>
 
-  <!-- ==================== VALUE PROPOSITION GRID (EXACT PANDAPING MULTI-CARD) ==================== -->
-  <section id="features" class="max-w-7xl mx-auto px-6 py-16">
-    <div class="text-center max-w-3xl mx-auto mb-16">
-      <span class="text-xs font-black uppercase tracking-widest text-brandGreen">Precision Architecture</span>
-      <h2 class="text-3xl md:text-5xl font-extrabold text-gray-900 mt-2 tracking-tight">
-        Everything your TikTok workflow needs. Nothing it doesn't.
+  <!-- ==================== FULL-WIDTH CAPABILITIES (BENTO GRID) ==================== -->
+  <section id="features" class="w-full px-6 md:px-12 py-20 border-b border-[#1A202C]">
+    <div class="max-w-3xl mb-16">
+      <span class="text-xs font-black uppercase tracking-widest text-ttCyan">High-Leverage Arsenal</span>
+      <h2 class="text-3xl md:text-5xl font-black text-white mt-2 tracking-tight">
+        Engineered to Obliterate Manual Video Posting.
       </h2>
-      <p class="text-base text-gray-600 mt-4">
-        Engineered specifically for creators, agencies, and businesses managing high-volume short-form content.
+      <p class="text-sm md:text-base text-gray-400 mt-4 leading-relaxed">
+        Stop wasting hours uploading one TikTok at a time. Deploy content at scale with enterprise precision.
       </p>
     </div>
 
-    <!-- Cards Grid (PandaPing Style Bento) -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
       
       <!-- Card 1 -->
-      <div class="soft-card rounded-custom p-8 flex flex-col justify-between">
+      <div class="feature-card rounded-card p-8 flex flex-col justify-between">
         <div>
-          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-brandGreen flex items-center justify-center font-bold mb-6">
+          <div class="w-12 h-12 rounded-xl bg-ttCyan/10 border border-ttCyan/30 text-ttCyan flex items-center justify-center font-bold mb-6">
             <i data-lucide="calendar" class="w-6 h-6"></i>
           </div>
-          <h3 class="text-xl font-extrabold text-gray-900 mb-2">Bulk Calendar Scheduling</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Upload dozens of MP4 videos at once. Set dates, specific UTC publish times, customized hashtags, and automate publishing seamlessly.
+          <h3 class="text-xl font-extrabold text-white mb-2">Bulk Calendar Scheduler</h3>
+          <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+            Upload and queue dozens of videos. Select exact dates, target timezones, custom hashtags, and push directly to TikTok servers.
           </p>
         </div>
-        <div class="mt-8 pt-4 border-t border-gray-100 flex items-center text-xs font-bold text-brandGreen">
-          Official Content Posting API &rarr;
+        <div class="mt-8 pt-4 border-t border-gray-800 text-xs font-bold text-ttCyan flex items-center gap-1">
+          <span>video.upload scope active</span>
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
         </div>
       </div>
 
       <!-- Card 2 -->
-      <div class="soft-card rounded-custom p-8 flex flex-col justify-between">
+      <div class="feature-card rounded-card p-8 flex flex-col justify-between">
         <div>
-          <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold mb-6">
-            <i data-lucide="layers" class="w-6 h-6"></i>
+          <div class="w-12 h-12 rounded-xl bg-ttMagenta/10 border border-ttMagenta/30 text-ttMagenta flex items-center justify-center font-bold mb-6">
+            <i data-lucide="users" class="w-6 h-6"></i>
           </div>
-          <h3 class="text-xl font-extrabold text-gray-900 mb-2">Multi-Account Switching</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Connect and manage unlimited TikTok accounts under one roof without constantly logging out or triggering suspicious login flags.
+          <h3 class="text-xl font-extrabold text-white mb-2">Multi-Account Fleet Control</h3>
+          <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+            Manage your personal brand, niche accounts, and client handles from a single authenticated command center without logging out.
           </p>
         </div>
-        <div class="mt-8 pt-4 border-t border-gray-100 flex items-center text-xs font-bold text-brandGreen">
-          OAuth 2.0 Secure Tokens &rarr;
+        <div class="mt-8 pt-4 border-t border-gray-800 text-xs font-bold text-ttMagenta flex items-center gap-1">
+          <span>Official OAuth 2.0 Auth</span>
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
         </div>
       </div>
 
       <!-- Card 3 -->
-      <div class="soft-card rounded-custom p-8 flex flex-col justify-between">
+      <div class="feature-card rounded-card p-8 flex flex-col justify-between">
         <div>
-          <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold mb-6">
-            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/20 text-white flex items-center justify-center font-bold mb-6">
+            <i data-lucide="shield-alert" class="w-6 h-6"></i>
           </div>
-          <h3 class="text-xl font-extrabold text-gray-900 mb-2">100% Zero-Ban Guarantee</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            No dangerous web scrapers, bots, or unapproved browser hacks. Every single post is delivered through TikTok's certified endpoints.
+          <h3 class="text-xl font-extrabold text-white mb-2">Zero-Ban Direct Routing</h3>
+          <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+            Never risk shadowbans or account blocks with illicit Android emulators or Selenium bots. Every post is certified by TikTok.
           </p>
         </div>
-        <div class="mt-8 pt-4 border-t border-gray-100 flex items-center text-xs font-bold text-brandGreen">
-          Enterprise Security Grade &rarr;
+        <div class="mt-8 pt-4 border-t border-gray-800 text-xs font-bold text-gray-300 flex items-center gap-1">
+          <span>video.publish certified</span>
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
         </div>
       </div>
 
       <!-- Card 4 -->
-      <div class="soft-card rounded-custom p-8 flex flex-col justify-between">
+      <div class="feature-card rounded-card p-8 flex flex-col justify-between">
         <div>
-          <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold mb-6">
+          <div class="w-12 h-12 rounded-xl bg-ttCyan/10 border border-ttCyan/30 text-ttCyan flex items-center justify-center font-bold mb-6">
             <i data-lucide="message-square" class="w-6 h-6"></i>
           </div>
-          <h3 class="text-xl font-extrabold text-gray-900 mb-2">Comment-to-Customer Inbox</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Track user replies and comments straight from the PandaPing style inbox and instantly route leads to WhatsApp or CRM.
+          <h3 class="text-xl font-extrabold text-white mb-2">Comment-to-Lead Funnel</h3>
+          <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+            Monitor and respond to high-intent customer comments directly inside the unified inbox to maximize conversion rates.
           </p>
         </div>
-        <div class="mt-8 pt-4 border-t border-gray-100 flex items-center text-xs font-bold text-brandGreen">
-          Direct Lead Capture &rarr;
+        <div class="mt-8 pt-4 border-t border-gray-800 text-xs font-bold text-ttCyan flex items-center gap-1">
+          <span>High-ROI Engagement</span>
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
         </div>
       </div>
 
       <!-- Card 5 -->
-      <div class="soft-card rounded-custom p-8 flex flex-col justify-between">
+      <div class="feature-card rounded-card p-8 flex flex-col justify-between">
         <div>
-          <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center font-bold mb-6">
-            <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
+          <div class="w-12 h-12 rounded-xl bg-ttMagenta/10 border border-ttMagenta/30 text-ttMagenta flex items-center justify-center font-bold mb-6">
+            <i data-lucide="activity" class="w-6 h-6"></i>
           </div>
-          <h3 class="text-xl font-extrabold text-gray-900 mb-2">Real-time Performance Radar</h3>
-          <p class="text-sm text-gray-600 leading-relaxed">
-            Know exactly which videos hit FYP velocity. Track view spikes, save rates, and engagement metrics instantly.
+          <h3 class="text-xl font-extrabold text-white mb-2">Real-Time Queue Telemetry</h3>
+          <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
+            Live feed tracking video processing status, TikTok review queue status, and scheduled dispatch timestamps.
           </p>
         </div>
-        <div class="mt-8 pt-4 border-t border-gray-100 flex items-center text-xs font-bold text-brandGreen">
-          Full Analytics Suite &rarr;
+        <div class="mt-8 pt-4 border-t border-gray-800 text-xs font-bold text-ttMagenta flex items-center gap-1">
+          <span>Instant Webhooks</span>
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
         </div>
       </div>
 
-      <!-- Card 6 -->
-      <div class="soft-card rounded-custom p-8 flex flex-col justify-between bg-gradient-to-br from-emerald-500 to-teal-700 text-white">
+      <!-- Card 6: CTA Card -->
+      <div class="feature-card rounded-card p-8 flex flex-col justify-between bg-gradient-to-br from-ttCard via-[#151B27] to-[#0A0D14] border-ttCyan/40">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-emerald-200">Get Started</span>
-          <h3 class="text-2xl font-extrabold text-white mt-2 mb-3">Ready to dominate short-form?</h3>
-          <p class="text-sm text-emerald-100 leading-relaxed">
-            Join leading brands scaling their video distribution with Oriptos TikTok Engine today.
+          <span class="text-xs font-black uppercase tracking-wider text-ttCyan">Action Required</span>
+          <h3 class="text-2xl font-black text-white mt-2 mb-2">Connect Your Accounts</h3>
+          <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
+            Experience the automated workflow that top content creators use to scale their reach effortlessly.
           </p>
         </div>
         <div class="mt-8">
-          <a href="/login" class="inline-block px-6 py-3 rounded-full bg-white text-gray-900 font-extrabold text-xs shadow-lg hover:bg-emerald-50 transition">
-            Launch Platform Now &rarr;
+          <a href="/login" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-xs font-black tt-btn-primary">
+            <span>Authorize Engine</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
           </a>
         </div>
       </div>
@@ -274,124 +341,114 @@
     </div>
   </section>
 
-  <!-- ==================== SCHEDULER DEMO PREVIEW (BROADCAST CALENDAR CALLOUT) ==================== -->
-  <section id="scheduler" class="max-w-7xl mx-auto px-6 py-16">
-    <div class="bg-brandDark rounded-[36px] p-8 md:p-14 text-white flex flex-col md:flex-row items-center justify-between gap-10">
-      <div class="max-w-xl">
-        <span class="text-xs font-black uppercase tracking-widest text-brandAccent">Live Interactive Engine</span>
-        <h2 class="text-3xl md:text-5xl font-extrabold mt-3 tracking-tight leading-tight">
-          Experience the Broadcast Planner.
+  <!-- ==================== SCHEDULER CALLOUT ==================== -->
+  <section id="scheduler" class="w-full px-6 md:px-12 py-20 border-b border-[#1A202C]">
+    <div class="bg-gradient-to-r from-[#0C1017] via-[#101522] to-[#0C1017] border border-[#1E2638] rounded-3xl p-8 md:p-14 flex flex-col lg:flex-row items-center justify-between gap-10">
+      <div class="max-w-2xl space-y-4">
+        <span class="text-xs font-black uppercase tracking-widest text-ttMagenta">Live Operations Interface</span>
+        <h2 class="text-3xl md:text-5xl font-black text-white tracking-tight">
+          Broadcast Calendar Architecture.
         </h2>
-        <p class="text-base text-gray-400 mt-4 leading-relaxed">
-          The exact calendar architecture you saw in Oriptos Broadcast is built right into your dashboard. Drag, drop, preview, and authorize with one click.
+        <p class="text-sm md:text-base text-gray-300 leading-relaxed">
+          Inspired by Oriptos Broadcast and PandaPing. Visual calendar grids, multi-account filters, and 1-click video queuing.
         </p>
-
-        <div class="flex items-center gap-4 mt-8">
-          <a href="/login" class="px-8 py-3.5 rounded-full font-extrabold text-sm bg-brandAccent text-black hover:bg-emerald-400 transition shadow-lg shadow-brandAccent/20">
-            Open Interactive Calendar
+        <div class="pt-4 flex flex-wrap gap-4">
+          <a href="/login" class="px-8 py-3.5 rounded-full text-xs font-black tt-btn-primary">
+            Enter Dashboard
           </a>
-          <a href="/dashboard" class="px-6 py-3.5 rounded-full font-bold text-sm bg-gray-800 hover:bg-gray-700 text-white transition">
-            Direct Dashboard View
+          <a href="/privacy" class="px-6 py-3.5 rounded-full text-xs font-bold tt-btn-secondary">
+            Developer Documentation
           </a>
         </div>
       </div>
 
-      <!-- Feature badges -->
-      <div class="space-y-4 w-full md:w-auto">
-        <div class="p-4 rounded-2xl bg-gray-800/80 border border-gray-700 flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-brandAccent/20 text-brandAccent flex items-center justify-center font-bold text-sm">
-            01
+      <div class="space-y-3 w-full lg:w-96">
+        <div class="p-4 rounded-2xl bg-black/50 border border-gray-800 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-ttCyan"></span>
+            <span class="text-xs font-bold text-white">@oriptos.official</span>
           </div>
-          <div>
-            <h4 class="text-sm font-bold text-white">Official Scopes Authorized</h4>
-            <p class="text-xs text-gray-400">video.upload & video.publish compliant</p>
-          </div>
+          <span class="text-[10px] font-black text-ttCyan bg-ttCyan/10 px-2 py-0.5 rounded-full">Primary</span>
         </div>
-        <div class="p-4 rounded-2xl bg-gray-800/80 border border-gray-700 flex items-center gap-4">
-          <div class="w-10 h-10 rounded-xl bg-brandAccent/20 text-brandAccent flex items-center justify-center font-bold text-sm">
-            02
+        <div class="p-4 rounded-2xl bg-black/50 border border-gray-800 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-ttMagenta"></span>
+            <span class="text-xs font-bold text-white">@oriptos.media</span>
           </div>
-          <div>
-            <h4 class="text-sm font-bold text-white">Full PandaPing Look & Feel</h4>
-            <p class="text-xs text-gray-400">Authentic typography, buttons, and animations</p>
-          </div>
+          <span class="text-[10px] font-black text-ttMagenta bg-ttMagenta/10 px-2 py-0.5 rounded-full">Secondary</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== COMPLIANCE & LEGAL SECTION (FOR TIKTOK REVIEWERS) ==================== -->
-  <section id="compliance" class="max-w-7xl mx-auto px-6 py-16">
-    <div class="border border-gray-200 bg-white rounded-custom p-8 md:p-12">
-      <div class="max-w-3xl">
-        <span class="text-xs font-bold uppercase tracking-wider text-brandGreen">Developer Compliance</span>
-        <h3 class="text-2xl md:text-3xl font-extrabold text-gray-900 mt-1 mb-4">
-          TikTok Developer Review & Policies
-        </h3>
-        <p class="text-sm text-gray-600 leading-relaxed mb-6">
-          Oriptos Ltd strictly follows all TikTok Developer Platform terms. We ensure complete transparency regarding user data access, authorization scopes, and data erasure.
-        </p>
+  <!-- ==================== COMPLIANCE & LEGAL (TIKTOK REVIEWERS) ==================== -->
+  <section id="compliance" class="w-full px-6 md:px-12 py-16 border-b border-[#1A202C]">
+    <div class="max-w-4xl">
+      <span class="text-xs font-black uppercase tracking-wider text-ttCyan">Trust & Transparency</span>
+      <h3 class="text-2xl md:text-3xl font-black text-white mt-1 mb-3">
+        TikTok Developer Platform Compliance
+      </h3>
+      <p class="text-sm text-gray-400 leading-relaxed mb-6">
+        Oriptos Ltd strictly follows all TikTok Developer Platform terms. We ensure complete transparency regarding user data access, authorization scopes, and data erasure.
+      </p>
 
-        <div class="flex flex-wrap gap-4">
-          <a href="/privacy" class="px-5 py-2.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold transition">
-            Read Privacy Policy &rarr;
-          </a>
-          <a href="/terms" class="px-5 py-2.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold transition">
-            Read Terms of Service &rarr;
-          </a>
-          <a href="/data-deletion" class="px-5 py-2.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold transition">
-            Data Deletion Instructions &rarr;
-          </a>
-        </div>
+      <div class="flex flex-wrap gap-4 text-xs font-bold">
+        <a href="/privacy" class="px-5 py-2.5 rounded-full bg-[#12161F] border border-gray-700 hover:border-ttCyan text-white transition">
+          Privacy Policy &rarr;
+        </a>
+        <a href="/terms" class="px-5 py-2.5 rounded-full bg-[#12161F] border border-gray-700 hover:border-ttCyan text-white transition">
+          Terms of Service &rarr;
+        </a>
+        <a href="/data-deletion" class="px-5 py-2.5 rounded-full bg-[#12161F] border border-gray-700 hover:border-ttCyan text-white transition">
+          User Data Deletion Instructions &rarr;
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-[#101613] text-gray-400 py-16 border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="flex flex-col md:flex-row items-start justify-between gap-10 pb-12 border-b border-gray-800">
+  <!-- ==================== FULL-WIDTH FOOTER ==================== -->
+  <footer class="w-full bg-[#030508] text-gray-400 py-12 px-6 md:px-12">
+    <div class="w-full flex flex-col md:flex-row items-start justify-between gap-8 pb-10 border-b border-gray-800">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xl font-black text-white">Oriptos</span>
+          <span class="text-[10px] uppercase font-bold text-ttCyan px-1.5 py-0.5 rounded bg-ttCyan/10">TikTok Engine</span>
+        </div>
+        <p class="text-xs text-gray-400 max-w-sm">
+          High-performance social media automation and short-form video operations platform.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-10 text-xs">
         <div>
-          <div class="flex items-center gap-3 mb-4">
-            <img src="/assets/pandaping-icon-blink.avif" alt="Oriptos" class="w-8 h-8 rounded-lg"/>
-            <span class="text-xl font-extrabold text-white">Oriptos</span>
-          </div>
-          <p class="text-xs text-gray-400 max-w-sm leading-relaxed">
-            Oriptos Ltd — High-performance social media automation and WhatsApp-first commerce solutions.
-          </p>
+          <h4 class="text-white font-bold mb-2 uppercase tracking-wider text-[11px]">Product</h4>
+          <ul class="space-y-1.5">
+            <li><a href="/login" class="hover:text-ttCyan transition">Login</a></li>
+            <li><a href="/dashboard" class="hover:text-ttCyan transition">Broadcast Dashboard</a></li>
+            <li><a href="#features" class="hover:text-ttCyan transition">Capabilities</a></li>
+          </ul>
         </div>
-
-        <div class="flex flex-wrap gap-12 text-xs">
-          <div>
-            <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Platform</h4>
-            <ul class="space-y-2">
-              <li><a href="/login" class="hover:text-white transition">Login</a></li>
-              <li><a href="/dashboard" class="hover:text-white transition">Dashboard</a></li>
-              <li><a href="#features" class="hover:text-white transition">Features</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Compliance</h4>
-            <ul class="space-y-2">
-              <li><a href="/privacy" class="hover:text-white transition">Privacy Policy</a></li>
-              <li><a href="/terms" class="hover:text-white transition">Terms of Service</a></li>
-              <li><a href="/data-deletion" class="hover:text-white transition">Data Deletion</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Support</h4>
-            <ul class="space-y-2">
-              <li><a href="/login" target="_blank" class="hover:text-white transition">WhatsApp Support</a></li>
-              <li><a href="mailto:oriptosltd@gmail.com" class="hover:text-white transition">oriptosltd@gmail.com</a></li>
-            </ul>
-          </div>
+        <div>
+          <h4 class="text-white font-bold mb-2 uppercase tracking-wider text-[11px]">Compliance</h4>
+          <ul class="space-y-1.5">
+            <li><a href="/privacy" class="hover:text-ttCyan transition">Privacy Policy</a></li>
+            <li><a href="/terms" class="hover:text-ttCyan transition">Terms of Service</a></li>
+            <li><a href="/data-deletion" class="hover:text-ttCyan transition">Data Deletion</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-2 uppercase tracking-wider text-[11px]">Support</h4>
+          <ul class="space-y-1.5">
+            <li><a href="mailto:oriptosltd@gmail.com" class="hover:text-ttCyan transition">oriptosltd@gmail.com</a></li>
+            <li><a href="/terms" class="hover:text-ttCyan transition">Community Guidelines</a></li>
+          </ul>
         </div>
       </div>
+    </div>
 
-      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-        <p>&copy; 2026 Oriptos Ltd. All rights reserved.</p>
-        <p class="text-gray-400">Official TikTok for Developers Content Posting Platform.</p>
-      </div>
+    <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+      <p>&copy; 2026 Oriptos Ltd. All rights reserved.</p>
+      <p>Official TikTok for Developers Content Posting Platform.</p>
     </div>
   </footer>
 

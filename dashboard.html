@@ -3,16 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oriptos Social Engine | TikTok Automation & Bulk Scheduler</title>
+  <title>Oriptos Social Engine | TikTok Broadcast & Scheduler</title>
   <meta name="description" content="Official TikTok Content Posting & Bulk Video Automation Platform by Oriptos Ltd." />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2327C97A'><circle cx='12' cy='12' r='10'/></svg>" />
-  <!-- Google Fonts: Inter -->
+  <link rel="icon" href="/assets/pandaping-icon-blink.avif" type="image/avif" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Tailwind CSS via CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
     tailwind.config = {
@@ -22,19 +19,18 @@
             sans: ['"Plus Jakarta Sans"', 'sans-serif'],
           },
           colors: {
-            brandDark: '#0B0E14',
-            brandSidebar: '#0F1218',
-            brandGreen: '#27C97A',
-            brandYellow: '#FFC72C',
-            bgLight: '#F7F7F5',
-            cardBorder: '#E5E7EB',
+            ttBlack: '#06080C',
+            ttDark: '#0D111A',
+            ttSidebar: '#090C12',
+            ttCard: '#111622',
+            ttCyan: '#25F4EE',
+            ttMagenta: '#FE2C55',
+            ttGreen: '#27C97A',
+            ttYellow: '#FFC72C',
           },
           borderRadius: {
-            'custom': '18px',
-          },
-          boxShadow: {
-            'soft': '0 4px 20px rgba(0, 0, 0, 0.05)',
-            'cardHover': '0 10px 25px rgba(0, 0, 0, 0.08)',
+            'card': '18px',
+            'pill': '999px',
           }
         }
       }
@@ -43,231 +39,202 @@
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #F7F7F5;
-      color: #1F2937;
+      background-color: #06080C;
+      color: #E2E8F0;
     }
     .custom-scrollbar::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
     .custom-scrollbar::-webkit-scrollbar-track {
-      background: #F1F1F1;
+      background: #090C12;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #D1D5DB;
+      background: #1F2736;
       border-radius: 999px;
     }
     .modal-backdrop {
-      background: rgba(11, 14, 20, 0.65);
-      backdrop-filter: blur(4px);
+      background: rgba(6, 8, 12, 0.75);
+      backdrop-filter: blur(6px);
     }
   </style>
 </head>
 <body class="h-screen w-screen overflow-hidden flex flex-col md:flex-row antialiased select-none">
 
-  <!-- ==================== LEFT SIDEBAR ==================== -->
-  <aside class="w-full md:w-64 bg-brandSidebar text-gray-300 flex flex-col justify-between border-r border-gray-800 flex-shrink-0 z-20">
-    <!-- Top: Logo & Nav -->
+  <!-- ==================== LEFT SIDEBAR (TIKTOK DARK FINTECH) ==================== -->
+  <aside class="w-full md:w-64 bg-ttSidebar text-gray-300 flex flex-col justify-between border-r border-[#1B2230] flex-shrink-0 z-20">
     <div class="p-5">
-      <!-- Brand Logo -->
+      <!-- Logo -->
       <div class="flex items-center space-x-3 mb-8 cursor-pointer" onclick="switchTab('planner')">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brandGreen to-emerald-400 flex items-center justify-center text-black font-extrabold text-xl shadow-lg shadow-emerald-900/30">
-          O
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-ttCyan to-ttMagenta p-[2px]">
+          <div class="w-full h-full bg-black rounded-[10px] flex items-center justify-center">
+            <svg class="w-5 h-5 fill-current text-white" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/>
+            </svg>
+          </div>
         </div>
         <div>
-          <h1 class="text-white font-bold text-lg tracking-tight flex items-center gap-1.5">
+          <h1 class="text-white font-extrabold text-lg tracking-tight flex items-center gap-1.5">
             Oriptos
-            <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-full bg-brandGreen/20 text-brandGreen border border-brandGreen/30">TikTok</span>
+            <span class="text-[9px] uppercase font-black px-1.5 py-0.5 rounded-full bg-ttMagenta/20 text-ttMagenta border border-ttMagenta/40">TikTok</span>
           </h1>
-          <p class="text-[11px] text-gray-400 font-medium">Broadcast & Hub</p>
+          <p class="text-[11px] text-gray-400 font-medium">Broadcast Engine</p>
         </div>
       </div>
 
       <!-- Main Navigation -->
       <div class="space-y-1 mb-6">
-        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 mb-2">Main Menu</p>
+        <p class="text-[10px] font-black text-gray-500 uppercase tracking-wider px-3 mb-2">Main Console</p>
         
-        <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all text-gray-400 hover:text-white hover:bg-gray-800/60">
-          <i data-lucide="layout-grid" class="w-4 h-4"></i>
-          <span>Dashboard</span>
-        </button>
-
-        <button onclick="switchTab('planner')" id="nav-planner" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-emerald-500/15 text-brandGreen border border-brandGreen/20 shadow-sm">
+        <button onclick="switchTab('planner')" id="nav-planner" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all bg-ttCyan/10 text-ttCyan border border-ttCyan/30 shadow-sm">
           <i data-lucide="calendar" class="w-4 h-4"></i>
           <span>Planner & Schedule</span>
         </button>
 
-        <button onclick="switchTab('content')" id="nav-content" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all text-gray-400 hover:text-white hover:bg-gray-800/60">
+        <button onclick="switchTab('content')" id="nav-content" class="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-gray-800/40">
           <i data-lucide="film" class="w-4 h-4"></i>
-          <span>Video Content</span>
+          <span>Video Content Queue</span>
         </button>
 
-        <button onclick="switchTab('inbox')" id="nav-inbox" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all text-gray-400 hover:text-white hover:bg-gray-800/60">
+        <button onclick="switchTab('inbox')" id="nav-inbox" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-gray-800/40">
           <div class="flex items-center gap-3">
             <i data-lucide="message-square" class="w-4 h-4"></i>
-            <span>Inbox & Comments</span>
+            <span>Comments & Leads</span>
           </div>
-          <span class="text-[11px] bg-gray-800 px-2 py-0.5 rounded-full text-gray-300">3</span>
+          <span class="text-[11px] bg-ttMagenta/20 text-ttMagenta px-2 py-0.5 rounded-full font-bold">3</span>
         </button>
       </div>
 
-      <!-- Platforms List -->
+      <!-- Connected Channels -->
       <div class="space-y-1">
-        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider px-3 mb-2">Channels</p>
+        <p class="text-[10px] font-black text-gray-500 uppercase tracking-wider px-3 mb-2">Authenticated Fleet</p>
 
-        <!-- TikTok (Active) -->
-        <div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-gray-800/80 text-white border border-gray-700/60">
+        <!-- TikTok Primary -->
+        <div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-bold bg-[#141A26] text-white border border-[#222B3D]">
           <div class="flex items-center gap-3">
-            <svg class="w-4 h-4 fill-current text-white" viewBox="0 0 24 24">
-              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/>
-            </svg>
-            <span>TikTok</span>
+            <svg class="w-4 h-4 fill-current text-ttCyan" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
+            <span>@oriptos.official</span>
           </div>
-          <span class="w-2.5 h-2.5 rounded-full bg-brandGreen shadow-md shadow-brandGreen/50 animate-pulse"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-ttCyan shadow-md shadow-ttCyan/50 animate-pulse"></span>
         </div>
 
-        <!-- WhatsApp -->
+        <!-- TikTok Secondary -->
         <div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:text-white transition-all cursor-pointer">
           <div class="flex items-center gap-3">
-            <i data-lucide="phone" class="w-4 h-4 text-emerald-400"></i>
-            <span>WhatsApp</span>
+            <svg class="w-4 h-4 fill-current text-ttMagenta" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
+            <span>@oriptos.media</span>
           </div>
-          <span class="w-2 h-2 rounded-full bg-emerald-500/70"></span>
-        </div>
-
-        <!-- Instagram -->
-        <div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:text-white transition-all cursor-pointer">
-          <div class="flex items-center gap-3">
-            <i data-lucide="instagram" class="w-4 h-4 text-pink-400"></i>
-            <span>Instagram</span>
-          </div>
-        </div>
-
-        <!-- Facebook -->
-        <div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium text-gray-400 hover:text-white transition-all cursor-pointer">
-          <div class="flex items-center gap-3">
-            <i data-lucide="facebook" class="w-4 h-4 text-blue-400"></i>
-            <span>Facebook</span>
-          </div>
+          <span class="w-2 h-2 rounded-full bg-ttMagenta"></span>
         </div>
       </div>
     </div>
 
-    <!-- Bottom: Legal Links & Admin Info -->
-    <div class="p-4 border-t border-gray-800 bg-[#0A0D12]">
-      <!-- Quick Legal links for TikTok reviewer -->
+    <!-- Bottom: Compliance Links & Admin Info -->
+    <div class="p-4 border-t border-[#1B2230] bg-[#05070A]">
       <div class="flex flex-wrap gap-2 text-[11px] text-gray-400 mb-3 px-1">
-        <a href="#privacy" onclick="switchTab('privacy')" class="hover:text-brandGreen underline transition">Privacy Policy</a>
+        <a href="/privacy" class="hover:text-ttCyan underline transition">Privacy</a>
         <span>•</span>
-        <a href="#terms" onclick="switchTab('terms')" class="hover:text-brandGreen underline transition">Terms of Service</a>
+        <a href="/terms" class="hover:text-ttCyan underline transition">Terms</a>
         <span>•</span>
-        <a href="#data-deletion" onclick="switchTab('data-deletion')" class="hover:text-brandGreen underline transition">Data Deletion</a>
+        <a href="/data-deletion" class="hover:text-ttCyan underline transition">Data Deletion</a>
       </div>
 
-      <div class="flex items-center justify-between bg-gray-900/90 p-2.5 rounded-xl border border-gray-800">
+      <div class="flex items-center justify-between bg-[#0E131E] p-2.5 rounded-xl border border-[#1E2638]">
         <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-full bg-brandGreen/20 text-brandGreen font-bold flex items-center justify-center text-xs border border-brandGreen/30">
+          <div class="w-8 h-8 rounded-full bg-ttCyan/20 text-ttCyan font-extrabold flex items-center justify-center text-xs border border-ttCyan/30">
             A
           </div>
           <div>
-            <p class="text-xs font-semibold text-white leading-tight">Admin Oriptos</p>
+            <p class="text-xs font-bold text-white leading-tight">Admin Oriptos</p>
             <p class="text-[10px] text-gray-400">admin@oriptos.com</p>
           </div>
         </div>
-        <button onclick="openModal('modal-account')" title="Connected Accounts" class="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition">
+        <button onclick="openModal('modal-account')" title="Fleet Settings" class="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-gray-800 transition">
           <i data-lucide="settings" class="w-4 h-4"></i>
         </button>
       </div>
     </div>
   </aside>
 
-  <!-- ==================== MAIN CONTENT AREA ==================== -->
-  <main class="flex-1 flex flex-col h-full overflow-hidden bg-bgLight">
+  <!-- ==================== MAIN CONTENT AREA (FULL WIDTH) ==================== -->
+  <main class="flex-1 flex flex-col h-full overflow-hidden bg-[#06080C]">
 
     <!-- Top Navigation Bar -->
-    <header class="bg-white border-b border-gray-200 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 flex-shrink-0">
+    <header class="bg-[#090C12] border-b border-[#1B2230] px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 flex-shrink-0">
       
-      <!-- Breadcrumb / Tabs (Broadcast style) -->
+      <!-- Tabs (Broadcast style) -->
       <div class="flex items-center gap-2 overflow-x-auto custom-scrollbar py-1">
-        <button onclick="switchTab('planner')" class="top-nav-pill px-4 py-1.5 rounded-full text-xs font-bold bg-brandGreen text-black shadow-sm transition">
-          Planner
+        <button onclick="switchTab('planner')" class="px-4 py-1.5 rounded-full text-xs font-black bg-ttCyan text-black shadow-sm transition">
+          Broadcast Planner
         </button>
-        <button onclick="switchTab('content')" class="top-nav-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition">
-          Content Library
+        <button onclick="switchTab('content')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#141A26] border border-[#222B3D] text-gray-300 hover:text-white transition">
+          Video Assets
         </button>
-        <button onclick="openModal('modal-account')" class="top-nav-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
-          <span>Connected TikToks</span>
-          <span class="w-2 h-2 rounded-full bg-brandGreen"></span>
-        </button>
-        <button onclick="switchTab('analytics')" class="top-nav-pill px-4 py-1.5 rounded-full text-xs font-semibold bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition">
-          Analytics
+        <button onclick="openModal('modal-account')" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#141A26] border border-[#222B3D] text-gray-300 hover:text-white transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 fill-current text-ttCyan" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
+          <span>Connected Fleet</span>
+          <span class="w-2 h-2 rounded-full bg-ttCyan"></span>
         </button>
       </div>
 
       <!-- Action Buttons -->
       <div class="flex items-center gap-3">
-        <!-- Connect TikTok Button -->
-        <button onclick="openModal('modal-account')" class="px-4 py-2 rounded-full text-xs font-bold bg-black text-white hover:bg-gray-800 transition flex items-center gap-2 shadow-sm">
-          <svg class="w-3.5 h-3.5 fill-current text-white" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
-          <span>+ Connect TikTok Account</span>
+        <button onclick="openModal('modal-account')" class="px-4 py-2 rounded-full text-xs font-extrabold bg-[#151B27] border border-[#252E42] text-white hover:border-ttCyan transition flex items-center gap-2">
+          <svg class="w-3.5 h-3.5 fill-current text-ttCyan" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
+          <span>+ Authorize Account</span>
         </button>
 
-        <!-- New Post / Schedule Video Button -->
-        <button onclick="openModal('modal-upload')" class="px-4 py-2 rounded-full text-xs font-bold bg-brandGreen text-black hover:bg-emerald-400 transition flex items-center gap-2 shadow-md shadow-brandGreen/20">
-          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <button onclick="openModal('modal-upload')" class="px-5 py-2 rounded-full text-xs font-black bg-gradient-to-r from-ttCyan to-emerald-400 text-black hover:opacity-90 transition flex items-center gap-2 shadow-lg shadow-ttCyan/20">
+          <i data-lucide="upload" class="w-4 h-4"></i>
           <span>Schedule Video</span>
         </button>
       </div>
     </header>
 
-    <!-- Dynamic Main Views -->
-    <div class="flex-1 overflow-y-auto p-6 custom-scrollbar" id="content-container">
+    <!-- Main Dynamic Container (Full Width) -->
+    <div class="flex-1 overflow-y-auto p-6 custom-scrollbar w-full" id="content-container">
 
       <!-- ==================== VIEW 1: PLANNER & CALENDAR ==================== -->
-      <section id="view-planner" class="space-y-6">
+      <section id="view-planner" class="space-y-6 w-full">
         
         <!-- Controls Bar -->
-        <div class="bg-white p-4 rounded-custom shadow-soft border border-gray-100 flex flex-wrap items-center justify-between gap-4">
-          <div class="flex items-center gap-2">
-            <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Account:</span>
-            <div class="relative inline-block text-left">
-              <select id="selected-account-dropdown" class="bg-gray-50 border border-gray-200 text-gray-800 text-xs rounded-full font-bold px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-brandGreen cursor-pointer">
-                <option value="all">@oriptos.official (Connected)</option>
-                <option value="acc2">@oriptos.media (Connected)</option>
-                <option value="acc3">@oriptos.deals (Pending)</option>
-              </select>
-            </div>
-            <button onclick="renderCalendar()" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-semibold rounded-full transition">
+        <div class="bg-[#0C1017] p-4 rounded-card border border-[#1A2230] flex flex-wrap items-center justify-between gap-4 w-full">
+          <div class="flex items-center gap-3">
+            <span class="text-xs font-black text-gray-400 uppercase tracking-wider">Account:</span>
+            <select class="bg-[#141A26] border border-[#222B3D] text-white text-xs rounded-full font-bold px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-ttCyan cursor-pointer">
+              <option value="all">@oriptos.official (Primary)</option>
+              <option value="acc2">@oriptos.media (Secondary)</option>
+            </select>
+            <button onclick="renderCalendar()" class="px-3 py-1.5 bg-[#141A26] hover:bg-[#1E2738] text-gray-300 text-xs font-bold rounded-full transition">
               Today
             </button>
           </div>
 
           <!-- Month Selector -->
           <div class="flex items-center gap-3">
-            <button class="p-1.5 rounded-full hover:bg-gray-100 text-gray-600 transition">
+            <button class="p-1.5 rounded-full hover:bg-gray-800 text-gray-400 transition">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
             </button>
-            <h2 class="text-sm font-bold text-gray-800">November 2026</h2>
-            <button class="p-1.5 rounded-full hover:bg-gray-100 text-gray-600 transition">
+            <h2 class="text-sm font-extrabold text-white">November 2026</h2>
+            <button class="p-1.5 rounded-full hover:bg-gray-800 text-gray-400 transition">
               <i data-lucide="chevron-right" class="w-4 h-4"></i>
             </button>
           </div>
 
-          <div class="flex items-center gap-2 text-xs">
-            <span class="flex items-center gap-1.5 font-medium text-gray-600">
-              <span class="w-2.5 h-2.5 rounded-full bg-brandGreen"></span> Scheduled (Official API)
+          <div class="flex items-center gap-3 text-xs">
+            <span class="flex items-center gap-1.5 font-bold text-gray-300">
+              <span class="w-2.5 h-2.5 rounded-full bg-ttCyan"></span> API Scheduled
             </span>
-            <span class="flex items-center gap-1.5 font-medium text-gray-600 ml-3">
-              <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span> Published
+            <span class="flex items-center gap-1.5 font-bold text-gray-300 ml-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-ttMagenta"></span> Live on FYP
             </span>
           </div>
         </div>
 
         <!-- Calendar Grid (Broadcast Style) -->
-        <div class="bg-white rounded-custom shadow-soft border border-gray-100 overflow-hidden">
+        <div class="bg-[#0A0D14] rounded-card border border-[#1A2230] overflow-hidden w-full">
           <!-- Days of Week Header -->
-          <div class="grid grid-cols-7 border-b border-gray-200 bg-gray-50/70 text-center text-xs font-bold text-gray-500 py-3">
+          <div class="grid grid-cols-7 border-b border-[#1A2230] bg-[#0E121A] text-center text-xs font-extrabold text-gray-400 py-3">
             <div>MON</div>
             <div>TUE</div>
             <div>WED</div>
@@ -278,166 +245,79 @@
           </div>
 
           <!-- Calendar Days Grid (5 weeks) -->
-          <div class="grid grid-cols-7 auto-rows-fr divide-x divide-y divide-gray-100 min-h-[560px]" id="calendar-days">
-            <!-- Dynamically populated or static demo blocks -->
+          <div class="grid grid-cols-7 auto-rows-fr divide-x divide-y divide-[#151C28] min-h-[580px]" id="calendar-days">
+            <!-- Dynamically populated -->
           </div>
         </div>
       </section>
 
-      <!-- ==================== VIEW 2: CONTENT LIBRARY ==================== -->
-      <section id="view-content" class="hidden space-y-6">
+      <!-- ==================== VIEW 2: CONTENT QUEUE ==================== -->
+      <section id="view-content" class="hidden space-y-6 w-full">
         <div class="flex items-center justify-between">
           <div>
-            <h2 class="text-xl font-extrabold text-gray-900 tracking-tight">TikTok Video Assets</h2>
-            <p class="text-xs text-gray-500">Manage uploaded videos, approved reels, and scheduled batches.</p>
+            <h2 class="text-xl font-black text-white tracking-tight">TikTok Video Assets</h2>
+            <p class="text-xs text-gray-400">Manage uploaded videos, approved reels, and scheduled batches.</p>
           </div>
-          <button onclick="openModal('modal-upload')" class="px-4 py-2 rounded-full text-xs font-bold bg-brandGreen text-black hover:bg-emerald-400 transition flex items-center gap-2">
+          <button onclick="openModal('modal-upload')" class="px-5 py-2 rounded-full text-xs font-black bg-ttCyan text-black hover:bg-cyan-300 transition flex items-center gap-2">
             <i data-lucide="upload-cloud" class="w-4 h-4"></i>
             <span>Upload New MP4</span>
           </button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5" id="video-grid">
-          <!-- Cards injected via JS -->
+          <!-- Video Cards injected via JS -->
         </div>
       </section>
 
       <!-- ==================== VIEW 3: INBOX & COMMENTS ==================== -->
-      <section id="view-inbox" class="hidden h-full flex flex-col md:flex-row gap-5">
-        <!-- Conversations List (PandaPing Inbox Style) -->
-        <div class="w-full md:w-80 bg-white rounded-custom p-4 shadow-soft border border-gray-100 flex flex-col">
+      <section id="view-inbox" class="hidden h-full flex flex-col md:flex-row gap-5 w-full">
+        <div class="w-full md:w-80 bg-[#0C1017] rounded-card p-4 border border-[#1A2230] flex flex-col">
           <div class="mb-4">
-            <h3 class="text-sm font-bold text-gray-900">TikTok Direct Leads</h3>
+            <h3 class="text-sm font-black text-white">TikTok Direct Inquiries</h3>
             <div class="relative mt-2">
-              <input type="text" placeholder="Search comments or users..." class="w-full text-xs bg-gray-50 border border-gray-200 rounded-full px-3 py-2 pl-8 focus:outline-none focus:ring-1 focus:ring-brandGreen">
+              <input type="text" placeholder="Search comments..." class="w-full text-xs bg-[#141A26] border border-[#222B3D] rounded-full px-3 py-2 pl-8 text-white focus:outline-none focus:ring-1 focus:ring-ttCyan">
               <i data-lucide="search" class="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5"></i>
             </div>
           </div>
           <div class="space-y-2 flex-1 overflow-y-auto custom-scrollbar">
-            <div class="p-3 rounded-2xl bg-gray-50 hover:bg-emerald-50/60 border border-gray-200/80 cursor-pointer transition">
+            <div class="p-3 rounded-2xl bg-[#141A26] border border-[#252E42] cursor-pointer transition">
               <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-bold text-gray-900">@usertariq_99</span>
+                <span class="text-xs font-bold text-white">@usertariq_99</span>
                 <span class="text-[10px] text-gray-400">10:45 AM</span>
               </div>
-              <p class="text-xs text-gray-600 truncate">How can I purchase your SaaS plan?</p>
-              <span class="inline-block mt-1 text-[9px] font-bold px-2 py-0.5 rounded-full bg-brandGreen/20 text-emerald-800">New Lead</span>
-            </div>
-            <div class="p-3 rounded-2xl bg-white hover:bg-gray-50 border border-gray-100 cursor-pointer transition">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-xs font-bold text-gray-900">@growthhacker</span>
-                <span class="text-[10px] text-gray-400">Yesterday</span>
-              </div>
-              <p class="text-xs text-gray-600 truncate">Awesome scheduling accuracy!</p>
+              <p class="text-xs text-gray-300 truncate">How can I purchase your SaaS plan?</p>
+              <span class="inline-block mt-1 text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-ttCyan/20 text-ttCyan">High Intent</span>
             </div>
           </div>
         </div>
 
-        <!-- Chat / Comment View -->
-        <div class="flex-1 bg-white rounded-custom p-6 shadow-soft border border-gray-100 flex flex-col justify-between">
+        <div class="flex-1 bg-[#0C1017] rounded-card p-6 border border-[#1A2230] flex flex-col justify-between">
           <div>
-            <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center justify-between pb-4 border-b border-gray-800">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-brandSidebar text-white flex items-center justify-center font-bold text-xs">
+                <div class="w-10 h-10 rounded-full bg-ttSidebar text-ttCyan flex items-center justify-center font-bold text-xs border border-ttCyan/30">
                   UT
                 </div>
                 <div>
-                  <h4 class="text-sm font-bold text-gray-900">@usertariq_99</h4>
-                  <p class="text-xs text-brandGreen font-medium">TikTok User • Comment on Post #402</p>
+                  <h4 class="text-sm font-bold text-white">@usertariq_99</h4>
+                  <p class="text-xs text-ttCyan font-medium">TikTok User • Video #402</p>
                 </div>
               </div>
-              <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-semibold text-gray-600">ID: #9932</span>
+              <span class="px-3 py-1 bg-[#141A26] rounded-full text-xs font-bold text-gray-400">ID: #9932</span>
             </div>
             <div class="py-6 space-y-4">
               <div class="flex gap-3 max-w-md">
-                <div class="bg-gray-100 p-3.5 rounded-2xl text-xs text-gray-800">
+                <div class="bg-[#141A26] p-3.5 rounded-2xl text-xs text-gray-200 border border-[#222B3D]">
                   Assalam o Alaikum, love your recent TikTok video! How do I get early beta access to the bulk scheduler?
-                </div>
-              </div>
-              <div class="flex gap-3 max-w-md ml-auto justify-end">
-                <div class="bg-brandSidebar text-white p-3.5 rounded-2xl text-xs">
-                  Walaikum Assalam! You can connect your TikTok account directly using our verified API integration above.
                 </div>
               </div>
             </div>
           </div>
-          <div class="pt-4 border-t border-gray-100 flex gap-2">
-            <input type="text" placeholder="Type verified TikTok reply..." class="flex-1 bg-gray-50 border border-gray-200 text-xs rounded-full px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brandGreen">
-            <button class="px-5 py-2.5 bg-brandGreen text-black text-xs font-bold rounded-full hover:bg-emerald-400 transition">
+          <div class="pt-4 border-t border-gray-800 flex gap-2">
+            <input type="text" placeholder="Type verified TikTok reply..." class="flex-1 bg-[#141A26] border border-[#222B3D] text-xs rounded-full px-4 py-2.5 text-white focus:outline-none focus:ring-1 focus:ring-ttCyan">
+            <button class="px-6 py-2.5 bg-ttCyan text-black text-xs font-black rounded-full hover:bg-cyan-300 transition">
               Send Reply
             </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== VIEW 4: PRIVACY POLICY (MANDATORY) ==================== -->
-      <section id="view-privacy" class="hidden bg-white rounded-custom p-8 shadow-soft border border-gray-100 max-w-4xl mx-auto space-y-6">
-        <div class="border-b pb-4">
-          <span class="text-xs font-bold uppercase tracking-wider text-brandGreen">Legal Compliance</span>
-          <h2 class="text-2xl font-black text-gray-900 mt-1">Privacy Policy</h2>
-          <p class="text-xs text-gray-500">Last updated: November 27, 2026 • Official TikTok API Integration</p>
-        </div>
-
-        <div class="text-sm text-gray-700 space-y-4 leading-relaxed">
-          <p><strong>1. Introduction:</strong> Oriptos Ltd ("we", "us", or "our") operates <strong>tiktok.oriptos.com</strong>. We respect your privacy and are committed to protecting personal data collected via our application and TikTok for Developers integration.</p>
-
-          <p><strong>2. Information We Collect:</strong> When you connect your TikTok account via official OAuth authentication, we receive permission-scoped data including your TikTok username, display name, profile avatar, and authorization tokens necessary to post content on your behalf (such as <code>video.upload</code> and <code>video.publish</code>).</p>
-
-          <p><strong>3. Use of Information:</strong> We strictly use your TikTok credentials and tokens to:
-            <ul class="list-disc pl-5 mt-1 space-y-1">
-              <li>Authenticate your account into the Oriptos Social Engine.</li>
-              <li>Schedule, queue, and publish user-approved video content to your TikTok account.</li>
-              <li>Display metrics, post status, and verification feedback.</li>
-            </ul>
-          </p>
-
-          <p><strong>4. Data Storage & Security:</strong> We do NOT store your TikTok passwords. All OAuth access tokens are securely stored using industry-grade encryption. We never sell, rent, or transfer your personal or TikTok data to third-party data brokers or unauthorized entities.</p>
-
-          <p><strong>5. Data Deletion & Revocation:</strong> You can disconnect your TikTok account at any time via the Settings modal or directly through your TikTok Security settings. To request full deletion of your user account and stored metadata, visit our <a href="#data-deletion" onclick="switchTab('data-deletion')" class="text-brandGreen underline font-semibold">Data Deletion Instructions</a>.</p>
-        </div>
-      </section>
-
-      <!-- ==================== VIEW 5: TERMS OF SERVICE (MANDATORY) ==================== -->
-      <section id="view-terms" class="hidden bg-white rounded-custom p-8 shadow-soft border border-gray-100 max-w-4xl mx-auto space-y-6">
-        <div class="border-b pb-4">
-          <span class="text-xs font-bold uppercase tracking-wider text-brandGreen">Legal Agreement</span>
-          <h2 class="text-2xl font-black text-gray-900 mt-1">Terms of Service</h2>
-          <p class="text-xs text-gray-500">Effective Date: November 27, 2026</p>
-        </div>
-
-        <div class="text-sm text-gray-700 space-y-4 leading-relaxed">
-          <p><strong>1. Acceptance of Terms:</strong> By accessing and using <strong>tiktok.oriptos.com</strong>, you agree to comply with and be bound by these Terms of Service, all applicable laws, and the <a href="https://www.tiktok.com/community-guidelines" target="_blank" class="text-brandGreen underline">TikTok Community Guidelines</a>.</p>
-
-          <p><strong>2. Authorized Use:</strong> You agree not to use Oriptos Social Engine to distribute spam, malware, infringing copyrighted materials, or content that violates TikTok's terms. You must own or hold the appropriate licenses for all video assets uploaded to our platform.</p>
-
-          <p><strong>3. API Usage Compliance:</strong> Our platform strictly adheres to TikTok Content Posting API rate limits, specifications, and policies. Any attempt to abuse, reverse engineer, or exploit the API will result in immediate account suspension.</p>
-
-          <p><strong>4. Limitation of Liability:</strong> Oriptos Ltd provides services on an "as-is" and "as-available" basis without warranties of any kind. We are not liable for any account actions taken by TikTok as a result of content posted by the user.</p>
-        </div>
-      </section>
-
-      <!-- ==================== VIEW 6: DATA DELETION (MANDATORY) ==================== -->
-      <section id="view-data-deletion" class="hidden bg-white rounded-custom p-8 shadow-soft border border-gray-100 max-w-4xl mx-auto space-y-6">
-        <div class="border-b pb-4">
-          <span class="text-xs font-bold uppercase tracking-wider text-brandGreen">User Rights</span>
-          <h2 class="text-2xl font-black text-gray-900 mt-1">User Data Deletion Instructions</h2>
-          <p class="text-xs text-gray-500">In accordance with TikTok Developer Policies and GDPR</p>
-        </div>
-
-        <div class="text-sm text-gray-700 space-y-4 leading-relaxed">
-          <p>Oriptos Ltd respects your right to delete your personal data and revoke TikTok access tokens. If you wish to delete your data associated with our app, you have two options:</p>
-
-          <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-            <h4 class="font-bold text-gray-900 mb-1">Option 1: In-App Revocation (Instant)</h4>
-            <p class="text-xs text-gray-600 mb-3">You can remove your TikTok connection at any time by clicking "Disconnect Account" under the Connected Accounts manager. This instantly wipes your stored authorization tokens from our database.</p>
-            <button onclick="openModal('modal-account')" class="px-4 py-2 bg-black text-white text-xs font-bold rounded-full hover:bg-gray-800 transition">
-              Open Connected Accounts
-            </button>
-          </div>
-
-          <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200">
-            <h4 class="font-bold text-gray-900 mb-1">Option 2: Direct Request to Data Protection Officer</h4>
-            <p class="text-xs text-gray-600 mb-2">You can email our data compliance team with your TikTok username. We will permanently erase all your logs, scheduled queues, and user profile data within 48 hours.</p>
-            <p class="text-xs font-bold text-gray-900">Email: <span class="text-brandGreen">privacy@oriptos.com</span> or <span class="text-brandGreen">oriptosltd@gmail.com</span></p>
           </div>
         </div>
       </section>
@@ -445,177 +325,151 @@
     </div>
   </main>
 
-  <!-- ==================== MODAL 1: CONNECT TIKTOK ACCOUNT (OAuth Simulation) ==================== -->
+  <!-- ==================== MODAL 1: FLEET MANAGER ==================== -->
   <div id="modal-account" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-custom max-w-md w-full p-6 shadow-2xl border border-gray-100 transform transition-all">
-      <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+    <div class="bg-[#0E121A] rounded-card max-w-md w-full p-6 border border-[#1F2738] shadow-2xl">
+      <div class="flex items-center justify-between pb-4 border-b border-gray-800">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
-          </div>
-          <h3 class="text-base font-extrabold text-gray-900">Connected TikTok Accounts</h3>
+          <svg class="w-5 h-5 fill-current text-ttCyan" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
+          <h3 class="text-base font-black text-white">Authenticated Fleet</h3>
         </div>
-        <button onclick="closeModal('modal-account')" class="p-1.5 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition">
+        <button onclick="closeModal('modal-account')" class="p-1 rounded-full text-gray-400 hover:text-white transition">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <div class="py-4 space-y-3">
-        <!-- Account Item 1 -->
-        <div class="flex items-center justify-between p-3 rounded-2xl bg-gray-50 border border-gray-200">
+        <div class="flex items-center justify-between p-3.5 rounded-2xl bg-[#141A26] border border-[#222B3D]">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-emerald-100 text-brandGreen font-bold flex items-center justify-center text-sm border border-emerald-300">
+            <div class="w-10 h-10 rounded-full bg-ttCyan/20 text-ttCyan font-extrabold flex items-center justify-center text-sm border border-ttCyan/40">
               OO
             </div>
             <div>
-              <p class="text-xs font-bold text-gray-900">@oriptos.official</p>
-              <p class="text-[10px] text-brandGreen font-semibold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-brandGreen"></span> Official API Active
+              <p class="text-xs font-bold text-white">@oriptos.official</p>
+              <p class="text-[10px] text-ttCyan font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-ttCyan"></span> API Active
               </p>
             </div>
           </div>
-          <span class="text-[11px] font-bold text-gray-400">Primary</span>
+          <span class="text-[10px] font-black uppercase text-ttCyan bg-ttCyan/10 px-2 py-0.5 rounded-full">Primary</span>
         </div>
 
-        <!-- Account Item 2 -->
-        <div class="flex items-center justify-between p-3 rounded-2xl bg-gray-50 border border-gray-200">
+        <div class="flex items-center justify-between p-3.5 rounded-2xl bg-[#141A26] border border-[#222B3D]">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-600 font-bold flex items-center justify-center text-sm border border-purple-300">
+            <div class="w-10 h-10 rounded-full bg-ttMagenta/20 text-ttMagenta font-extrabold flex items-center justify-center text-sm border border-ttMagenta/40">
               OM
             </div>
             <div>
-              <p class="text-xs font-bold text-gray-900">@oriptos.media</p>
-              <p class="text-[10px] text-brandGreen font-semibold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-brandGreen"></span> Official API Active
+              <p class="text-xs font-bold text-white">@oriptos.media</p>
+              <p class="text-[10px] text-ttMagenta font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-ttMagenta"></span> API Active
               </p>
             </div>
           </div>
-          <button onclick="alert('Account disconnected.')" class="text-[11px] text-red-500 hover:underline font-semibold">Disconnect</button>
+          <span class="text-[10px] font-black uppercase text-ttMagenta bg-ttMagenta/10 px-2 py-0.5 rounded-full">Secondary</span>
         </div>
       </div>
 
-      <!-- Connect New Button (Trigger OAuth Flow) -->
       <div class="pt-2">
-        <button onclick="triggerTikTokOAuth()" class="w-full py-3 rounded-full bg-black hover:bg-gray-800 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition">
-          <svg class="w-4 h-4 fill-current text-white" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
-          <span>Authorize New TikTok Account</span>
+        <button onclick="triggerTikTokOAuth()" class="w-full py-3 rounded-full bg-white text-black font-black text-xs flex items-center justify-center gap-2 hover:bg-ttCyan transition">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>
+          <span>Authorize New TikTok Handle</span>
         </button>
-        <p class="text-[10px] text-center text-gray-400 mt-2">Requires TikTok permissions: <code>video.upload</code> & <code>video.publish</code></p>
       </div>
     </div>
   </div>
 
-  <!-- ==================== MODAL 2: SCHEDULE VIDEO (CONTENT POSTING API DEMO) ==================== -->
+  <!-- ==================== MODAL 2: SCHEDULE VIDEO ==================== -->
   <div id="modal-upload" class="fixed inset-0 modal-backdrop hidden flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-custom max-w-lg w-full p-6 shadow-2xl border border-gray-100">
-      <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+    <div class="bg-[#0E121A] rounded-card max-w-lg w-full p-6 border border-[#1F2738] shadow-2xl">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-800">
         <div>
-          <h3 class="text-base font-extrabold text-gray-900">Schedule Video to TikTok</h3>
-          <p class="text-[11px] text-gray-500">Official TikTok Content Posting API v2</p>
+          <h3 class="text-base font-black text-white">Queue Video to TikTok</h3>
+          <p class="text-[11px] text-gray-400">Content Posting API v2 Dispatch</p>
         </div>
-        <button onclick="closeModal('modal-upload')" class="p-1.5 rounded-full hover:bg-gray-100 text-gray-400 hover:text-gray-700 transition">
+        <button onclick="closeModal('modal-upload')" class="p-1 rounded-full text-gray-400 hover:text-white transition">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
       <form id="schedule-form" onsubmit="handleScheduleSubmit(event)" class="py-4 space-y-4">
-        <!-- Target Account -->
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Target Account *</label>
-          <select class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-2.5 font-semibold focus:outline-none focus:ring-2 focus:ring-brandGreen">
+          <label class="block text-xs font-bold text-gray-300 mb-1">Target Account *</label>
+          <select class="w-full bg-[#141A26] border border-[#222B3D] text-white text-xs rounded-xl p-2.5 font-bold focus:outline-none focus:ring-1 focus:ring-ttCyan">
             <option>@oriptos.official (Primary)</option>
             <option>@oriptos.media (Secondary)</option>
           </select>
         </div>
 
-        <!-- Video Upload Box -->
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Select Video (MP4 / MOV) *</label>
-          <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-brandGreen bg-gray-50/50 cursor-pointer transition">
+          <label class="block text-xs font-bold text-gray-300 mb-1">Select Video (MP4 / MOV) *</label>
+          <div class="border-2 border-dashed border-[#222B3D] rounded-2xl p-6 text-center hover:border-ttCyan bg-[#121622] cursor-pointer transition">
             <i data-lucide="video" class="w-8 h-8 text-gray-400 mx-auto mb-2"></i>
-            <p class="text-xs font-bold text-gray-700">Drag & drop video or browse</p>
-            <p class="text-[10px] text-gray-400 mt-0.5">MP4 or MOV, up to 1080p, max 500MB</p>
+            <p class="text-xs font-bold text-white">Drag & drop video or browse</p>
+            <p class="text-[10px] text-gray-500 mt-0.5">MP4 or MOV, up to 1080p, max 500MB</p>
           </div>
         </div>
 
-        <!-- Caption Box -->
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">TikTok Caption & Hashtags *</label>
-          <textarea id="caption-input" rows="3" placeholder="Write an engaging caption... #viral #automation #oriptos" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-brandGreen" required>Automate your TikTok operations with precision. #oriptos #efficiency #growth</textarea>
+          <label class="block text-xs font-bold text-gray-300 mb-1">TikTok Caption & Tags *</label>
+          <textarea id="caption-input" rows="3" class="w-full bg-[#141A26] border border-[#222B3D] text-white text-xs rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-ttCyan" required>Dominate short-form video operations with Oriptos. #fyp #tiktokgrowth #automation</textarea>
         </div>
 
-        <!-- Date & Time Picker -->
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Publish Date *</label>
-            <input type="date" value="2026-11-28" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-2.5 font-medium focus:outline-none focus:ring-2 focus:ring-brandGreen">
+            <label class="block text-xs font-bold text-gray-300 mb-1">Publish Date *</label>
+            <input type="date" value="2026-11-28" class="w-full bg-[#141A26] border border-[#222B3D] text-white text-xs rounded-xl p-2.5 font-bold focus:outline-none focus:ring-1 focus:ring-ttCyan">
           </div>
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Publish Time (UTC) *</label>
-            <input type="time" value="14:00" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-2.5 font-medium focus:outline-none focus:ring-2 focus:ring-brandGreen">
+            <label class="block text-xs font-bold text-gray-300 mb-1">Publish Time (UTC) *</label>
+            <input type="time" value="14:00" class="w-full bg-[#141A26] border border-[#222B3D] text-white text-xs rounded-xl p-2.5 font-bold focus:outline-none focus:ring-1 focus:ring-ttCyan">
           </div>
         </div>
 
-        <!-- Submit Button -->
         <div class="pt-2">
-          <button type="submit" id="btn-schedule-submit" class="w-full py-3 rounded-full bg-brandGreen hover:bg-emerald-400 text-black font-extrabold text-xs flex items-center justify-center gap-2 shadow-lg shadow-brandGreen/20 transition">
+          <button type="submit" id="btn-schedule-submit" class="w-full py-3 rounded-full bg-gradient-to-r from-ttCyan to-emerald-400 text-black font-black text-xs flex items-center justify-center gap-2 shadow-lg shadow-ttCyan/20 hover:opacity-90 transition">
             <i data-lucide="send" class="w-4 h-4"></i>
-            <span>Confirm & Schedule to TikTok Queue</span>
+            <span>Confirm & Queue to TikTok API</span>
           </button>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
   <script>
-    // Initialize Lucide Icons
     lucide.createIcons();
 
-    // Navigation Switcher
     function switchTab(tabId) {
-      const views = ['planner', 'content', 'inbox', 'privacy', 'terms', 'data-deletion'];
-      views.forEach(v => {
+      ['planner', 'content', 'inbox'].forEach(v => {
         const el = document.getElementById('view-' + v);
         if (el) el.classList.add('hidden');
       });
-
       const target = document.getElementById('view-' + tabId);
-      if (target) {
-        target.classList.remove('hidden');
-      }
+      if (target) target.classList.remove('hidden');
 
-      // Update Nav active styling
-      ['dashboard', 'planner', 'content', 'inbox'].forEach(n => {
+      ['planner', 'content', 'inbox'].forEach(n => {
         const btn = document.getElementById('nav-' + n);
         if (btn) {
-          if (n === tabId || (n === 'planner' && tabId === 'dashboard')) {
-            btn.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all bg-emerald-500/15 text-brandGreen border border-brandGreen/20 shadow-sm";
+          if (n === tabId) {
+            btn.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all bg-ttCyan/10 text-ttCyan border border-ttCyan/30 shadow-sm";
           } else {
-            btn.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all text-gray-400 hover:text-white hover:bg-gray-800/60";
+            btn.className = "w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-400 hover:text-white hover:bg-gray-800/40";
           }
         }
       });
     }
 
-    // Modal Handlers
-    function openModal(id) {
-      document.getElementById(id).classList.remove('hidden');
-    }
-    function closeModal(id) {
-      document.getElementById(id).classList.add('hidden');
-    }
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-    // Simulated TikTok OAuth
     function triggerTikTokOAuth() {
-      const confirmAuth = confirm("Simulating TikTok OAuth Authorization...\n\nPermissions requested:\n- video.upload\n- video.publish\n- user.info.basic\n\nClick OK to authorize Oriptos.");
+      const confirmAuth = confirm("Simulating TikTok OAuth 2.0 Authorization...\n\nScopes:\n- video.upload\n- video.publish\n- user.info.basic\n\nClick OK to authorize.");
       if (confirmAuth) {
-        alert("✅ Authorization Successful! TikTok Account @oriptos.official token refreshed and active.");
+        alert("✅ Authorization Successful! Handle refreshed.");
         closeModal('modal-account');
       }
     }
 
-    // Handle Video Schedule Form Submission
     function handleScheduleSubmit(e) {
       e.preventDefault();
       const btn = document.getElementById('btn-schedule-submit');
@@ -624,28 +478,26 @@
 
       setTimeout(() => {
         alert("🎉 Video successfully queued via TikTok Content Posting API!\nScheduled for: Nov 28, 2026 at 14:00 UTC");
-        btn.innerHTML = '<i data-lucide="send" class="w-4 h-4"></i><span>Confirm & Schedule to TikTok Queue</span>';
+        btn.innerHTML = '<i data-lucide="send" class="w-4 h-4"></i><span>Confirm & Queue to TikTok API</span>';
         btn.disabled = false;
         closeModal('modal-upload');
         lucide.createIcons();
       }, 1500);
     }
 
-    // Render Demo Calendar Days
     function renderCalendar() {
       const container = document.getElementById('calendar-days');
       if (!container) return;
       container.innerHTML = '';
 
-      // 35 days (Nov 2026 demo)
       const scheduledPosts = {
-        3: { title: "Automate Reels 🚀", time: "11:00 AM", status: "Published", color: "bg-blue-100 text-blue-700 border-blue-200" },
-        7: { title: "Oriptos Feature Drop", time: "03:30 PM", status: "Published", color: "bg-blue-100 text-blue-700 border-blue-200" },
-        14: { title: "SaaS ROI Secrets", time: "09:00 AM", status: "Published", color: "bg-blue-100 text-blue-700 border-blue-200" },
-        20: { title: "Viral Hook Blueprint", time: "06:00 PM", status: "Published", color: "bg-blue-100 text-blue-700 border-blue-200" },
-        27: { title: "Black Friday Launch ⚡", time: "02:00 PM", status: "Today", color: "bg-emerald-100 text-emerald-800 border-emerald-300" },
-        28: { title: "Content Engine v2", time: "07:00 PM", status: "Scheduled", color: "bg-emerald-100 text-emerald-800 border-emerald-300" },
-        29: { title: "Q4 Growth Tactics", time: "01:00 PM", status: "Scheduled", color: "bg-emerald-100 text-emerald-800 border-emerald-300" },
+        3: { title: "Automate Reels 🚀", time: "11:00 AM", status: "Published", color: "bg-ttCyan/15 text-ttCyan border-ttCyan/30" },
+        7: { title: "Feature Drop", time: "03:30 PM", status: "Published", color: "bg-ttCyan/15 text-ttCyan border-ttCyan/30" },
+        14: { title: "SaaS ROI Secrets", time: "09:00 AM", status: "Published", color: "bg-ttCyan/15 text-ttCyan border-ttCyan/30" },
+        20: { title: "Viral Hook Blueprint", time: "06:00 PM", status: "Published", color: "bg-ttCyan/15 text-ttCyan border-ttCyan/30" },
+        27: { title: "Black Friday Launch ⚡", time: "02:00 PM", status: "Today", color: "bg-ttMagenta/20 text-ttMagenta border-ttMagenta/40" },
+        28: { title: "Content Engine v2", time: "07:00 PM", status: "Scheduled", color: "bg-ttCyan/20 text-ttCyan border-ttCyan/40" },
+        29: { title: "Q4 Growth Tactics", time: "01:00 PM", status: "Scheduled", color: "bg-ttCyan/20 text-ttCyan border-ttCyan/40" },
       };
 
       for (let i = 1; i <= 35; i++) {
@@ -655,19 +507,19 @@
         const isToday = dayNumber === 27 && isCurrentMonth;
 
         const cell = document.createElement('div');
-        cell.className = `p-2 min-h-[110px] flex flex-col justify-between transition hover:bg-gray-50/80 cursor-pointer ${isToday ? 'bg-emerald-50/40 ring-1 ring-inset ring-brandGreen' : ''}`;
+        cell.className = `p-2 min-h-[110px] flex flex-col justify-between transition hover:bg-[#111722] cursor-pointer ${isToday ? 'bg-ttMagenta/10 ring-1 ring-inset ring-ttMagenta' : ''}`;
         
         let cellContent = `
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold ${isCurrentMonth ? (isToday ? 'text-brandGreen' : 'text-gray-800') : 'text-gray-300'}">${dayNumber}</span>
-            ${isToday ? '<span class="text-[9px] font-extrabold uppercase bg-brandGreen text-black px-1.5 py-0.2 rounded-full">Today</span>' : ''}
+            <span class="text-xs font-bold ${isCurrentMonth ? (isToday ? 'text-ttMagenta font-black' : 'text-gray-300') : 'text-gray-700'}">${dayNumber}</span>
+            ${isToday ? '<span class="text-[9px] font-black uppercase bg-ttMagenta text-white px-1.5 py-0.2 rounded-full">Today</span>' : ''}
           </div>
         `;
 
         if (post && isCurrentMonth) {
           cellContent += `
-            <div class="mt-2 p-1.5 rounded-xl border text-[10px] font-medium leading-tight ${post.color} shadow-xs">
-              <div class="flex items-center justify-between font-bold">
+            <div class="mt-2 p-1.5 rounded-xl border text-[10px] font-bold leading-tight ${post.color}">
+              <div class="flex items-center justify-between">
                 <span class="truncate">${post.title}</span>
               </div>
               <p class="text-[9px] opacity-80 mt-0.5">${post.time} • TikTok</p>
@@ -683,38 +535,36 @@
       }
     }
 
-    // Render Demo Video Content Cards
     function renderVideoLibrary() {
       const grid = document.getElementById('video-grid');
       if (!grid) return;
 
       const videos = [
-        { title: "SaaS Workflow 2026", duration: "0:45", size: "18.4 MB", status: "Ready to Post", views: "14.2k" },
-        { title: "Bulk Scheduling Masterclass", duration: "1:15", size: "32.1 MB", status: "Scheduled", views: "28.5k" },
-        { title: "Client Acquisition Funnel", duration: "0:30", size: "12.8 MB", status: "Published", views: "92.0k" },
-        { title: "Direct Response Hooks", duration: "0:58", size: "24.6 MB", status: "Published", views: "45.1k" },
+        { title: "SaaS Workflow 2026", duration: "0:45", size: "18.4 MB", status: "Ready to Post", color: "border-ttCyan/30" },
+        { title: "Bulk Scheduling Masterclass", duration: "1:15", size: "32.1 MB", status: "Scheduled", color: "border-ttCyan/30" },
+        { title: "Client Acquisition Funnel", duration: "0:30", size: "12.8 MB", status: "Published", color: "border-ttMagenta/30" },
+        { title: "Direct Response Hooks", duration: "0:58", size: "24.6 MB", status: "Published", color: "border-ttMagenta/30" },
       ];
 
       grid.innerHTML = videos.map(v => `
-        <div class="bg-white rounded-custom p-4 shadow-soft border border-gray-100 flex flex-col justify-between hover:shadow-cardHover transition">
+        <div class="bg-[#0C1017] rounded-card p-4 border border-[#1A2230] flex flex-col justify-between hover:border-ttCyan transition">
           <div>
-            <div class="relative w-full h-36 bg-brandDark rounded-2xl flex items-center justify-center overflow-hidden mb-3">
-              <i data-lucide="play-circle" class="w-10 h-10 text-white/80 hover:text-brandGreen transition cursor-pointer"></i>
+            <div class="relative w-full h-36 bg-[#04060A] rounded-2xl flex items-center justify-center overflow-hidden mb-3 border border-gray-800">
+              <i data-lucide="play-circle" class="w-10 h-10 text-white/80 hover:text-ttCyan transition cursor-pointer"></i>
               <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/80 text-white text-[10px] font-bold">${v.duration}</span>
             </div>
-            <h4 class="text-xs font-bold text-gray-900 truncate">${v.title}</h4>
-            <p class="text-[10px] text-gray-400 mt-0.5">${v.size} • 1080x1920 MP4</p>
+            <h4 class="text-xs font-bold text-white truncate">${v.title}</h4>
+            <p class="text-[10px] text-gray-500 mt-0.5">${v.size} • 1080x1920 MP4</p>
           </div>
-          <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full ${v.status === 'Scheduled' ? 'bg-emerald-100 text-brandGreen' : 'bg-gray-100 text-gray-600'}">${v.status}</span>
-            <button onclick="openModal('modal-upload')" class="text-xs font-bold text-brandGreen hover:underline">Schedule</button>
+          <div class="mt-4 pt-3 border-t border-gray-800 flex items-center justify-between">
+            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-full ${v.status === 'Scheduled' ? 'bg-ttCyan/20 text-ttCyan' : 'bg-gray-800 text-gray-400'}">${v.status}</span>
+            <button onclick="openModal('modal-upload')" class="text-xs font-black text-ttCyan hover:underline">Queue</button>
           </div>
         </div>
       `).join('');
       lucide.createIcons();
     }
 
-    // Auto initialize on page load
     window.onload = () => {
       renderCalendar();
       renderVideoLibrary();
