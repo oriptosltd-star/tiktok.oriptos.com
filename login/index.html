@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+  <title>Login — Oriptos TikTok Engine</title>
+  <meta name="description" content="Log in to Oriptos TikTok Social Media Hub & Scheduler."/>
+  <link rel="icon" href="/assets/pandaping-icon-blink.avif" type="image/avif"/>
+  <link rel="stylesheet" href="/pandaping.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pad-x: 24px;
+      --grad-btn: linear-gradient(135deg, #01A095 0%, #00877D 100%);
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #F5F5F2;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      color: #101613;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .website-announcement {
+      min-height: 40px;
+      padding: 8px 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #01A095;
+      color: #0A0A0A;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .website-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: #F5F5F2;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    .website-header-inner {
+      padding: 10px 32px;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .website-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #101613;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: 800;
+    }
+    .pandaping-auth-page {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 60px 24px;
+      overflow: hidden;
+    }
+    .pandaping-login-art {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+    }
+    .pandaping-login-art-left {
+      left: 12%;
+      width: 240px;
+      height: auto;
+    }
+    .pandaping-login-art-right {
+      right: 12%;
+      width: 250px;
+      height: auto;
+    }
+    @media (max-width: 1024px) {
+      .pandaping-login-art { display: none; }
+    }
+    .pandaping-auth-card {
+      position: relative;
+      z-index: 2;
+      background: transparent;
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .pandaping-auth-card h1 {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: #101613;
+      letter-spacing: -0.02em;
+    }
+    .pandaping-login-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .pandaping-login-form label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #4B5563;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .pandaping-login-form input {
+      height: 50px;
+      border-radius: 12px;
+      border: 1px solid #D1D5DB;
+      background: #E8E8E4;
+      padding: 0 16px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #101613;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .pandaping-login-form input:focus {
+      background: #FFFFFF;
+      border-color: #01A095;
+      box-shadow: 0 0 0 3px rgba(1, 160, 149, 0.15);
+    }
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .password-wrapper input {
+      width: 100%;
+      box-sizing: border-box;
+      padding-right: 44px;
+    }
+    .password-toggle-btn {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #6B7280;
+      padding: 4px;
+    }
+    .btn-login-submit {
+      margin-top: 8px;
+      height: 52px;
+      border-radius: 999px;
+      background: #1B74E4;
+      color: #FFFFFF;
+      border: none;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-login-submit:hover {
+      background: #1565C0;
+      transform: translateY(-1px);
+    }
+    .btn-wa-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      height: 48px;
+      padding: 0 24px;
+      border-radius: 999px;
+      background: #01A095;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .btn-header-login {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 48px;
+      padding: 0 10px 0 20px;
+      border-radius: 999px;
+      border: 1.5px solid #101613;
+      background: transparent;
+      color: #101613;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .login-arrow-disc {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #101613;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <aside class="website-announcement" aria-label="Oriptos announcement">
+    <span>
+      <strong style="margin-right: 8px; font-size: 11px; letter-spacing: 0.04em;">TIKTOK COMMERCE</strong>
+      Scale video publishing and bulk automation with Oriptos TikTok Engine.
+      <a href="/" style="color: inherit; margin-left: 5px; font-weight: 600;">Explore Platform</a>
+    </span>
+  </aside>
+
+  <!-- Header -->
+  <header class="website-header">
+    <div class="website-header-inner">
+      <a href="/" class="website-logo">
+        <img src="/assets/pandaping-icon-blink.avif" alt="Oriptos" width="40" height="40" style="border-radius: 10px; display: block;"/>
+        <span>Oriptos</span>
+      </a>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="https://wa.me/923415213268" target="_blank" class="btn-wa-contact">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 6.46 17.5 2 12.04 2M12.05 20.16C10.57 20.16 9.12 19.76 7.85 19L7.55 18.82L4.43 19.64L5.26 16.6L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.8 7.37 7.5 3.67 12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.16 12.05 20.16Z"/>
+          </svg>
+          <span>Chat on WhatsApp</span>
+        </a>
+        <a href="/login" class="btn-header-login">
+          <span>Login</span>
+          <span class="login-arrow-disc">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12h15M13 5l7 7-7 7"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Main Content with Exact Panda Art -->
+  <main class="pandaping-auth-page">
+    <img src="/assets/login-magnifier.webp" alt="Panda Magnifier" class="pandaping-login-art pandaping-login-art-left"/>
+    <img src="/assets/login-heart.webp" alt="Panda Heart" class="pandaping-login-art pandaping-login-art-right"/>
+
+    <section class="pandaping-auth-card">
+      <h1>Log in</h1>
+
+      <form class="pandaping-login-form" onsubmit="handleLogin(event)">
+        <label>
+          Email address
+          <input type="email" id="login-email" value="admin@oriptos.com" required placeholder="admin@oriptos.com"/>
+        </label>
+
+        <label>
+          Password
+          <div class="password-wrapper">
+            <input type="password" id="login-password" value="••••••••••••••••" required/>
+            <button type="button" class="password-toggle-btn" onclick="togglePassword()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </label>
+
+        <button type="submit" class="btn-login-submit">
+          Log In
+        </button>
+
+        <div style="text-align: center; margin-top: 12px; font-size: 14px; color: #6B7280;">
+          Don't have an account yet? <a href="https://wa.me/923415213268" target="_blank" style="color: #1B74E4; font-weight: 600; text-decoration: none;">Chat with us on WhatsApp</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    function togglePassword() {
+      const field = document.getElementById('login-password');
+      field.type = field.type === 'password' ? 'text' : 'password';
+    }
+    function handleLogin(e) {
+      e.preventDefault();
+      // Redirect to authenticated dashboard
+      window.location.href = '/dashboard';
+    }
+  </script>
+</body>
+</html>
