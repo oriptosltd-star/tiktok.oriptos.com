@@ -13,9 +13,9 @@
 // clearly-marked TODO stub that fails items honestly rather than
 // pretending to post (see publishOne below).
 
-import { supabaseService, hasServiceRole, eq } from '../../../_lib/supabase.js';
-import { json, timingSafeEqual } from '../../../_lib/guard.js';
-import { isMockMode } from '../../../_lib/tiktok.js';
+import { supabaseService, hasServiceRole, eq } from '../../_lib/supabase.js';
+import { json, timingSafeEqual } from '../../_lib/guard.js';
+import { isMockMode } from '../../_lib/tiktok.js';
 
 const CLAIM_LIMIT = 5; // plan §3.6 step 3 (N=5)
 const LEASE_STALE_MS = 10 * 60 * 1000; // plan §3.6 crash rule: 10-minute lease
