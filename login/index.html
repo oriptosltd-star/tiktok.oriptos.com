@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -279,7 +280,7 @@
 
       <div style="display: flex; align-items: center; gap: 12px;">
         <!-- Header TikTok Action Button -->
-        <a href="javascript:void(0)" onclick="handleTikTokLogin()" class="btn-tiktok-header">
+        <a href="#" onclick="startTikTokConnect(event)" class="btn-tiktok-header">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/>
           </svg>
@@ -304,18 +305,18 @@
     <img src="/assets/login-heart.webp" alt="Panda Heart" class="pandaping-login-art pandaping-login-art-right"/>
 
     <section class="pandaping-auth-card">
-      <h1>Log in</h1>
+      <h1 id="auth-heading">Log in</h1>
 
-      <form class="pandaping-login-form" onsubmit="handleLogin(event)">
+      <form class="pandaping-login-form" id="auth-form" onsubmit="handleLogin(event)">
         <label>
           Email address
-          <input type="email" id="login-email" value="admin@oriptos.com" required placeholder="admin@oriptos.com"/>
+          <input type="email" id="login-email" required placeholder="you@company.com" autocomplete="email"/>
         </label>
 
         <label>
           Password
           <div class="password-wrapper">
-            <input type="password" id="login-password" value="••••••••••••••••" required/>
+            <input type="password" id="login-password" required placeholder="Your password" autocomplete="current-password"/>
             <button type="button" class="password-toggle-btn" onclick="togglePassword()">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
@@ -325,8 +326,14 @@
           </div>
         </label>
 
-        <button type="submit" class="btn-login-submit">
+        <p id="auth-message" role="alert" style="display:none; margin:0; font-size:13px; font-weight:600; line-height:1.45;"></p>
+
+        <button type="submit" class="btn-login-submit" id="btn-auth-submit">
           Log In
+        </button>
+
+        <button type="button" id="auth-mode-toggle" onclick="toggleAuthMode()" style="background:none; border:none; padding:2px; color:#1B74E4; font-size:13px; font-weight:700; cursor:pointer;">
+          New here? Create an account
         </button>
 
         <!-- Divider -->
@@ -335,32 +342,131 @@
         </div>
 
         <!-- Official Continue with TikTok Button -->
-        <button type="button" onclick="handleTikTokLogin()" class="btn-tiktok-login">
+        <a href="#" onclick="startTikTokConnect(event)" class="btn-tiktok-login">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/>
           </svg>
           <span>Continue with TikTok</span>
-        </button>
+        </a>
       </form>
     </section>
   </main>
 
   <script>
+    // Supabase project wiring (publishable values only — safe in the browser).
+    // SUPABASE_ANON_KEY is a placeholder in this working copy; the real
+    // publishable key is injected by the parent at integration time.
+    const SUPABASE_URL = 'https://nnkvruflauabevuhimhk.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_-H9oPDTFv1laCwR7vIebzQ_IfVF6AkH';
+    const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+    let authMode = 'signin'; // 'signin' | 'signup'
+
     function togglePassword() {
       const field = document.getElementById('login-password');
       field.type = field.type === 'password' ? 'text' : 'password';
     }
-    function handleLogin(e) {
-      e.preventDefault();
-      window.location.href = '/dashboard';
+
+    function setAuthMessage(message, isError) {
+      const el = document.getElementById('auth-message');
+      if (!el) return;
+      el.textContent = message || '';
+      el.style.display = message ? 'block' : 'none';
+      el.style.color = isError ? '#B91C1C' : '#047857';
     }
-    function handleTikTokLogin() {
-      // Simulate or redirect to official TikTok OAuth
-      const ok = confirm("TikTok OAuth Authorization Flow:\n\nConnecting to TikTok for Developers...\nScopes requested: user.info.basic, video.upload, video.publish\n\nClick OK to authorize Oriptos.");
-      if (ok) {
-        window.location.href = '/dashboard';
+
+    function toggleAuthMode() {
+      authMode = authMode === 'signin' ? 'signup' : 'signin';
+      const heading = document.getElementById('auth-heading');
+      const submit = document.getElementById('btn-auth-submit');
+      const toggle = document.getElementById('auth-mode-toggle');
+      const password = document.getElementById('login-password');
+      if (heading) heading.textContent = authMode === 'signup' ? 'Create account' : 'Log in';
+      if (submit) submit.textContent = authMode === 'signup' ? 'Sign Up' : 'Log In';
+      if (toggle) toggle.textContent = authMode === 'signup' ? 'Already have an account? Log in' : 'New here? Create an account';
+      if (password) password.setAttribute('autocomplete', authMode === 'signup' ? 'new-password' : 'current-password');
+      setAuthMessage('', false);
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      if (!supabaseClient) {
+        setAuthMessage('Login is not configured yet. Please try again later.', true);
+        return;
+      }
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const btn = document.getElementById('btn-auth-submit');
+      setAuthMessage('', false);
+      btn.disabled = true;
+      btn.textContent = authMode === 'signup' ? 'Creating account...' : 'Logging in...';
+      try {
+        if (authMode === 'signup') {
+          const { data, error } = await supabaseClient.auth.signUp({ email, password });
+          if (error) throw error;
+          if (data.session) {
+            window.location.href = '/dashboard';
+            return;
+          }
+          toggleAuthMode(); // back to sign-in
+          setAuthMessage('Account created. If email confirmation is enabled, confirm your email and then log in.', false);
+        } else {
+          const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+          if (error) throw error;
+          window.location.href = '/dashboard';
+        }
+      } catch (err) {
+        setAuthMessage((err && err.message) || 'Authentication failed. Please try again.', true);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = authMode === 'signup' ? 'Sign Up' : 'Log In';
       }
     }
+
+    // "Continue with TikTok" — the OAuth start endpoint requires the
+    // site session as a Bearer JWT, and a plain navigation cannot send
+    // one (the session lives in supabase-js localStorage, not a cookie),
+    // so start.js bounces a bare link click back to /login even for a
+    // signed-in user. With a session: fetch the JSON variant with the
+    // JWT, then navigate to the returned URL (the oauth_state cookie set
+    // by that fetch response is stored by the browser, so the callback's
+    // cookie check still passes). Without a session there is nothing to
+    // connect yet — TikTok is connected from the dashboard after login,
+    // so say that plainly instead of looping back to this page.
+    async function startTikTokConnect(e) {
+      if (e) e.preventDefault();
+      if (!supabaseClient) {
+        setAuthMessage('Login is not configured yet. Please try again later.', true);
+        return;
+      }
+      try {
+        const { data } = await supabaseClient.auth.getSession();
+        const token = data && data.session ? data.session.access_token : null;
+        if (!token) {
+          setAuthMessage('Log in or create an account first — you can connect TikTok from your dashboard.', true);
+          return;
+        }
+        const res = await fetch('/auth/tiktok/start', {
+          headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/json' }
+        });
+        const payload = await res.json().catch(() => null);
+        if (!res.ok || !payload || !payload.url) {
+          throw new Error((payload && payload.message) || 'Could not start the TikTok connection (' + res.status + ').');
+        }
+        window.location.assign(payload.url);
+      } catch (err) {
+        setAuthMessage((err && err.message) || 'Could not start the TikTok connection.', true);
+      }
+    }
+
+    // Already signed in? Go straight to the dashboard.
+    (async () => {
+      if (!supabaseClient) return;
+      try {
+        const { data } = await supabaseClient.auth.getSession();
+        if (data && data.session) window.location.href = '/dashboard';
+      } catch (_) { /* stay on the login page */ }
+    })();
   </script>
 </body>
 </html>

@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -118,26 +119,16 @@
       <div class="space-y-1">
         <p class="text-[10px] font-bold text-gray-500 uppercase tracking-wider px-3 mb-2">Connected Channels</p>
 
-        <!-- TikTok Primary -->
-        <div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold bg-white/10 text-white cursor-pointer border border-white/5">
-          <div class="flex items-center gap-3">
-            <svg class="w-4 h-4 fill-current text-[#00D1B2]" viewBox="0 0 24 24">
-              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/>
-            </svg>
-            <span>@oriptos.official</span>
+        <div id="connected-channels-list">
+          <div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 border border-white/5">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 fill-current text-gray-400" viewBox="0 0 24 24">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/>
+              </svg>
+              <span>Loading accounts...</span>
+            </div>
+            <span class="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
           </div>
-          <span class="w-2 h-2 rounded-full bg-[#00D1B2] shadow-sm shadow-[#00D1B2]/50"></span>
-        </div>
-
-        <!-- TikTok Secondary -->
-        <div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white hover:bg-white/5 transition cursor-pointer">
-          <div class="flex items-center gap-3">
-            <svg class="w-4 h-4 fill-current text-gray-400" viewBox="0 0 24 24">
-              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/>
-            </svg>
-            <span>@oriptos.media</span>
-          </div>
-          <span class="w-1.5 h-1.5 rounded-full bg-gray-500"></span>
         </div>
       </div>
     </div>
@@ -157,7 +148,7 @@
       </div>
       <div class="grid grid-cols-2 gap-2 text-[11px] font-semibold">
         <button class="py-1.5 rounded-lg bg-gray-800 text-gray-300 hover:text-white">Settings</button>
-        <a href="/login" class="py-1.5 rounded-lg bg-rose-950/60 border border-rose-900/50 text-rose-300 text-center hover:bg-rose-900 transition">Logout</a>
+        <a href="/login" id="btn-logout" class="py-1.5 rounded-lg bg-rose-950/60 border border-rose-900/50 text-rose-300 text-center hover:bg-rose-900 transition">Logout</a>
       </div>
     </div>
   </aside>
@@ -189,14 +180,12 @@
       </button>
     </header>
 
-    <!-- Expiry Notice Banner (Broadcast Style) -->
+    <!-- TikTok Connection Status (live from /api/account/status) -->
     <div class="bg-white border-b border-gray-100 px-6 py-2.5 flex flex-wrap items-center justify-between text-xs gap-3 flex-shrink-0">
-      <div class="text-gray-700">
-        <strong>TikTok OAuth Token Active.</strong> Tokens expire in ~60 days — automatic API posting is verified and operational.
+      <div class="text-gray-700" id="connection-status-text">
+        Checking TikTok connection...
       </div>
-      <button onclick="triggerTikTokOAuth()" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#00D1B2] hover:bg-teal-400 text-black transition">
-        Re-connect TikTok
-      </button>
+      <div id="connection-action"></div>
     </div>
 
     <!-- Secondary Tab Row: Calendar | Content | Content Planner -->
@@ -208,15 +197,13 @@
       </div>
 
       <div class="flex items-center gap-3">
-        <select class="bg-teal-50 text-teal-800 text-xs font-bold rounded-full px-3 py-1.5 border border-teal-200 cursor-pointer">
-          <option>Account: All TikToks</option>
-          <option>@oriptos.official</option>
-          <option>@oriptos.media</option>
+        <select id="account-filter" onchange="handleAccountFilterChange(this.value)" class="bg-teal-50 text-teal-800 text-xs font-bold rounded-full px-3 py-1.5 border border-teal-200 cursor-pointer">
+          <option value="all">Account: All TikToks</option>
         </select>
-        <button onclick="renderCalendar()" class="px-3.5 py-1.5 rounded-full bg-teal-100 text-teal-900 text-xs font-bold">
+        <button onclick="goToToday()" class="px-3.5 py-1.5 rounded-full bg-teal-100 text-teal-900 text-xs font-bold">
           Today
         </button>
-        <button onclick="renderCalendar()" class="p-1.5 rounded-full bg-teal-50 text-teal-900 hover:bg-teal-100">
+        <button onclick="refreshDashboardData()" class="p-1.5 rounded-full bg-teal-50 text-teal-900 hover:bg-teal-100">
           <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
         </button>
       </div>
@@ -233,9 +220,9 @@
             Showing scheduled TikTok dispatches for current active fleet
           </div>
           <div class="flex items-center gap-3">
-            <button class="p-1 rounded-full hover:bg-gray-200 text-gray-600"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
-            <span class="text-sm font-extrabold text-gray-900">November 2026</span>
-            <button class="p-1 rounded-full hover:bg-gray-200 text-gray-600"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+            <button onclick="changeCalendarMonth(-1)" class="p-1 rounded-full hover:bg-gray-200 text-gray-600"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+            <span class="text-sm font-extrabold text-gray-900" id="calendar-month-label">Loading...</span>
+            <button onclick="changeCalendarMonth(1)" class="p-1 rounded-full hover:bg-gray-200 text-gray-600"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
           </div>
         </div>
 
@@ -289,6 +276,14 @@
         </div>
       </section>
 
+
+      <!-- ==================== VIEW 4: ANALYTICS (COMING SOON) ==================== -->
+      <section id="view-analytics" class="hidden space-y-4">
+        <div class="bg-white p-6 rounded-2xl border border-gray-200">
+          <h3 class="text-sm font-extrabold text-gray-900 mb-2">Post Analytics</h3>
+          <p class="text-xs text-gray-500">Coming soon.</p>
+        </div>
+      </section>
     </div>
   </main>
 
@@ -308,36 +303,43 @@
       <form id="schedule-form" onsubmit="handleScheduleSubmit(event)" class="py-4 space-y-4">
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">Target Account *</label>
-          <select class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-2.5 font-bold focus:outline-none focus:ring-1 focus:ring-[#00D1B2]">
-            <option>@oriptos.official (Primary)</option>
-            <option>@oriptos.media (Secondary)</option>
+          <select id="queue-account" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-2.5 font-bold focus:outline-none focus:ring-1 focus:ring-[#00D1B2]">
+            <option value="">No TikTok account connected</option>
           </select>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">Select Video (MP4 / MOV) *</label>
-          <div class="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-[#00D1B2] bg-gray-50/50 cursor-pointer transition">
+          <div id="upload-dropzone" onclick="document.getElementById('queue-file').click()" class="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-[#00D1B2] bg-gray-50/50 cursor-pointer transition">
             <i data-lucide="video" class="w-8 h-8 text-gray-400 mx-auto mb-2"></i>
-            <p class="text-xs font-bold text-gray-700">Drag & drop video or browse</p>
-            <p class="text-[10px] text-gray-400 mt-0.5">MP4 or MOV, up to 1080p, max 500MB</p>
+            <p class="text-xs font-bold text-gray-700" id="file-label">Drag & drop video or browse</p>
+            <p class="text-[10px] text-gray-400 mt-0.5" id="file-meta">MP4 or MOV, up to 1080p, max 500MB</p>
           </div>
+          <input type="file" id="queue-file" accept=".mp4,.mov,video/mp4,video/quicktime" class="hidden" onchange="handleFileSelected(this)"/>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">TikTok Caption & Tags *</label>
-          <textarea rows="3" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-[#00D1B2]" required>Dominate short-form video operations with Oriptos. #fyp #tiktokgrowth #automation</textarea>
+          <textarea rows="3" id="queue-caption" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-[#00D1B2]" required>Dominate short-form video operations with Oriptos. #fyp #tiktokgrowth #automation</textarea>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Publish Date *</label>
-            <input type="date" value="2026-11-28" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-2.5 font-medium focus:outline-none focus:ring-1 focus:ring-[#00D1B2]">
+            <input type="date" id="queue-date" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-2.5 font-medium focus:outline-none focus:ring-1 focus:ring-[#00D1B2]">
           </div>
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Publish Time (UTC) *</label>
-            <input type="time" value="14:00" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-2.5 font-medium focus:outline-none focus:ring-1 focus:ring-[#00D1B2]">
+            <label class="block text-xs font-bold text-gray-700 mb-1">Publish Time *</label>
+            <input type="time" id="queue-time" class="w-full bg-gray-50 border border-gray-200 text-xs rounded-xl p-2.5 font-medium focus:outline-none focus:ring-1 focus:ring-[#00D1B2]">
           </div>
         </div>
+
+        <div id="upload-progress-wrap" class="hidden">
+          <div class="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
+            <div id="upload-progress-bar" class="h-full bg-[#00D1B2] rounded-full" style="width: 0%"></div>
+          </div>
+        </div>
+        <p id="upload-status" class="hidden text-[11px] font-semibold text-gray-500"></p>
 
         <div class="pt-2">
           <button type="submit" id="btn-schedule-submit" class="w-full py-3 rounded-full bg-[#00D1B2] hover:bg-teal-400 text-black font-extrabold text-xs flex items-center justify-center gap-2 shadow-sm transition">
@@ -350,95 +352,377 @@
   </div>
 
   <script>
-    lucide.createIcons();
+    // Supabase project wiring (publishable values only — safe in the browser).
+    // SUPABASE_ANON_KEY is a placeholder in this working copy; the real
+    // publishable key is injected by the parent at integration time.
+    const SUPABASE_URL = 'https://nnkvruflauabevuhimhk.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_-H9oPDTFv1laCwR7vIebzQ_IfVF6AkH';
+    const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
+    let accountStatus = { connected: false, demoMode: false, account: null };
+    let queueItems = [];
+    let selectedAccountId = 'all';
+    let selectedFile = null;
+    let editingQueueItemId = null;
+    const calendarCursor = new Date();
+    calendarCursor.setDate(1);
+
+    const TIKTOK_ICON = '<svg class="w-4 h-4 fill-current text-[#00D1B2]" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.68 6.34 6.34 0 0 0 9.34 22a6.33 6.33 0 0 0 6.33-6.33V9.42a8.16 8.16 0 0 0 4.92 1.62V7.61a4.85 4.85 0 0 1-1-.92z"/></svg>';
+
+    // ---------- helpers ----------
+    function escapeHtml(value) {
+      return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    function unwrapData(payload) {
+      return payload && payload.data && typeof payload.data === 'object' ? payload.data : payload;
+    }
+    function formatBytes(bytes) {
+      const n = Number(bytes);
+      if (!isFinite(n) || n <= 0) return '';
+      const units = ['B', 'KB', 'MB', 'GB'];
+      let v = n, u = 0;
+      while (v >= 1024 && u < units.length - 1) { v /= 1024; u++; }
+      return v.toFixed(v >= 100 || u === 0 ? 0 : 1) + ' ' + units[u];
+    }
+    function formatDuration(sec) {
+      if (sec == null || sec === '') return '';
+      if (typeof sec === 'string' && sec.indexOf(':') !== -1) return sec;
+      const n = Math.round(Number(sec));
+      if (!isFinite(n) || n < 0) return '';
+      return Math.floor(n / 60) + ':' + String(n % 60).padStart(2, '0');
+    }
+    function formatDateTime(iso) {
+      const d = new Date(iso);
+      if (isNaN(d.getTime())) return '';
+      return d.toLocaleDateString(undefined, { month: 'short', day: '2-digit' }) + ', ' +
+             d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    function itemTitle(item) {
+      return (item && (item.caption || item.file_name)) || 'Untitled video';
+    }
+    function getAccountId(account) {
+      return account ? (account.id || account.account_id || account.open_id || '') : '';
+    }
+    function getAccountUsername(account) {
+      if (!account) return '';
+      const u = account.username || account.display_name || account.name || '';
+      if (!u) return '';
+      return u.charAt(0) === '@' ? u : '@' + u;
+    }
+    function itemAccountLabel(item) {
+      const account = accountStatus.account;
+      if (account && item && item.tiktok_account_id &&
+          (String(item.tiktok_account_id) === String(getAccountId(account)) ||
+           String(item.tiktok_account_id) === String(account.open_id || ''))) {
+        return getAccountUsername(account);
+      }
+      return '';
+    }
+
+    // ---------- auth / API ----------
+    async function requireSession() {
+      if (!supabaseClient) { window.location.href = '/login'; return null; }
+      try {
+        const { data, error } = await supabaseClient.auth.getSession();
+        if (error || !data || !data.session) { window.location.href = '/login'; return null; }
+        return data.session;
+      } catch (_) {
+        window.location.href = '/login';
+        return null;
+      }
+    }
+    async function handleLogout(e) {
+      if (e) e.preventDefault();
+      try { if (supabaseClient) await supabaseClient.auth.signOut(); } catch (_) { /* go to login anyway */ }
+      window.location.href = '/login';
+    }
+    async function apiFetch(path, options) {
+      options = options || {};
+      const { data } = await supabaseClient.auth.getSession();
+      const token = data && data.session ? data.session.access_token : null;
+      const headers = Object.assign({}, options.headers || {});
+      if (token) headers['Authorization'] = 'Bearer ' + token;
+      let body = options.body;
+      if (body !== undefined && body !== null && typeof body !== 'string') {
+        headers['Content-Type'] = 'application/json';
+        body = JSON.stringify(body);
+      }
+      const res = await fetch(path, Object.assign({}, options, { headers: headers, body: body }));
+      let payload = null;
+      try { payload = await res.json(); } catch (_) { /* empty body */ }
+      if (!res.ok) {
+        let msg = payload && (payload.message || (payload.error && payload.error.message) || payload.error);
+        if (typeof msg !== 'string' || !msg) msg = 'Request failed (' + res.status + ')';
+        throw new Error(msg);
+      }
+      return payload;
+    }
+
+    // ---------- tabs / modal ----------
     function switchTab(tabId) {
-      ['calendar', 'queue', 'content-planner'].forEach(t => {
+      ['calendar', 'queue', 'content-planner', 'analytics'].forEach(t => {
         const el = document.getElementById('view-' + t);
         if (el) el.classList.add('hidden');
       });
-
       const target = document.getElementById('view-' + tabId);
       if (target) target.classList.remove('hidden');
 
-      // Update Subtabs styling
       const cal = document.getElementById('tab-cal');
       const cnt = document.getElementById('tab-cnt');
       const cp = document.getElementById('tab-cp');
-
       [cal, cnt, cp].forEach(el => {
         if (el) el.className = "text-gray-400 hover:text-gray-900 pb-1.5";
       });
-
       if (tabId === 'calendar' && cal) cal.className = "text-gray-900 border-b-2 border-black pb-1.5";
       if (tabId === 'queue' && cnt) cnt.className = "text-gray-900 border-b-2 border-black pb-1.5";
       if (tabId === 'content-planner' && cp) cp.className = "text-gray-900 border-b-2 border-black pb-1.5";
     }
-
     function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
     function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
-    function triggerTikTokOAuth() {
-      const ok = confirm("TikTok OAuth 2.0 Authorization:\n\nConnecting to TikTok for Developers...\nScopes: video.upload, video.publish\n\nClick OK to re-authorize.");
-      if (ok) {
-        alert("✅ TikTok connection active for the next 60 days!");
+    // ---------- TikTok connection status ----------
+    function normalizeStatus(payload) {
+      const d = unwrapData(payload) || {};
+      // Contract (backend functions/api/account/status.js): the payload is
+      // { account, demoMode } — there is NO `connected` boolean. "Connected"
+      // means the account object is non-null (the backend only returns the
+      // caller's latest status='connected' account row, with id, open_id,
+      // username, display_name, avatar_url — or null when none exists).
+      const account = d.account || null;
+      return { connected: !!(d.connected || account), demoMode: !!d.demoMode, account: account };
+    }
+    async function loadAccountStatus() {
+      try {
+        accountStatus = normalizeStatus(await apiFetch('/api/account/status'));
+      } catch (err) {
+        accountStatus = { connected: false, demoMode: false, account: null };
+        const textEl = document.getElementById('connection-status-text');
+        if (textEl) textEl.innerHTML = '<strong>Connection status unavailable.</strong> ' + escapeHtml(err.message);
+        renderAccountSurfaces();
+        return;
+      }
+      renderConnectionStatus();
+    }
+    function renderConnectionStatus() {
+      const textEl = document.getElementById('connection-status-text');
+      const actionEl = document.getElementById('connection-action');
+      const account = accountStatus.account;
+      const username = getAccountUsername(account);
+      const btnClass = 'px-4 py-1.5 rounded-full text-xs font-bold bg-[#00D1B2] hover:bg-teal-400 text-black transition inline-flex items-center gap-2';
+      if (textEl) {
+        if (accountStatus.demoMode) {
+          textEl.innerHTML = '<strong>Demo mode.</strong> TikTok app not connected yet' +
+            (accountStatus.connected && username ? ' — demo account ' + escapeHtml(username) + ' shown for preview.' : '.');
+        } else if (accountStatus.connected) {
+          textEl.innerHTML = '<strong>TikTok connected.</strong> Posting account: ' + escapeHtml(username || 'Connected account');
+        } else {
+          textEl.innerHTML = '<strong>TikTok not connected.</strong> Connect your TikTok account to start scheduling posts.';
+        }
+      }
+      if (actionEl) {
+        actionEl.innerHTML = '';
+        if (accountStatus.connected) {
+          const btn = document.createElement('button');
+          btn.className = btnClass;
+          btn.textContent = 'Disconnect';
+          btn.onclick = disconnectTikTokAccount;
+          actionEl.appendChild(btn);
+        } else {
+          actionEl.innerHTML = '<a href="#" onclick="return startTikTokConnect(event)" class="' + btnClass + '">Connect TikTok</a>';
+        }
+      }
+      renderAccountSurfaces();
+    }
+    function renderAccountSurfaces() {
+      const account = accountStatus.account;
+      const id = getAccountId(account);
+      const username = getAccountUsername(account);
+
+      const listEl = document.getElementById('connected-channels-list');
+      if (listEl) {
+        if (accountStatus.connected && account) {
+          listEl.innerHTML =
+            '<div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold bg-white/10 text-white cursor-pointer border border-white/5">' +
+              '<div class="flex items-center gap-3">' + TIKTOK_ICON + '<span>' + escapeHtml(username || 'Connected account') + '</span></div>' +
+              '<span class="w-2 h-2 rounded-full bg-[#00D1B2] shadow-sm shadow-[#00D1B2]/50"></span>' +
+            '</div>';
+        } else {
+          listEl.innerHTML =
+            '<div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium text-gray-400 border border-white/5">' +
+              '<div class="flex items-center gap-3">' + TIKTOK_ICON + '<span>No account connected</span></div>' +
+              '<span class="w-1.5 h-1.5 rounded-full bg-gray-500"></span>' +
+            '</div>';
+        }
+      }
+
+      const filterEl = document.getElementById('account-filter');
+      if (filterEl) {
+        const current = selectedAccountId;
+        filterEl.innerHTML = '<option value="all">Account: All TikToks</option>' +
+          (account && id ? '<option value="' + escapeHtml(id) + '">' + escapeHtml(username) + '</option>' : '');
+        filterEl.value = (current !== 'all' && current === id) ? current : 'all';
+        selectedAccountId = filterEl.value;
+      }
+
+      const selectEl = document.getElementById('queue-account');
+      if (selectEl) {
+        if (account && id) {
+          selectEl.innerHTML = '<option value="' + escapeHtml(id) + '">' + escapeHtml(username) +
+            (accountStatus.demoMode ? ' (Demo)' : '') + '</option>';
+        } else {
+          selectEl.innerHTML = '<option value="">No TikTok account connected</option>';
+        }
       }
     }
-
-    function handleScheduleSubmit(e) {
-      e.preventDefault();
-      const btn = document.getElementById('btn-schedule-submit');
-      btn.innerHTML = '<span class="animate-spin mr-2">⏳</span> Queuing to TikTok...';
-      btn.disabled = true;
-
-      setTimeout(() => {
-        alert("🎉 Video queued successfully to TikTok API!");
-        btn.innerHTML = '<i data-lucide="send" class="w-4 h-4"></i><span>Confirm & Queue to TikTok API</span>';
-        btn.disabled = false;
-        closeModal('modal-upload');
-        lucide.createIcons();
-      }, 1200);
+    // The OAuth start endpoint requires the site session as a Bearer JWT,
+    // and a plain browser navigation cannot send one — the session lives
+    // in supabase-js localStorage, not a cookie, so start.js bounces a
+    // bare <a href> click to /login even for a signed-in user. Instead:
+    // fetch the JSON variant with the JWT, then navigate to the returned
+    // URL. The oauth_state cookie set by that fetch response is stored by
+    // the browser (same-origin fetch), so the callback's cookie check
+    // still passes when TikTok (or mock mode) redirects back.
+    async function startTikTokConnect(e) {
+      if (e) e.preventDefault();
+      const textEl = document.getElementById('connection-status-text');
+      try {
+        const { data } = await supabaseClient.auth.getSession();
+        const token = data && data.session ? data.session.access_token : null;
+        if (!token) { window.location.href = '/login'; return; }
+        const res = await fetch('/auth/tiktok/start', {
+          headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/json' }
+        });
+        const payload = await res.json().catch(() => null);
+        if (!res.ok || !payload || !payload.url) {
+          throw new Error((payload && payload.message) || 'Could not start the TikTok connection (' + res.status + ').');
+        }
+        window.location.assign(payload.url);
+      } catch (err) {
+        if (textEl) textEl.innerHTML = '<strong>Connect failed.</strong> ' + escapeHtml(err.message);
+      }
+    }
+    async function disconnectTikTokAccount() {
+      const accountId = getAccountId(accountStatus.account);
+      const textEl = document.getElementById('connection-status-text');
+      if (!accountId) {
+        // Defensive only: the status payload does carry the account id
+        // (backend selects id, open_id, username, ...), so this branch
+        // should never run — but disconnect cannot be addressed without it.
+        if (textEl) textEl.innerHTML = '<strong>Disconnect unavailable.</strong> The status API did not return an account id.';
+        return;
+      }
+      try {
+        await apiFetch('/api/accounts/' + encodeURIComponent(accountId) + '/disconnect', { method: 'POST' });
+        await loadAccountStatus();
+        await loadQueue();
+      } catch (err) {
+        if (textEl) textEl.innerHTML = '<strong>Disconnect failed.</strong> ' + escapeHtml(err.message);
+      }
+    }
+    function handleAccountFilterChange(value) {
+      selectedAccountId = value || 'all';
+      renderCalendar();
+      renderQueue();
     }
 
+    // ---------- queue data ----------
+    function normalizeQueue(payload) {
+      const d = unwrapData(payload);
+      if (Array.isArray(d)) return d;
+      if (d && Array.isArray(d.items)) return d.items;
+      if (d && Array.isArray(d.queue)) return d.queue;
+      if (d && Array.isArray(d.queue_items)) return d.queue_items;
+      return [];
+    }
+    function sortQueueItems(a, b) {
+      const at = a.scheduled_at ? new Date(a.scheduled_at).getTime() : Infinity;
+      const bt = b.scheduled_at ? new Date(b.scheduled_at).getTime() : Infinity;
+      if (at !== bt) return at - bt;
+      return new Date(a.created_at || 0).getTime() - new Date(b.created_at || 0).getTime();
+    }
+    function visibleItems() {
+      if (selectedAccountId === 'all') return queueItems;
+      const account = accountStatus.account;
+      const ids = [selectedAccountId, account && account.open_id].filter(Boolean).map(String);
+      return queueItems.filter(item => ids.indexOf(String(item.tiktok_account_id || '')) !== -1);
+    }
+    async function loadQueue() {
+      const payload = await apiFetch('/api/queue');
+      queueItems = normalizeQueue(payload).slice().sort(sortQueueItems);
+      renderCalendar();
+      renderQueue();
+    }
+    function renderQueueError(err) {
+      const q = document.getElementById('queue-grid');
+      if (q) {
+        q.innerHTML = '<div class="md:col-span-3 bg-white rounded-2xl p-6 border border-gray-200 text-center shadow-xs">' +
+          '<p class="text-xs font-bold text-gray-900">Could not load your queue.</p>' +
+          '<p class="text-[11px] text-gray-500 mt-1">' + escapeHtml(err.message) + '</p></div>';
+      }
+    }
+    async function refreshDashboardData() {
+      await loadAccountStatus();
+      try { await loadQueue(); } catch (err) { renderQueueError(err); }
+    }
+
+    // ---------- calendar ----------
     function renderCalendar() {
       const container = document.getElementById('calendar-days');
       if (!container) return;
+      const label = document.getElementById('calendar-month-label');
+      const year = calendarCursor.getFullYear();
+      const month = calendarCursor.getMonth();
+      if (label) label.textContent = calendarCursor.toLocaleDateString(undefined, { month: 'long', year: 'numeric' });
+
+      const byDay = {};
+      visibleItems().forEach(item => {
+        if (!item.scheduled_at) return;
+        const d = new Date(item.scheduled_at);
+        if (d.getFullYear() === year && d.getMonth() === month) {
+          const k = d.getDate();
+          (byDay[k] = byDay[k] || []).push(item);
+        }
+      });
+
+      const first = new Date(year, month, 1);
+      const startOffset = (first.getDay() + 6) % 7; // Monday-first grid
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const daysInPrev = new Date(year, month, 0).getDate();
+      const today = new Date();
+      const isThisMonth = today.getFullYear() === year && today.getMonth() === month;
+      const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
+
       container.innerHTML = '';
+      for (let i = 0; i < totalCells; i++) {
+        const dayNum = i - startOffset + 1;
+        let displayDay, isCurrent = true;
+        if (dayNum < 1) { displayDay = daysInPrev + dayNum; isCurrent = false; }
+        else if (dayNum > daysInMonth) { displayDay = dayNum - daysInMonth; isCurrent = false; }
+        else { displayDay = dayNum; }
 
-      const scheduled = {
-        3: { title: "Short-Form Formula", time: "11:00 AM" },
-        7: { title: "Viral Hook Blueprint", time: "03:30 PM" },
-        14: { title: "SaaS Scaling Reels", time: "09:00 AM" },
-        20: { title: "Automated Lead Drops", time: "06:00 PM" },
-        27: { title: "Black Friday Launch", time: "02:00 PM", today: true },
-        28: { title: "Q4 TikTok Tactics", time: "07:00 PM" },
-      };
-
-      for (let i = 1; i <= 35; i++) {
-        const dayNumber = i <= 30 ? i : (i - 30);
-        const isCurrent = i <= 30;
-        const post = scheduled[dayNumber];
-        const isToday = dayNumber === 27 && isCurrent;
+        const isToday = isCurrent && isThisMonth && displayDay === today.getDate();
+        const posts = isCurrent ? (byDay[displayDay] || []) : [];
 
         const cell = document.createElement('div');
-        cell.className = `p-2 min-h-[105px] flex flex-col justify-between transition hover:bg-gray-50/80 cursor-pointer ${isToday ? 'bg-teal-50/50 ring-1 ring-inset ring-[#00D1B2]' : ''}`;
-        
-        let html = `
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold ${isCurrent ? (isToday ? 'text-teal-700' : 'text-gray-800') : 'text-gray-300'}">${dayNumber}</span>
-            ${isToday ? '<span class="text-[9px] font-bold bg-[#00D1B2] text-black px-1.5 py-0.2 rounded-full">Today</span>' : ''}
-          </div>
-        `;
+        cell.className = 'p-2 min-h-[105px] flex flex-col justify-between transition hover:bg-gray-50/80 cursor-pointer ' +
+          (isToday ? 'bg-teal-50/50 ring-1 ring-inset ring-[#00D1B2]' : '');
 
-        if (post && isCurrent) {
-          html += `
-            <div class="mt-2 p-1.5 rounded-lg border text-[10px] font-bold leading-tight bg-teal-50 text-teal-800 border-teal-200 shadow-xs">
-              <span class="truncate block">${post.title}</span>
-              <span class="text-[9px] text-teal-600 font-medium">${post.time} • TikTok</span>
-            </div>
-          `;
+        let html = '<div class="flex items-center justify-between">' +
+          '<span class="text-xs font-bold ' + (isCurrent ? (isToday ? 'text-teal-700' : 'text-gray-800') : 'text-gray-300') + '">' + displayDay + '</span>' +
+          (isToday ? '<span class="text-[9px] font-bold bg-[#00D1B2] text-black px-1.5 py-0.2 rounded-full">Today</span>' : '') +
+          '</div>';
+
+        if (posts.length) {
+          const post = posts[0];
+          const time = new Date(post.scheduled_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          html += '<div class="mt-2 p-1.5 rounded-lg border text-[10px] font-bold leading-tight bg-teal-50 text-teal-800 border-teal-200 shadow-xs">' +
+            '<span class="truncate block">' + escapeHtml(itemTitle(post)) + '</span>' +
+            '<span class="text-[9px] text-teal-600 font-medium">' + escapeHtml(time) + ' • TikTok</span></div>';
+          if (posts.length > 1) html += '<span class="text-[9px] font-bold text-teal-700 mt-1">+' + (posts.length - 1) + ' more</span>';
         } else {
-          html += `<div class="flex-1"></div>`;
+          html += '<div class="flex-1"></div>';
         }
 
         cell.innerHTML = html;
@@ -446,40 +730,378 @@
         container.appendChild(cell);
       }
     }
+    function changeCalendarMonth(delta) {
+      calendarCursor.setMonth(calendarCursor.getMonth() + delta);
+      renderCalendar();
+    }
+    function goToToday() {
+      const now = new Date();
+      calendarCursor.setFullYear(now.getFullYear(), now.getMonth(), 1);
+      renderCalendar();
+    }
 
+    // ---------- queue cards ----------
+    function statusMeta(status) {
+      switch (String(status || '').toLowerCase()) {
+        case 'published': return { label: 'Published', cls: 'text-emerald-600' };
+        case 'publishing': return { label: 'Publishing', cls: 'text-amber-600' };
+        case 'failed': return { label: 'Failed', cls: 'text-rose-600' };
+        case 'scheduled': return { label: 'Scheduled', cls: 'text-emerald-600' };
+        case 'uploaded': return { label: 'Uploaded', cls: 'text-teal-700' };
+        case 'draft': return { label: 'Draft', cls: 'text-gray-500' };
+        case 'cancelled': return { label: 'Cancelled', cls: 'text-gray-400' };
+        default: return { label: status || 'Queued', cls: 'text-emerald-600' };
+      }
+    }
     function renderQueue() {
       const q = document.getElementById('queue-grid');
       if (!q) return;
+      const items = visibleItems();
 
-      const items = [
-        { title: "Viral Hook Blueprint.mp4", duration: "0:45", size: "18.2 MB", time: "Nov 28, 14:00 UTC", acc: "@oriptos.official" },
-        { title: "Q4 TikTok Tactics.mp4", duration: "0:58", size: "22.6 MB", time: "Nov 29, 18:30 UTC", acc: "@oriptos.official" },
-        { title: "SaaS Workflow 2026.mp4", duration: "1:12", size: "34.1 MB", time: "Dec 01, 10:00 UTC", acc: "@oriptos.media" },
-      ];
+      if (!items.length) {
+        q.innerHTML = '<div class="md:col-span-3 bg-white rounded-2xl p-6 border border-gray-200 text-center shadow-xs">' +
+          '<p class="text-xs font-bold text-gray-900">No videos in your queue yet.</p>' +
+          '<p class="text-[11px] text-gray-500 mt-1">Upload a video to schedule your first TikTok post.</p></div>';
+        return;
+      }
 
-      q.innerHTML = items.map(v => `
-        <div class="bg-white rounded-2xl p-4 border border-gray-200 flex flex-col justify-between shadow-xs">
-          <div>
-            <div class="h-32 bg-gray-900 rounded-xl flex items-center justify-center text-white mb-3">
-              <i data-lucide="play-circle" class="w-10 h-10 text-[#00D1B2]"></i>
-            </div>
-            <h4 class="text-xs font-bold text-gray-900 truncate">${v.title}</h4>
-            <p class="text-[10px] text-gray-400 mt-0.5">${v.size} • ${v.duration}</p>
-            <p class="text-[10px] font-semibold text-teal-700 mt-2 bg-teal-50 p-1.5 rounded-lg">${v.acc} &bull; ${v.time}</p>
-          </div>
-          <div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-xs font-bold">
-            <span class="text-emerald-600">Queued</span>
-            <button onclick="openModal('modal-upload')" class="text-gray-500 hover:text-black">Edit</button>
-          </div>
-        </div>
-      `).join('');
+      q.innerHTML = items.map(v => {
+        const meta = statusMeta(v.status);
+        const fileMeta = [formatBytes(v.file_size_bytes), formatDuration(v.duration_sec != null ? v.duration_sec : v.duration)].filter(Boolean).join(' • ');
+        const when = v.scheduled_at ? formatDateTime(v.scheduled_at) : 'Not scheduled yet';
+        const acc = itemAccountLabel(v);
+        return '<div class="bg-white rounded-2xl p-4 border border-gray-200 flex flex-col justify-between shadow-xs">' +
+          '<div>' +
+            '<div class="h-32 bg-gray-900 rounded-xl flex items-center justify-center text-white mb-3">' +
+              '<i data-lucide="play-circle" class="w-10 h-10 text-[#00D1B2]"></i>' +
+            '</div>' +
+            '<h4 class="text-xs font-bold text-gray-900 truncate">' + escapeHtml(itemTitle(v)) + '</h4>' +
+            '<p class="text-[10px] text-gray-400 mt-0.5">' + escapeHtml(fileMeta || v.file_name || '') + '</p>' +
+            '<p class="text-[10px] font-semibold text-teal-700 mt-2 bg-teal-50 p-1.5 rounded-lg">' + escapeHtml((acc ? acc + ' • ' : '') + when) + '</p>' +
+            (v.fail_reason ? '<p class="text-[10px] font-semibold text-rose-600 mt-2">' + escapeHtml(v.fail_reason) + '</p>' : '') +
+          '</div>' +
+          '<div class="mt-4 pt-2 border-t border-gray-100 flex items-center justify-between text-xs font-bold">' +
+            '<span class="' + meta.cls + '">' + escapeHtml(meta.label) + '</span>' +
+            '<span class="flex items-center gap-3">' +
+              '<button data-queue-action="edit" data-id="' + escapeHtml(v.id) + '" class="text-gray-500 hover:text-black">Edit</button>' +
+              '<button data-queue-action="delete" data-id="' + escapeHtml(v.id) + '" class="text-rose-500 hover:text-rose-700">Delete</button>' +
+            '</span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      q.querySelectorAll('[data-queue-action]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          if (btn.getAttribute('data-queue-action') === 'edit') editQueueItem(id);
+          else deleteQueueItem(id);
+        });
+      });
       lucide.createIcons();
     }
+    function editQueueItem(id) {
+      const item = queueItems.find(x => String(x.id) === String(id));
+      if (!item) return;
+      editingQueueItemId = item.id;
+      selectedFile = null;
+      const fileInput = document.getElementById('queue-file');
+      if (fileInput) fileInput.value = '';
+      updateFileLabel(item.file_name ? 'Current file: ' + item.file_name : '');
+      const caption = document.getElementById('queue-caption');
+      if (caption) caption.value = item.caption || '';
+      const acc = document.getElementById('queue-account');
+      if (acc && item.tiktok_account_id) acc.value = item.tiktok_account_id;
+      if (item.scheduled_at) setDateTimeInputs(new Date(item.scheduled_at));
+      setUploadStatus('Editing this queue item. Choose a new video only if you want to replace the upload.', false);
+      openModal('modal-upload');
+    }
+    async function deleteQueueItem(id) {
+      try {
+        await apiFetch('/api/queue/' + encodeURIComponent(id), { method: 'DELETE' });
+        if (String(editingQueueItemId) === String(id)) editingQueueItemId = null;
+        await loadQueue();
+      } catch (err) {
+        const textEl = document.getElementById('connection-status-text');
+        if (textEl) textEl.innerHTML = '<strong>Delete failed.</strong> ' + escapeHtml(err.message);
+      }
+    }
 
-    window.onload = () => {
-      renderCalendar();
-      renderQueue();
-    };
+    // ---------- upload + schedule ----------
+    function setUploadStatus(message, isError) {
+      const el = document.getElementById('upload-status');
+      if (!el) return;
+      el.textContent = message || '';
+      el.classList.toggle('hidden', !message);
+      el.classList.toggle('text-rose-600', !!isError);
+      el.classList.toggle('text-gray-500', !isError);
+      if (!message) {
+        const wrap = document.getElementById('upload-progress-wrap');
+        if (wrap) wrap.classList.add('hidden');
+      }
+    }
+    function setUploadProgress(pct) {
+      const wrap = document.getElementById('upload-progress-wrap');
+      const bar = document.getElementById('upload-progress-bar');
+      if (wrap) wrap.classList.remove('hidden');
+      if (bar) bar.style.width = Math.max(0, Math.min(100, pct)) + '%';
+    }
+    function updateFileLabel(currentFileNote) {
+      const label = document.getElementById('file-label');
+      const meta = document.getElementById('file-meta');
+      if (!label || !meta) return;
+      if (selectedFile) {
+        label.textContent = selectedFile.name;
+        meta.textContent = formatBytes(selectedFile.size) + ' selected';
+      } else if (currentFileNote) {
+        label.textContent = currentFileNote;
+        meta.textContent = 'MP4 or MOV, up to 1080p, max 500MB';
+      } else {
+        label.textContent = 'Drag & drop video or browse';
+        meta.textContent = 'MP4 or MOV, up to 1080p, max 500MB';
+      }
+    }
+    function handleFileSelected(input) {
+      selectedFile = input.files && input.files[0] ? input.files[0] : null;
+      updateFileLabel();
+    }
+    function setDateTimeInputs(date) {
+      const d = date || new Date(Date.now() + 60 * 60 * 1000);
+      const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+      const iso = local.toISOString();
+      const dateEl = document.getElementById('queue-date');
+      const timeEl = document.getElementById('queue-time');
+      if (dateEl) dateEl.value = iso.slice(0, 10);
+      if (timeEl) timeEl.value = iso.slice(11, 16);
+    }
+    function getScheduledAtIso() {
+      const dateVal = document.getElementById('queue-date').value;
+      const timeVal = document.getElementById('queue-time').value;
+      if (!dateVal || !timeVal) return null;
+      const local = new Date(dateVal + 'T' + timeVal + ':00');
+      return isNaN(local.getTime()) ? null : local.toISOString();
+    }
+    // Parse the presign response using the backend's ACTUAL field names
+    // (functions/api/r2/presign.js):
+    //   single PUT : { itemId, key, mode: 'single', putUrl, expiresIn }
+    //   multipart  : { itemId, key, mode: 'multipart', uploadId, partSize,
+    //                  parts: [{ partNumber, url }], completeEndpoint,
+    //                  abortEndpoint }
+    // The presign call has already created the queue_items row as a
+    // draft; /api/r2/complete flips it to 'uploaded' after HEAD-verifying
+    // the stored object against the row's byte size.
+    function parsePresign(payload) {
+      const d = unwrapData(payload) || {};
+      return {
+        itemId: d.itemId || null,
+        key: d.key || null,
+        mode: d.mode || null,
+        putUrl: d.putUrl || null,
+        uploadId: d.uploadId || null,
+        partSize: Number(d.partSize) || 0,
+        parts: Array.isArray(d.parts) ? d.parts : []
+      };
+    }
+    // PUT one blob to a presigned URL. Resolves with the response ETag
+    // (multipart completion needs one per part) and reports progress via
+    // onProgress as a 0..1 fraction of THIS blob.
+    function putWithProgress(url, blob, contentType, onProgress) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', url);
+        if (contentType) { try { xhr.setRequestHeader('Content-Type', contentType); } catch (_) { /* ignore */ } }
+        xhr.upload.onprogress = evt => {
+          if (evt.lengthComputable && onProgress) onProgress(evt.loaded / evt.total);
+        };
+        xhr.onload = () => {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            resolve({ etag: xhr.getResponseHeader('ETag') || xhr.getResponseHeader('etag') || null });
+          } else {
+            reject(new Error('Video upload failed (' + xhr.status + ').'));
+          }
+        };
+        xhr.onerror = () => reject(new Error('Video upload failed. Please check your connection and try again.'));
+        xhr.send(blob);
+      });
+    }
+    // Drive one file through the backend's upload flow and return the
+    // queue item id, left in status 'uploaded':
+    //   presign (creates the draft row) -> PUT(s) -> /api/r2/complete.
+    async function uploadSelectedFile(file, accountId) {
+      const presign = parsePresign(await apiFetch('/api/r2/presign', {
+        method: 'POST',
+        body: {
+          fileName: file.name,
+          fileSize: file.size,
+          mimeType: file.type || 'video/mp4',
+          tiktokAccountId: accountId
+        }
+      }));
+      if (!presign.itemId || !presign.key) {
+        throw new Error('The upload service did not return an upload session.');
+      }
+      setUploadProgress(0);
+      if (presign.mode === 'multipart') {
+        if (!presign.uploadId || !presign.parts.length || !presign.partSize) {
+          throw new Error('The upload service returned an incomplete multipart plan.');
+        }
+        const loaded = presign.parts.map(() => 0);
+        const etags = [];
+        try {
+          for (let i = 0; i < presign.parts.length; i++) {
+            const part = presign.parts[i];
+            const start = i * presign.partSize;
+            const blob = file.slice(start, Math.min(start + presign.partSize, file.size));
+            const res = await putWithProgress(part.url, blob, null, frac => {
+              loaded[i] = frac * blob.size;
+              setUploadProgress(Math.round((loaded.reduce((a, b) => a + b, 0) / file.size) * 100));
+            });
+            if (!res.etag) throw new Error('Storage did not return a part tag; the upload cannot be completed.');
+            etags.push({ partNumber: part.partNumber, etag: res.etag });
+          }
+        } catch (err) {
+          // Best-effort: free the multipart session server-side. The
+          // draft row stays, so the user can retry from the queue.
+          try {
+            await apiFetch('/api/r2/abort', {
+              method: 'POST',
+              body: { queueItemId: presign.itemId, key: presign.key, uploadId: presign.uploadId }
+            });
+          } catch (_) { /* ignore */ }
+          throw err;
+        }
+        await apiFetch('/api/r2/complete', {
+          method: 'POST',
+          body: { queueItemId: presign.itemId, key: presign.key, uploadId: presign.uploadId, parts: etags }
+        });
+      } else {
+        if (!presign.putUrl) throw new Error('The upload service did not return an upload URL.');
+        await putWithProgress(presign.putUrl, file, file.type || 'video/mp4', frac => {
+          setUploadProgress(Math.round(frac * 100));
+        });
+        await apiFetch('/api/r2/complete', {
+          method: 'POST',
+          body: { queueItemId: presign.itemId, key: presign.key }
+        });
+      }
+      setUploadProgress(100);
+      return presign.itemId;
+    }
+    async function handleScheduleSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btn-schedule-submit');
+      const originalHtml = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span>Working...</span>';
+      setUploadStatus('', false);
+      try {
+        const caption = document.getElementById('queue-caption').value.trim();
+        const accountSelect = document.getElementById('queue-account');
+        const editingItem = editingQueueItemId
+          ? queueItems.find(x => String(x.id) === String(editingQueueItemId)) : null;
+        const accountId = (accountSelect && accountSelect.value) ||
+          (editingItem && editingItem.tiktok_account_id) ||
+          getAccountId(accountStatus.account) || null;
+        const scheduledAt = getScheduledAtIso();
+        if (!scheduledAt) throw new Error('Please choose a publish date and time.');
+
+        let itemId = editingQueueItemId;
+        let replacedItemId = null;
+
+        if (selectedFile) {
+          // Presign creates the draft queue row, and the schema makes
+          // queue_items.tiktok_account_id NOT NULL — with no connected
+          // account there is nothing to upload against. Stop here, with
+          // the message inside the modal, instead of firing a presign
+          // call that can only fail.
+          if (!accountId) {
+            throw new Error('Connect your TikTok account first — a video can only be uploaded against a connected account.');
+          }
+          setUploadStatus('Uploading video...', false);
+          // Backend flow: presign (draft row) -> PUT -> /api/r2/complete
+          // (verifies the object, flips draft -> uploaded). The item is
+          // NEVER created via POST /api/queue — presign already made it,
+          // and a create call would insert a second, duplicate row.
+          // Edit-with-a-new-file takes the same path into a NEW item;
+          // the old item is deleted below, once the new one is safely
+          // scheduled, so a failed upload loses nothing. (Re-uploading
+          // into the old row via presign's queueItemId mode is not used:
+          // it keeps the old file_name/file_size_bytes, so the complete
+          // step's size check could never pass for a different file.)
+          itemId = await uploadSelectedFile(selectedFile, accountId);
+          if (editingQueueItemId && String(editingQueueItemId) !== String(itemId)) {
+            replacedItemId = editingQueueItemId;
+          }
+          setUploadStatus('Upload verified. Scheduling...', false);
+        } else if (editingItem && editingItem.status === 'draft') {
+          // A leftover draft's upload never completed; without the file
+          // there is nothing to verify, and draft -> scheduled is not a
+          // transition clients may make. Ask for the file again.
+          throw new Error('This draft\'s upload never finished. Choose the video file again to complete it.');
+        }
+
+        if (!itemId) throw new Error('Select a video to upload first.');
+
+        const patchPayload = {
+          caption: caption,
+          scheduled_at: scheduledAt,
+          timezone: (window.Intl && Intl.DateTimeFormat().resolvedOptions().timeZone) || 'UTC',
+          status: 'scheduled'
+        };
+        if (accountId) patchPayload.tiktok_account_id = accountId;
+        await apiFetch('/api/queue/' + encodeURIComponent(itemId), { method: 'PATCH', body: patchPayload });
+
+        let cleanupNote = '';
+        if (replacedItemId) {
+          try {
+            await apiFetch('/api/queue/' + encodeURIComponent(replacedItemId), { method: 'DELETE' });
+          } catch (_) {
+            cleanupNote = ' Your previous queue item could not be removed automatically — delete it from the queue list.';
+          }
+        }
+
+        editingQueueItemId = null;
+        selectedFile = null;
+        const fileInput = document.getElementById('queue-file');
+        if (fileInput) fileInput.value = '';
+        updateFileLabel();
+        closeModal('modal-upload');
+        await loadQueue();
+        if (cleanupNote) {
+          const textEl = document.getElementById('connection-status-text');
+          if (textEl) textEl.innerHTML = '<strong>Video replaced.</strong>' + escapeHtml(cleanupNote);
+        }
+      } catch (err) {
+        setUploadStatus((err && err.message) || 'Could not queue this video.', true);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+        lucide.createIcons();
+      }
+    }
+
+    // ---------- init ----------
+    async function initDashboard() {
+      lucide.createIcons();
+      const session = await requireSession();
+      if (!session) return; // redirected to /login
+
+      const logout = document.getElementById('btn-logout');
+      if (logout) logout.addEventListener('click', handleLogout);
+
+      const dz = document.getElementById('upload-dropzone');
+      if (dz) {
+        dz.addEventListener('dragover', evt => evt.preventDefault());
+        dz.addEventListener('drop', evt => {
+          evt.preventDefault();
+          const f = evt.dataTransfer && evt.dataTransfer.files && evt.dataTransfer.files[0];
+          if (f) { selectedFile = f; updateFileLabel(); }
+        });
+      }
+
+      setDateTimeInputs();
+      await refreshDashboardData();
+    }
+    window.onload = initDashboard;
   </script>
 </body>
 </html>
