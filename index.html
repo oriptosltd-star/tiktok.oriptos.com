@@ -19,14 +19,13 @@
             sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
           },
           colors: {
-            ttBlack: '#010101',
-            ttDark: '#0B0E14',
-            ttCard: '#12161F',
+            ttBlack: '#06080C',
+            ttDark: '#0D111A',
+            ttCard: '#111622',
             ttBorder: '#1F2430',
             ttCyan: '#25F4EE',
             ttMagenta: '#FE2C55',
-            ttGreen: '#27C97A',
-            ttYellow: '#FFC72C',
+            brandPurple: '#12063D',
           },
           borderRadius: {
             'card': '20px',
@@ -41,12 +40,6 @@
       background-color: #06080C;
       color: #F3F4F6;
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    }
-    .tiktok-glow {
-      text-shadow: 2px 2px 0px #FE2C55, -2px -2px 0px #25F4EE;
-    }
-    .tt-badge-gradient {
-      background: linear-gradient(90deg, #25F4EE 0%, #FE2C55 100%);
     }
     .tt-btn-primary {
       background: #FFFFFF;
@@ -82,17 +75,80 @@
       transform: translateY(-4px);
       box-shadow: 0 12px 35px rgba(37, 244, 238, 0.12);
     }
+
+    /* Big Footer (PandaPing Exact Standard) */
+    .start-band {
+      background: #0E072E;
+      border-radius: 36px 36px 0 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .start-headline {
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      transition: color 0.25s ease;
+    }
+    .start-cta:hover .start-headline {
+      color: #25F4EE;
+    }
+    .start-circle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: clamp(56px, 7vw, 84px);
+      height: clamp(56px, 7vw, 84px);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #25F4EE, #FE2C55);
+      color: #000000;
+      transition: transform 0.25s ease;
+      flex-shrink: 0;
+    }
+    .start-cta:hover .start-circle {
+      transform: translateX(8px) scale(1.05);
+    }
+    .footer-white-panel {
+      background: #FFFFFF;
+      color: #10083D;
+      border-radius: 36px 36px 0 0;
+    }
+    .footer-col-link {
+      color: #4B5563;
+      transition: color 0.15s ease;
+      text-decoration: none;
+    }
+    .footer-col-link:hover {
+      color: #000000;
+    }
+    .social-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #F3F4F6;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #1F2937;
+      transition: all 0.2s ease;
+    }
+    .social-circle:hover {
+      background: #000000;
+      color: #25F4EE;
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col w-full overflow-x-hidden">
 
   <!-- ==================== TOP ANNOUNCEMENT ==================== -->
   <div class="w-full bg-gradient-to-r from-ttCyan/20 via-black to-ttMagenta/20 border-b border-gray-800 text-xs py-2.5 px-6 flex items-center justify-center text-center">
-    <span>
-      <span class="font-extrabold uppercase tracking-wider text-ttCyan mr-2">TIKTOK API V2 ACTIVE</span>
-      Enterprise-grade bulk content scheduling & automated queue is live.
-      <a href="/login" class="text-ttMagenta font-bold hover:underline ml-2">Access Dashboard &rarr;</a>
-    </span>
+    <div class="flex items-center gap-2">
+      <i data-lucide="check-circle" class="w-4 h-4 text-ttCyan"></i>
+      <span class="font-extrabold uppercase tracking-wider text-ttCyan">TIKTOK API V2 ACTIVE</span>
+      <span class="text-gray-300">Enterprise-grade bulk content scheduling & automated queue is live.</span>
+      <a href="/login" class="text-ttMagenta font-bold hover:underline ml-1">Access Dashboard &rarr;</a>
+    </div>
   </div>
 
   <!-- ==================== FULL-WIDTH STICKY HEADER ==================== -->
@@ -140,7 +196,6 @@
 
   <!-- ==================== FULL-WIDTH HERO SECTION ==================== -->
   <section class="w-full relative overflow-hidden py-16 md:py-24 border-b border-[#1A202C]">
-    <!-- Ambient Glow Background -->
     <div class="absolute -top-32 -left-32 w-96 h-96 bg-ttCyan/10 rounded-full blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-ttMagenta/10 rounded-full blur-3xl pointer-events-none"></div>
 
@@ -149,7 +204,7 @@
       <!-- Hero Copy -->
       <div class="lg:col-span-7 space-y-6">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
-          <span class="w-2 h-2 rounded-full bg-ttCyan animate-ping"></span>
+          <i data-lucide="shield-check" class="w-4 h-4 text-ttCyan"></i>
           <span class="text-xs font-extrabold uppercase tracking-widest text-ttCyan">Official Content Posting API v2</span>
         </div>
 
@@ -186,7 +241,7 @@
           </div>
           <div>
             <p class="text-2xl font-black text-white">10x</p>
-            <p class="text-xs text-gray-400 font-medium">Output Speed</p>
+            <p class="text-xs text-gray-400 font-medium">Output Velocity</p>
           </div>
         </div>
       </div>
@@ -194,17 +249,15 @@
       <!-- Hero Visual (Professional High-Res Video Creator Asset) -->
       <div class="lg:col-span-5 relative flex items-center justify-center">
         <div class="relative w-full max-w-lg rounded-3xl overflow-hidden border-2 border-[#1E2638] shadow-2xl bg-black">
-          <!-- Glow Accent Ring -->
           <div class="absolute -inset-1 bg-gradient-to-r from-ttCyan to-ttMagenta rounded-3xl blur opacity-30"></div>
           
           <div class="relative rounded-3xl overflow-hidden">
             <img src="/assets/tiktok-hero.jpg" alt="Video Creator Production" class="w-full h-[460px] object-cover"/>
             
-            <!-- Floating UI Card Overlay -->
             <div class="absolute bottom-4 left-4 right-4 bg-black/85 backdrop-blur-md p-4 rounded-2xl border border-gray-700/80">
               <div class="flex items-center justify-between mb-2">
                 <div class="flex items-center gap-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-ttCyan animate-pulse"></span>
+                  <i data-lucide="radio" class="w-4 h-4 text-ttCyan"></i>
                   <span class="text-xs font-black text-white">Live Content Queue</span>
                 </div>
                 <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full bg-ttMagenta/20 text-ttMagenta border border-ttMagenta/30">Auto-Publish</span>
@@ -274,7 +327,7 @@
       <div class="feature-card rounded-card p-8 flex flex-col justify-between">
         <div>
           <div class="w-12 h-12 rounded-xl bg-white/10 border border-white/20 text-white flex items-center justify-center font-bold mb-6">
-            <i data-lucide="shield-alert" class="w-6 h-6"></i>
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
           </div>
           <h3 class="text-xl font-extrabold text-white mb-2">Zero-Ban Direct Routing</h3>
           <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
@@ -321,7 +374,7 @@
         </div>
       </div>
 
-      <!-- Card 6: CTA Card -->
+      <!-- Card 6 -->
       <div class="feature-card rounded-card p-8 flex flex-col justify-between bg-gradient-to-br from-ttCard via-[#151B27] to-[#0A0D14] border-ttCyan/40">
         <div>
           <span class="text-xs font-black uppercase tracking-wider text-ttCyan">Action Required</span>
@@ -381,75 +434,89 @@
     </div>
   </section>
 
-  <!-- ==================== COMPLIANCE & LEGAL (TIKTOK REVIEWERS) ==================== -->
-  <section id="compliance" class="w-full px-6 md:px-12 py-16 border-b border-[#1A202C]">
-    <div class="max-w-4xl">
-      <span class="text-xs font-black uppercase tracking-wider text-ttCyan">Trust & Transparency</span>
-      <h3 class="text-2xl md:text-3xl font-black text-white mt-1 mb-3">
-        TikTok Developer Platform Compliance
-      </h3>
-      <p class="text-sm text-gray-400 leading-relaxed mb-6">
-        Oriptos Ltd strictly follows all TikTok Developer Platform terms. We ensure complete transparency regarding user data access, authorization scopes, and data erasure.
-      </p>
-
-      <div class="flex flex-wrap gap-4 text-xs font-bold">
-        <a href="/privacy" class="px-5 py-2.5 rounded-full bg-[#12161F] border border-gray-700 hover:border-ttCyan text-white transition">
-          Privacy Policy &rarr;
+  <!-- ==================== BIG FOOTER (PANDAPING EXACT SPECIFICATION) ==================== -->
+  <footer class="w-full mt-12">
+    <!-- Top Big Band: "Start today" CTA -->
+    <section class="start-band w-full">
+      <div class="w-full px-6 md:px-16 py-20 flex flex-col lg:flex-row lg:items-end justify-between gap-10">
+        <a href="/login" class="start-cta flex items-end gap-6 text-decoration-none flex-wrap">
+          <span class="start-headline">Start today</span>
+          <span class="start-circle" aria-hidden="true">
+            <i data-lucide="arrow-up-right" class="w-8 h-8"></i>
+          </span>
         </a>
-        <a href="/terms" class="px-5 py-2.5 rounded-full bg-[#12161F] border border-gray-700 hover:border-ttCyan text-white transition">
-          Terms of Service &rarr;
-        </a>
-        <a href="/data-deletion" class="px-5 py-2.5 rounded-full bg-[#12161F] border border-gray-700 hover:border-ttCyan text-white transition">
-          User Data Deletion Instructions &rarr;
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== FULL-WIDTH FOOTER ==================== -->
-  <footer class="w-full bg-[#030508] text-gray-400 py-12 px-6 md:px-12">
-    <div class="w-full flex flex-col md:flex-row items-start justify-between gap-8 pb-10 border-b border-gray-800">
-      <div>
-        <div class="flex items-center gap-2 mb-3">
-          <span class="text-xl font-black text-white">Oriptos</span>
-          <span class="text-[10px] uppercase font-bold text-ttCyan px-1.5 py-0.5 rounded bg-ttCyan/10">TikTok Engine</span>
-        </div>
-        <p class="text-xs text-gray-400 max-w-sm">
-          High-performance social media automation and short-form video operations platform.
+        <p class="max-w-md text-sm md:text-base text-gray-300 leading-relaxed font-medium">
+          Your TikTok accounts, connected the official way. Dominate video scheduling and automate growth with precision.
         </p>
       </div>
+    </section>
 
-      <div class="flex flex-wrap gap-10 text-xs">
-        <div>
-          <h4 class="text-white font-bold mb-2 uppercase tracking-wider text-[11px]">Product</h4>
-          <ul class="space-y-1.5">
-            <li><a href="/login" class="hover:text-ttCyan transition">Login</a></li>
-            <li><a href="/dashboard" class="hover:text-ttCyan transition">Broadcast Dashboard</a></li>
-            <li><a href="#features" class="hover:text-ttCyan transition">Capabilities</a></li>
-          </ul>
+    <!-- Bottom White Panel (PandaPing Style Multi-Col Panel) -->
+    <section class="footer-white-panel mx-3 md:mx-8 mb-6 p-8 md:p-14 shadow-2xl">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-gray-200">
+        
+        <!-- Left Brand Col -->
+        <div class="md:col-span-5 space-y-4">
+          <div class="flex items-center gap-3">
+            <img src="/assets/pandaping-icon-blink.avif" alt="Oriptos Logo" class="w-10 h-10 rounded-xl object-cover shadow-sm"/>
+            <span class="text-2xl font-black text-gray-900 tracking-tight">Oriptos</span>
+          </div>
+          <p class="text-xs md:text-sm text-gray-600 max-w-sm leading-relaxed font-medium">
+            Oriptos Ltd provides enterprise-grade social media broadcasting, official WhatsApp-first commerce, and automated TikTok content infrastructure.
+          </p>
+
+          <!-- Social Media Icons (Clean SVG Discs) -->
+          <div class="flex items-center gap-3 pt-2">
+            <a href="#" class="social-circle" title="TikTok"><i data-lucide="video" class="w-4 h-4"></i></a>
+            <a href="#" class="social-circle" title="LinkedIn"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="#" class="social-circle" title="YouTube"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+            <a href="#" class="social-circle" title="Twitter"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+          </div>
         </div>
-        <div>
-          <h4 class="text-white font-bold mb-2 uppercase tracking-wider text-[11px]">Compliance</h4>
-          <ul class="space-y-1.5">
-            <li><a href="/privacy" class="hover:text-ttCyan transition">Privacy Policy</a></li>
-            <li><a href="/terms" class="hover:text-ttCyan transition">Terms of Service</a></li>
-            <li><a href="/data-deletion" class="hover:text-ttCyan transition">Data Deletion</a></li>
-          </ul>
+
+        <!-- Links Columns -->
+        <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 text-xs font-semibold">
+          <div class="space-y-3">
+            <p class="font-black text-gray-900 uppercase tracking-wider text-[11px]">Platform</p>
+            <ul class="space-y-2">
+              <li><a href="/dashboard" class="footer-col-link">Broadcast Dashboard</a></li>
+              <li><a href="/login" class="footer-col-link">TikTok OAuth Sign In</a></li>
+              <li><a href="#features" class="footer-col-link">Features & Capabilities</a></li>
+              <li><a href="#scheduler" class="footer-col-link">Content Calendar</a></li>
+            </ul>
+          </div>
+
+          <div class="space-y-3">
+            <p class="font-black text-gray-900 uppercase tracking-wider text-[11px]">Compliance</p>
+            <ul class="space-y-2">
+              <li><a href="/privacy" class="footer-col-link">Privacy Policy</a></li>
+              <li><a href="/terms" class="footer-col-link">Terms of Service</a></li>
+              <li><a href="/data-deletion" class="footer-col-link">User Data Deletion</a></li>
+              <li><a href="https://www.tiktok.com/community-guidelines" target="_blank" class="footer-col-link">TikTok Guidelines</a></li>
+            </ul>
+          </div>
+
+          <div class="space-y-3">
+            <p class="font-black text-gray-900 uppercase tracking-wider text-[11px]">Contact</p>
+            <ul class="space-y-2">
+              <li><a href="mailto:oriptosltd@gmail.com" class="footer-col-link">oriptosltd@gmail.com</a></li>
+              <li><a href="mailto:privacy@oriptos.com" class="footer-col-link">privacy@oriptos.com</a></li>
+              <li><span class="text-gray-400">London, United Kingdom</span></li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <h4 class="text-white font-bold mb-2 uppercase tracking-wider text-[11px]">Support</h4>
-          <ul class="space-y-1.5">
-            <li><a href="mailto:oriptosltd@gmail.com" class="hover:text-ttCyan transition">oriptosltd@gmail.com</a></li>
-            <li><a href="/terms" class="hover:text-ttCyan transition">Community Guidelines</a></li>
-          </ul>
-        </div>
+
       </div>
-    </div>
 
-    <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
-      <p>&copy; 2026 Oriptos Ltd. All rights reserved.</p>
-      <p>Official TikTok for Developers Content Posting Platform.</p>
-    </div>
+      <!-- Sub-Footer Copyright -->
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-gray-500">
+        <p>&copy; 2026 Oriptos Ltd. All rights reserved.</p>
+        <p class="flex items-center gap-1.5">
+          <i data-lucide="check-check" class="w-3.5 h-3.5 text-emerald-600"></i>
+          <span>Official TikTok for Developers Content Posting Partner</span>
+        </p>
+      </div>
+    </section>
   </footer>
 
   <script>
