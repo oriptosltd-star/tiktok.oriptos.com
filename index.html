@@ -238,9 +238,6 @@
       0%, 100% { opacity: 0.55; transform: scale(1); }
       50% { opacity: 0.95; transform: scale(1.06); }
     }
-    .hero-visual {
-      will-change: transform;
-    }
     /* Announcement strip sheen */
     .strip-sheen {
       position: relative;
@@ -417,7 +414,7 @@
       <div class="lg:col-span-5 relative flex items-center justify-center hero-visual hero-in" style="animation-delay: 0.15s">
         <div class="hero-glow"></div>
         <div class="absolute w-3/4 h-3/4 bg-ttCyan/10 rounded-full blur-3xl pointer-events-none"></div>
-        <img src="/assets/vis-hero.webp" alt="TikTok Planner dashboard — calendar of scheduled videos and the publishing queue" width="1100" height="880" class="cute-float relative w-full max-w-[560px] h-auto rounded-[2rem]" style="aspect-ratio: 1100/880;"/>
+        <img src="/assets/vis-hero.webp" alt="TikTok Planner dashboard — calendar of scheduled videos and the publishing queue" width="1100" height="880" class="relative w-full max-w-[560px] h-auto rounded-[2rem]" style="aspect-ratio: 1100/880;"/>
       </div>
 
     </div>
@@ -1104,6 +1101,17 @@
     .faq-a-text,
     .faq-more-btn { transition: none !important; }
   }
+
+  /* FAQ centering (owner order): single centered column, centered heading */
+  .faq-section > .max-w-3xl { margin-inline: auto; text-align: center; }
+  .faq-flourish { margin-inline: auto; }
+  .faq-layout { grid-template-columns: 1fr; max-width: 54rem; margin-inline: auto; }
+  .faq-intro { text-align: center; }
+  .faq-chips { justify-content: center; }
+  @media (min-width: 1024px) {
+    .faq-layout { grid-template-columns: 1fr; }
+    .faq-intro { position: static; }
+  }
 </style>
 
 <section id="faq" class="faq-section w-full px-6 md:px-12 py-20 border-b border-[#1A202C]">
@@ -1417,23 +1425,6 @@
         els.forEach(function (el) { el.classList.add('revealed'); });
       }
 
-      // ---- Hero tilt (desktop fine pointers only, touch never) ----
-      var visual = document.querySelector('.hero-visual');
-      var hero = visual ? visual.closest('section') : null;
-      if (visual && hero && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        var raf = null;
-        hero.addEventListener('mousemove', function (ev) {
-          if (raf) return;
-          raf = requestAnimationFrame(function () {
-            raf = null;
-            var r = visual.getBoundingClientRect();
-            var x = (ev.clientX - r.left) / r.width - 0.5;
-            var y = (ev.clientY - r.top) / r.height - 0.5;
-            visual.style.transform = 'perspective(900px) rotateX(' + (-y * 5).toFixed(2) + 'deg) rotateY(' + (x * 5).toFixed(2) + 'deg)';
-          });
-        });
-        hero.addEventListener('mouseleave', function () { visual.style.transform = ''; });
-      }
     })();
   </script>
 </body>
