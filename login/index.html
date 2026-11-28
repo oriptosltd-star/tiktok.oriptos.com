@@ -357,7 +357,7 @@
     // SUPABASE_ANON_KEY is a placeholder in this working copy; the real
     // publishable key is injected by the parent at integration time.
     const SUPABASE_URL = 'https://nnkvruflauabevuhimhk.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_-H9oPDTFv1laCwR7vIebzQ_IfVF6AkH';
+    const SUPABASE_ANON_KEY = 'sb_publishable_7X-mrLkFKWsBpbA_jLsu9A_WvlgCkmZ';
     const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
     let authMode = 'signin'; // 'signin' | 'signup'
@@ -423,16 +423,17 @@
       }
     }
 
-    // "Continue with TikTok" — the OAuth start endpoint requires the
-    // site session as a Bearer JWT, and a plain navigation cannot send
-    // one (the session lives in supabase-js localStorage, not a cookie),
-    // so start.js bounces a bare link click back to /login even for a
-    // signed-in user. With a session: fetch the JSON variant with the
-    // JWT, then navigate to the returned URL (the oauth_state cookie set
-    // by that fetch response is stored by the browser, so the callback's
-    // cookie check still passes). Without a session there is nothing to
-    // connect yet — TikTok is connected from the dashboard after login,
-    // so say that plainly instead of looping back to this page.
+    // "Continue with TikTok" — TikTok is a PRIMARY sign-in here, not a
+    // connect-only extra: the button ALWAYS starts the OAuth flow. The
+    // start endpoint is fetched (a plain navigation cannot carry the
+    // site session — it lives in supabase-js localStorage, not a cookie):
+    // with a session, its JWT goes along and the flow CONNECTS TikTok to
+    // the signed-in account; without one, the same fetch starts LOGIN
+    // mode, and the callback creates the site account on first use and
+    // hands the session back via the #tt_session fragment handled below.
+    // Either way the oauth_state cookie set by the fetch response is
+    // stored by the browser (same-origin fetch), so the callback's
+    // cookie check still passes when TikTok redirects back.
     async function startTikTokConnect(e) {
       if (e) e.preventDefault();
       if (!supabaseClient) {
@@ -442,25 +443,48 @@
       try {
         const { data } = await supabaseClient.auth.getSession();
         const token = data && data.session ? data.session.access_token : null;
-        if (!token) {
-          setAuthMessage('Log in or create an account first — you can connect TikTok from your dashboard.', true);
-          return;
-        }
-        const res = await fetch('/auth/tiktok/start', {
-          headers: { 'Authorization': 'Bearer ' + token, 'Accept': 'application/json' }
-        });
+        const headers = { 'Accept': 'application/json' };
+        if (token) headers['Authorization'] = 'Bearer ' + token;
+        const res = await fetch('/auth/tiktok/start', { headers });
         const payload = await res.json().catch(() => null);
         if (!res.ok || !payload || !payload.url) {
-          throw new Error((payload && payload.message) || 'Could not start the TikTok connection (' + res.status + ').');
+          throw new Error((payload && payload.message) || 'Could not start TikTok sign-in (' + res.status + ').');
         }
         window.location.assign(payload.url);
       } catch (err) {
-        setAuthMessage((err && err.message) || 'Could not start the TikTok connection.', true);
+        setAuthMessage((err && err.message) || 'Could not start TikTok sign-in.', true);
       }
     }
 
-    // Already signed in? Go straight to the dashboard.
+    // TikTok LOGIN mode lands back on this page from the callback with a
+    // one-time token in the URL fragment (#tt_session=<hashed_token>).
+    // Exchange it for a real Supabase session, scrub the fragment from
+    // history, and continue to the dashboard. Returns true when a
+    // tt_session fragment was present (handled, successfully or not), so
+    // the signed-in check below does not race it.
+    async function completeTikTokSessionFromHash() {
+      const match = (window.location.hash || '').match(/tt_session=([^&]+)/);
+      if (!match) return false;
+      const tokenHash = decodeURIComponent(match[1]);
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      if (!supabaseClient) {
+        setAuthMessage('TikTok sign-in could not be completed — please try again.', true);
+        return true;
+      }
+      try {
+        const { error } = await supabaseClient.auth.verifyOtp({ token_hash: tokenHash, type: 'magiclink' });
+        if (error) throw error;
+        window.location.assign('/dashboard?connected=tiktok');
+      } catch (err) {
+        setAuthMessage('TikTok sign-in could not be completed — please try again.', true);
+      }
+      return true;
+    }
+
     (async () => {
+      // A TikTok sign-in completing takes precedence over everything.
+      if (await completeTikTokSessionFromHash()) return;
+      // Already signed in? Go straight to the dashboard.
       if (!supabaseClient) return;
       try {
         const { data } = await supabaseClient.auth.getSession();
