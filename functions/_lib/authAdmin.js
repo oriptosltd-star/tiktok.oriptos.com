@@ -104,5 +104,5 @@ export async function generateMagicLinkToken(env, email) {
     method: 'POST',
     body: { type: 'magiclink', email },
   });
-  return data?.properties?.hashed_token || null;
+  return data?.hashed_token || data?.properties?.hashed_token || null;
 }

@@ -219,7 +219,7 @@ export async function onRequestGet({ request, env }) {
       const profileRow = await svc.selectOne('profiles', eq('id', resolvedUserId));
       const email = (profileRow && profileRow.email) || syntheticEmailForOpenId(profile.open_id);
       const hashedToken = await generateMagicLinkToken(env, email);
-      if (!hashedToken) return failLogin('tiktok_login_failed_magiclink');
+      if (!hashedToken) return failLogin('tiktok_login_failed');
       return redirect(`${base}/login#tt_session=${encodeURIComponent(hashedToken)}`, {
         'Set-Cookie': CLEAR_COOKIE,
       });
@@ -229,6 +229,6 @@ export async function onRequestGet({ request, env }) {
       'Set-Cookie': CLEAR_COOKIE,
     });
   } catch {
-    return loginMode ? failLogin(`tiktok_login_failed_${stage}`) : fail('tiktok_exchange');
+    return loginMode ? failLogin('tiktok_login_failed') : fail('tiktok_exchange');
   }
 }
