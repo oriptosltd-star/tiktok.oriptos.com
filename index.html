@@ -108,22 +108,23 @@
       transform: scale(1.04);
     }
 
-    /* TikTok dual-colour shadow hover — How It Works + Security & Control ONLY.
-       Owner order: in these two sections the hover shows a soft cyan/magenta
-       cloud shadow instead of a border colour change. Border stays at its
-       resting colour (#1C2230); all other sections keep the border glow above. */
+    /* Hard offset shadow hover — How It Works + Security & Control ONLY.
+       Owner order (Gumroad-style reference): on hover the card casts a HARD
+       shadow to the RIGHT and BOTTOM in TikTok's two colours — a cyan step
+       at 6px and a magenta step at 12px, zero blur — instead of any border
+       colour change. Border stays at its resting colour (#1C2230); all
+       other sections keep the border glow above. */
     #how-it-works .feature-card,
     #security .feature-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     #how-it-works .feature-card:hover,
     #security .feature-card:hover {
       border-color: #1C2230;
-      transform: translateY(-6px);
+      transform: translate(-3px, -3px);
       box-shadow:
-        -14px 10px 44px -10px rgba(37, 244, 238, 0.38),
-        14px 18px 48px -10px rgba(254, 44, 85, 0.38),
-        0 24px 48px -16px rgba(0, 0, 0, 0.65);
+        6px 6px 0 0 rgba(37, 244, 238, 0.9),
+        12px 12px 0 0 rgba(254, 44, 85, 0.9);
     }
     #how-it-works .feature-card:has(.text-ttMagenta):hover,
     #security .feature-card:has(.text-ttMagenta):hover {
