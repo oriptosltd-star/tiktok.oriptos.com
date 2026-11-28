@@ -129,6 +129,17 @@ export function presignPut(env, key, { expiresIn = 3600, now } = {}) {
   return presignUrl(env, { method: 'PUT', key, expiresIn, now });
 }
 
+/**
+ * Presigned GET URL for a server-side download. Used by the dispatcher
+ * (plan §3.3 step 4) to read a queue item's video back out of R2 in
+ * Range slices while uploading chunks to TikTok. Server-side only —
+ * the URL is never sent to a browser. Only the host header is signed,
+ * so callers may add an unsigned Range header to the fetch.
+ */
+export function presignGet(env, key, { expiresIn = 3600, now } = {}) {
+  return presignUrl(env, { method: 'GET', key, expiresIn, now });
+}
+
 /** Presigned PUT URL for one multipart part. */
 export function presignPart(env, key, uploadId, partNumber, { expiresIn = 3600, now } = {}) {
   return presignUrl(env, {
