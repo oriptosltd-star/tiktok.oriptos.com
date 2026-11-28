@@ -20,6 +20,21 @@
 // ============================================================================
 
 export const TIKTOK_SCOPES = ['user.info.basic', 'video.upload', 'video.publish'];
+
+// Extended scopes for the analytics wave (Display API + richer profile):
+// appended to TIKTOK_SCOPES by the authorize flow ONLY when
+// env.TIKTOK_EXTENDED_SCOPES === '1' (see auth/tiktok/start.js). They are
+// never part of the base grant: a token minted without them simply lacks
+// them, and the insights endpoint reports such accounts as
+// needsReconnect instead of failing. TIKTOK_SCOPES itself is never
+// mutated — other consumers (callback scope bookkeeping, status) keep
+// seeing exactly the base set.
+export const TIKTOK_EXTENDED_SCOPES = [
+  'user.info.username',
+  'user.info.profile',
+  'user.info.stats',
+  'video.list',
+];
 export const MOCK_CODE = 'mock_code';
 
 export function isMockMode(env) {
@@ -31,12 +46,16 @@ export function redirectUri(env, appBaseUrl) {
   return `${appBaseUrl}/auth/tiktok/callback`;
 }
 
-/** Step 1 of the flow: the authorize URL the user is redirected to. */
-export function buildAuthorizeUrl(env, appBaseUrl, state) {
+/**
+ * Step 1 of the flow: the authorize URL the user is redirected to.
+ * `scopes` defaults to the base TIKTOK_SCOPES; start.js passes the
+ * extended set when env.TIKTOK_EXTENDED_SCOPES === '1'.
+ */
+export function buildAuthorizeUrl(env, appBaseUrl, state, scopes = TIKTOK_SCOPES) {
   const params = new URLSearchParams({
     client_key: env.TIKTOK_CLIENT_KEY,
     response_type: 'code',
-    scope: TIKTOK_SCOPES.join(','),
+    scope: scopes.join(','),
     redirect_uri: redirectUri(env, appBaseUrl),
     state,
   });
@@ -117,6 +136,74 @@ export async function fetchUserInfo(accessToken) {
   } catch (e) {
     return fetchUserInfoFields(accessToken, 'open_id');
   }
+}
+
+// ---------------------------------------------------------------------------
+// Display API wave: extended profile/stats + the user's own video list.
+// These need the TIKTOK_EXTENDED_SCOPES grant on the token. Unlike
+// fetchUserInfo (sign-in path, deliberately forgiving), these FAIL LOUD:
+// they throw TikTokApiError carrying TikTok's error code, because the
+// only caller (the insights endpoint) must distinguish "token lacks the
+// scopes" (-> ask the user to reconnect) from success. There is NO
+// reduced-fields fallback here — a partial profile would silently
+// masquerade as real stats.
+// ---------------------------------------------------------------------------
+
+export const USER_INFO_EXTENDED_FIELDS =
+  'open_id,union_id,avatar_url,display_name,username,bio_description,profile_web_link,is_verified,follower_count,following_count,likes_count,video_count';
+
+/**
+ * One user/info call with the full extended field set (base identity +
+ * username + profile + stats fields). Returns TikTok's user object.
+ * Throws TikTokApiError (with .code / .httpStatus) on any failure —
+ * including the scope error TikTok returns when the token was minted
+ * before the extended scopes were granted.
+ */
+export async function fetchUserInfoExtended(accessToken) {
+  const res = await fetch(
+    `https://open.tiktokapis.com/v2/user/info/?fields=${encodeURIComponent(USER_INFO_EXTENDED_FIELDS)}`,
+    { headers: { Authorization: `Bearer ${accessToken}` } },
+  );
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok || !data?.data?.user) {
+    throw new TikTokApiError(data?.error?.message || `TikTok user/info failed: HTTP ${res.status}`, {
+      httpStatus: res.status,
+      code: data?.error?.code || null,
+    });
+  }
+  return data.data.user;
+}
+
+export const VIDEO_LIST_FIELDS =
+  'id,create_time,cover_image_url,share_url,video_description,title,duration,like_count,comment_count,share_count,view_count';
+
+/**
+ * The connected user's own videos (Display API, POST /v2/video/list/).
+ * Returns TikTok's `data` object: { videos: [...], cursor, has_more }.
+ * Same envelope discipline as the Content Posting helper: an HTTP 200
+ * with a non-'ok' error.code is still a failure. Throws TikTokApiError.
+ */
+export async function listUserVideos(accessToken, maxCount = 20) {
+  const res = await fetch(
+    `https://open.tiktokapis.com/v2/video/list/?fields=${encodeURIComponent(VIDEO_LIST_FIELDS)}`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify({ max_count: maxCount }),
+    },
+  );
+  const data = await res.json().catch(() => ({}));
+  const apiError = data?.error;
+  if (!res.ok || (apiError && apiError.code && apiError.code !== 'ok')) {
+    throw new TikTokApiError(apiError?.message || `TikTok video/list failed: HTTP ${res.status}`, {
+      httpStatus: res.status,
+      code: apiError?.code || null,
+    });
+  }
+  return data?.data ?? {};
 }
 
 /** Normalise a TikTok token payload into stored expiry timestamps. */

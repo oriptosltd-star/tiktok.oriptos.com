@@ -26,7 +26,13 @@
 
 import { supabaseService, hasServiceRole, getAuthUser } from '../../_lib/supabase.js';
 import { bearerToken, redirect, json, jsonError, appBaseUrl, HttpError } from '../../_lib/guard.js';
-import { isMockMode, buildAuthorizeUrl, MOCK_CODE } from '../../_lib/tiktok.js';
+import {
+  isMockMode,
+  buildAuthorizeUrl,
+  MOCK_CODE,
+  TIKTOK_SCOPES,
+  TIKTOK_EXTENDED_SCOPES,
+} from '../../_lib/tiktok.js';
 
 const STATE_TTL_MS = 10 * 60 * 1000; // plan §1.1: 10-minute expiry
 
@@ -67,9 +73,19 @@ export async function onRequestGet({ request, env }) {
       `oauth_state=${state}; HttpOnly; Secure; SameSite=Lax; Path=/auth/tiktok; Max-Age=600`;
 
     const mock = isMockMode(env);
+    // Extended scopes (Display API + profile/stats) are requested ONLY
+    // when the operator flips TIKTOK_EXTENDED_SCOPES=1 — that flip is
+    // the moment TikTok starts prompting users for the extra grants, so
+    // it stays OFF until the portal app carries the scopes and the
+    // review covers them. With the flag off the authorize URL is byte-
+    // identical to before: login keeps working exactly as today.
+    const scopes =
+      env.TIKTOK_EXTENDED_SCOPES === '1'
+        ? [...TIKTOK_SCOPES, ...TIKTOK_EXTENDED_SCOPES]
+        : TIKTOK_SCOPES;
     const target = mock
       ? `${base}/auth/tiktok/callback?code=${MOCK_CODE}&state=${state}&mock=1`
-      : buildAuthorizeUrl(env, base, state);
+      : buildAuthorizeUrl(env, base, state, scopes);
 
     const wantsJson = (request.headers.get('Accept') || '').includes('application/json');
     if (wantsJson) {
