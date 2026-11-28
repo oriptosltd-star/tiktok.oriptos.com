@@ -44,6 +44,8 @@
     .tt-btn-primary {
       background: #FFFFFF;
       color: #000000;
+      position: relative;
+      overflow: hidden;
       transition: all 0.25s ease;
       box-shadow: 0 4px 20px rgba(37, 244, 238, 0.25);
     }
@@ -53,6 +55,21 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(37, 244, 238, 0.45);
     }
+    .tt-btn-primary::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -80%;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+      transform: skewX(-20deg);
+      transition: left 0.55s ease;
+      pointer-events: none;
+    }
+    .tt-btn-primary:hover::after {
+      left: 130%;
+    }
     .tt-btn-secondary {
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -61,19 +78,30 @@
     }
     .tt-btn-secondary:hover {
       background: rgba(255, 255, 255, 0.12);
-      border-color: #FE2C55;
+      border-color: rgba(255, 255, 255, 0.55);
+      box-shadow: 0 6px 22px rgba(255, 255, 255, 0.08);
       transform: translateY(-2px);
     }
     .feature-card {
       background: #0E121A;
       border: 1px solid #1C2230;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
-      transition: all 0.25s ease;
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
     }
     .feature-card:hover {
-      border-color: #25F4EE;
-      transform: translateY(-4px);
-      box-shadow: 0 12px 35px rgba(37, 244, 238, 0.12);
+      border-color: rgba(37, 244, 238, 0.7);
+      transform: translateY(-5px);
+      box-shadow: 0 14px 38px rgba(37, 244, 238, 0.14);
+    }
+    .feature-card:has(.text-ttMagenta):hover {
+      border-color: rgba(254, 44, 85, 0.7);
+      box-shadow: 0 14px 38px rgba(254, 44, 85, 0.14);
+    }
+    .feature-card img {
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover img {
+      transform: scale(1.04);
     }
 
     /* Big Footer (PandaPing Exact Standard) */
@@ -144,15 +172,124 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
     }
+
+    /* ==================== EFFECTS PASS ==================== */
+    /* Scroll reveal: pre-state applies ONLY when JS added .fx to <html> */
+    html.fx .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    html.fx .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    html.fx .feature-card.reveal.revealed {
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease, opacity 0.28s ease;
+    }
+    /* Hero entrance (pure CSS, ends at natural state, no JS needed) */
+    .hero-in {
+      animation: hero-in 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+    }
+    @keyframes hero-in {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Hero glow: soft cyan/magenta radial pulse behind the animation */
+    .hero-glow {
+      position: absolute;
+      inset: 4% 0;
+      border-radius: 50%;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 32% 38%, rgba(37, 244, 238, 0.32), transparent 58%),
+        radial-gradient(circle at 70% 66%, rgba(254, 44, 85, 0.28), transparent 58%);
+      filter: blur(38px);
+      animation: glow-pulse 6s ease-in-out infinite;
+    }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50% { opacity: 0.95; transform: scale(1.06); }
+    }
+    .hero-visual {
+      will-change: transform;
+    }
+    /* Announcement strip sheen */
+    .strip-sheen {
+      position: relative;
+      overflow: hidden;
+    }
+    .strip-sheen::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.09) 50%, transparent 70%);
+      transform: translateX(-120%);
+      animation: strip-sheen 7s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes strip-sheen {
+      0% { transform: translateX(-120%); }
+      55%, 100% { transform: translateX(120%); }
+    }
+    /* Nav underline grow */
+    header nav a {
+      position: relative;
+    }
+    header nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      height: 2px;
+      width: 100%;
+      background: linear-gradient(90deg, #25F4EE, #FE2C55);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    header nav a:hover::after {
+      transform: scaleX(1);
+    }
+    /* Subtle background gradient drift (two sections) */
+    .drift-bg {
+      background-image:
+        radial-gradient(640px 320px at 18% 15%, rgba(37, 244, 238, 0.055), transparent 62%),
+        radial-gradient(720px 360px at 82% 85%, rgba(254, 44, 85, 0.045), transparent 62%);
+      background-size: 170% 170%;
+      background-repeat: no-repeat;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      from { background-position: 0% 0%; }
+      to { background-position: 100% 100%; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .cute-float { animation: none; }
+      .hero-glow,
+      .strip-sheen::after,
+      .drift-bg,
+      .hero-in { animation: none !important; }
+      .feature-card,
+      .feature-card img,
+      .tt-btn-primary,
+      .tt-btn-primary::after,
+      .tt-btn-secondary,
+      header nav a::after,
+      .start-headline,
+      .start-circle,
+      .social-circle,
+      .footer-col-link,
+      html.fx .reveal { transition: none !important; }
+      html.fx .reveal { opacity: 1 !important; transform: none !important; }
     }
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col w-full overflow-x-hidden">
 
   <!-- ==================== TOP ANNOUNCEMENT ==================== -->
-  <div class="w-full bg-gradient-to-r from-ttCyan/20 via-black to-ttMagenta/20 border-b border-gray-800 text-xs py-2.5 px-6 flex items-center justify-center text-center">
+  <div class="strip-sheen w-full bg-gradient-to-r from-ttCyan/20 via-black to-ttMagenta/20 border-b border-gray-800 text-xs py-2.5 px-6 flex items-center justify-center text-center">
     <div class="flex items-center gap-2">
       <i data-lucide="check-circle" class="w-4 h-4 text-ttCyan"></i>
       <span class="font-extrabold uppercase tracking-wider text-ttCyan">TIKTOK API V2 ACTIVE</span>
@@ -211,7 +348,7 @@
     <div class="w-full px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
       
       <!-- Hero Copy -->
-      <div class="lg:col-span-7 space-y-6">
+      <div class="lg:col-span-7 space-y-6 hero-in">
         <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md">
           <i data-lucide="shield-check" class="w-4 h-4 text-ttCyan"></i>
           <span class="text-xs font-extrabold uppercase tracking-widest text-ttCyan">Official Content Posting API v2</span>
@@ -256,7 +393,8 @@
       </div>
 
       <!-- Hero Visual (Large Animated Graphic) -->
-      <div class="lg:col-span-5 relative flex items-center justify-center">
+      <div class="lg:col-span-5 relative flex items-center justify-center hero-visual hero-in" style="animation-delay: 0.15s">
+        <div class="hero-glow"></div>
         <div class="absolute w-3/4 h-3/4 bg-ttCyan/10 rounded-full blur-3xl pointer-events-none"></div>
         <img src="/assets/anim-hero.webp" alt="Animated phone with floating hearts and music notes" width="800" height="800" class="cute-float relative w-full max-w-[540px] h-auto rounded-[2rem]" style="aspect-ratio: 1/1;"/>
       </div>
@@ -386,7 +524,7 @@
   </section>
 
   <!-- ==================== SCHEDULER CALLOUT ==================== -->
-  <section id="scheduler" class="w-full px-6 md:px-12 py-20 border-b border-[#1A202C]">
+  <section id="scheduler" class="drift-bg w-full px-6 md:px-12 py-20 border-b border-[#1A202C]">
     <div class="bg-gradient-to-r from-[#0C1017] via-[#101522] to-[#0C1017] border border-[#1E2638] rounded-3xl p-8 md:p-14 flex flex-col lg:flex-row items-center justify-between gap-10">
       <div class="max-w-2xl space-y-4">
         <span class="text-xs font-black uppercase tracking-widest text-ttMagenta">Live Operations Interface</span>
@@ -556,7 +694,7 @@
   </section>
 
   <!-- ==================== SECURITY & CONTROL ==================== -->
-  <section id="security" class="w-full px-6 md:px-12 py-20 border-b border-[#1A202C]">
+  <section id="security" class="drift-bg w-full px-6 md:px-12 py-20 border-b border-[#1A202C]">
     <div class="max-w-3xl mb-16">
       <span class="text-xs font-black uppercase tracking-widest text-ttCyan">Security &amp; Control</span>
       <h2 class="text-3xl md:text-5xl font-black text-white mt-2 tracking-tight">
@@ -815,6 +953,53 @@
 
   <script>
     lucide.createIcons();
+  </script>
+  <script>
+    (function () {
+      // Reduced motion: add nothing, hide nothing, tilt nothing.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      document.documentElement.classList.add('fx');
+
+      // ---- Scroll reveal ----
+      var sel = '.feature-card, section > .max-w-3xl, #scheduler > div, #compare > div, #security .mt-10, footer .start-band > div, .footer-white-panel';
+      var els = Array.prototype.slice.call(document.querySelectorAll(sel));
+      els.forEach(function (el, i) {
+        el.classList.add('reveal');
+        el.style.transitionDelay = Math.min((i % 4) * 70, 210) + 'ms';
+        el.addEventListener('transitionend', function h() {
+          el.style.transitionDelay = '0ms';
+          el.removeEventListener('transitionend', h);
+        });
+      });
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        els.forEach(function (el) { io.observe(el); });
+      } else {
+        els.forEach(function (el) { el.classList.add('revealed'); });
+      }
+
+      // ---- Hero tilt (desktop fine pointers only, touch never) ----
+      var visual = document.querySelector('.hero-visual');
+      var hero = visual ? visual.closest('section') : null;
+      if (visual && hero && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        var raf = null;
+        hero.addEventListener('mousemove', function (ev) {
+          if (raf) return;
+          raf = requestAnimationFrame(function () {
+            raf = null;
+            var r = visual.getBoundingClientRect();
+            var x = (ev.clientX - r.left) / r.width - 0.5;
+            var y = (ev.clientY - r.top) / r.height - 0.5;
+            visual.style.transform = 'perspective(900px) rotateX(' + (-y * 5).toFixed(2) + 'deg) rotateY(' + (x * 5).toFixed(2) + 'deg)';
+          });
+        });
+        hero.addEventListener('mouseleave', function () { visual.style.transform = ''; });
+      }
+    })();
   </script>
 </body>
 </html>
