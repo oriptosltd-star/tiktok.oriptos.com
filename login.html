@@ -308,6 +308,17 @@
       <h1 id="auth-heading">Log in</h1>
 
       <form class="pandaping-login-form" id="auth-form" onsubmit="handleLogin(event)">
+        <div id="auth-name-row" style="display:none; gap:12px;">
+          <label style="flex:1;">
+            First name
+            <input type="text" id="login-first-name" placeholder="First name" autocomplete="given-name"/>
+          </label>
+          <label style="flex:1;">
+            Last name
+            <input type="text" id="login-last-name" placeholder="Last name" autocomplete="family-name"/>
+          </label>
+        </div>
+
         <label>
           Email address
           <input type="email" id="login-email" required placeholder="you@company.com" autocomplete="email"/>
@@ -357,7 +368,7 @@
     // SUPABASE_ANON_KEY is a placeholder in this working copy; the real
     // publishable key is injected by the parent at integration time.
     const SUPABASE_URL = 'https://nnkvruflauabevuhimhk.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_7X-mrLkFKWsBpbA_jLsu9A_WvlgCkmZ';
+    const SUPABASE_ANON_KEY = 'sb_publishable_-H9oPDTFv1laCwR7vIebzQ_IfVF6AkH';
     const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
     let authMode = 'signin'; // 'signin' | 'signup'
@@ -381,6 +392,8 @@
       const submit = document.getElementById('btn-auth-submit');
       const toggle = document.getElementById('auth-mode-toggle');
       const password = document.getElementById('login-password');
+      const nameRow = document.getElementById('auth-name-row');
+      if (nameRow) nameRow.style.display = authMode === 'signup' ? 'flex' : 'none';
       if (heading) heading.textContent = authMode === 'signup' ? 'Create account' : 'Log in';
       if (submit) submit.textContent = authMode === 'signup' ? 'Sign Up' : 'Log In';
       if (toggle) toggle.textContent = authMode === 'signup' ? 'Already have an account? Log in' : 'New here? Create an account';
@@ -402,7 +415,17 @@
       btn.textContent = authMode === 'signup' ? 'Creating account...' : 'Logging in...';
       try {
         if (authMode === 'signup') {
-          const { data, error } = await supabaseClient.auth.signUp({ email, password });
+          const firstName = document.getElementById('login-first-name').value.trim();
+          const lastName = document.getElementById('login-last-name').value.trim();
+          if (!firstName || !lastName) {
+            setAuthMessage('Please enter your first and last name.', true);
+            return;
+          }
+          const { data, error } = await supabaseClient.auth.signUp({
+            email,
+            password,
+            options: { data: { first_name: firstName, last_name: lastName, display_name: firstName + ' ' + lastName } }
+          });
           if (error) throw error;
           if (data.session) {
             window.location.href = '/dashboard';
