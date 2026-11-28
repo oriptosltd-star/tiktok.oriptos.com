@@ -30,7 +30,13 @@ export const TIKTOK_SCOPES = ['user.info.basic', 'video.upload', 'video.publish'
 // mutated — other consumers (callback scope bookkeeping, status) keep
 // seeing exactly the base set.
 export const TIKTOK_EXTENDED_SCOPES = [
-  'user.info.username',
+  // NOTE: 'user.info.username' is deliberately NOT requested — the TikTok
+  // portal does not offer that scope for this app (checked in both the
+  // Production and Sandbox scope lists, 2026-11-28), and asking TikTok for
+  // an unavailable scope fails the whole authorize flow. The username
+  // field is likewise excluded from fetchUserInfoExtended's field list;
+  // the dashboard renders the display name without an @username until
+  // TikTok offers the scope.
   'user.info.profile',
   'user.info.stats',
   'video.list',
@@ -150,7 +156,7 @@ export async function fetchUserInfo(accessToken) {
 // ---------------------------------------------------------------------------
 
 export const USER_INFO_EXTENDED_FIELDS =
-  'open_id,union_id,avatar_url,display_name,username,bio_description,profile_web_link,is_verified,follower_count,following_count,likes_count,video_count';
+  'open_id,union_id,avatar_url,display_name,bio_description,profile_web_link,is_verified,follower_count,following_count,likes_count,video_count';
 
 /**
  * One user/info call with the full extended field set (base identity +
