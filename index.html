@@ -8,7 +8,7 @@
   <link rel="icon" href="/assets/pandaping-icon-blink.avif" type="image/avif"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
@@ -39,7 +39,7 @@
     body {
       background-color: #06080C;
       color: #F3F4F6;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; letter-spacing: -0.02em; letter-spacing: -0.01em;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; letter-spacing: -0.02em; letter-spacing: -0.01em;
     }
     .tt-btn-primary {
       background: #FFFFFF;
@@ -137,6 +137,16 @@
       color: #25F4EE;
       transform: translateY(-2px);
     }
+    .cute-float {
+      animation: cute-bob 3.2s ease-in-out infinite;
+    }
+    @keyframes cute-bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cute-float { animation: none; }
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col w-full overflow-x-hidden">
@@ -146,7 +156,6 @@
     <div class="flex items-center gap-2">
       <i data-lucide="check-circle" class="w-4 h-4 text-ttCyan"></i>
       <span class="font-extrabold uppercase tracking-wider text-ttCyan">TIKTOK API V2 ACTIVE</span>
-      <span class="text-gray-300">Enterprise-grade bulk content scheduling & automated queue is live.</span>
       <a href="/login" class="text-ttMagenta font-bold hover:underline ml-1">Access Dashboard &rarr;</a>
     </div>
   </div>
@@ -214,7 +223,7 @@
         </h1>
 
         <p class="text-base sm:text-lg text-gray-300 max-w-2xl leading-relaxed font-medium">
-          Selling and attention is what keeps you alive. Oriptos puts the unfair advantage in your hands: multi-account TikTok bulk scheduling, verified OAuth security, and precision queue execution on complete autopilot.
+          Multi-account TikTok scheduling and auto-publishing — on complete autopilot.
         </p>
 
         <!-- CTA Buttons -->
@@ -270,6 +279,7 @@
             </div>
           </div>
         </div>
+        <img src="/assets/anim-hero.webp" alt="Animated scheduling preview" width="320" height="240" class="absolute -bottom-6 -left-3 md:-left-6 w-36 md:w-44 rounded-2xl border-2 border-[#1E2638] shadow-2xl bg-black z-10 object-cover" style="aspect-ratio: 4/3;"/>
       </div>
 
     </div>
@@ -283,7 +293,7 @@
         Engineered to Obliterate Manual Video Posting.
       </h2>
       <p class="text-sm md:text-base text-gray-400 mt-4 leading-relaxed">
-        Stop wasting hours uploading one TikTok at a time. Deploy content at scale with enterprise precision.
+        Post at scale — no more one-by-one uploads.
       </p>
     </div>
 
@@ -297,7 +307,7 @@
           </div>
           <h3 class="text-xl font-extrabold text-white mb-2">Bulk Calendar Scheduler</h3>
           <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-            Upload and queue dozens of videos. Select exact dates, target timezones, custom hashtags, and push directly to TikTok servers.
+            Queue dozens of videos with dates, timezones and hashtags.
           </p>
         </div>
         <div class="mt-8 pt-4 border-t border-gray-800 text-xs font-bold text-ttCyan flex items-center gap-1">
@@ -312,9 +322,10 @@
           <div class="w-12 h-12 rounded-xl bg-ttMagenta/10 border border-ttMagenta/30 text-ttMagenta flex items-center justify-center font-bold mb-6">
             <i data-lucide="users" class="w-6 h-6"></i>
           </div>
+          <img src="/assets/cute-accounts.png" alt="Multiple TikTok accounts" width="200" height="200" loading="lazy" class="cute-float h-20 w-20 object-contain mb-5" style="aspect-ratio: 1/1;"/>
           <h3 class="text-xl font-extrabold text-white mb-2">Multi-Account Fleet Control</h3>
           <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-            Manage your personal brand, niche accounts, and client handles from a single authenticated command center without logging out.
+            Every brand and client handle in one command center.
           </p>
         </div>
         <div class="mt-8 pt-4 border-t border-gray-800 text-xs font-bold text-ttMagenta flex items-center gap-1">
@@ -331,7 +342,7 @@
           </div>
           <h3 class="text-xl font-extrabold text-white mb-2">Zero-Ban Direct Routing</h3>
           <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-            Never risk shadowbans or account blocks with illicit Android emulators or Selenium bots. Every post is certified by TikTok.
+            Official API only — no emulators, no bots, no bans.
           </p>
         </div>
         <div class="mt-8 pt-4 border-t border-gray-800 text-xs font-bold text-gray-300 flex items-center gap-1">
@@ -348,7 +359,7 @@
           </div>
           <h3 class="text-xl font-extrabold text-white mb-2">Comment-to-Lead Funnel</h3>
           <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-            Monitor and respond to high-intent customer comments directly inside the unified inbox to maximize conversion rates.
+            Reply to customer comments from one unified inbox.
           </p>
         </div>
         <div class="mt-8 pt-4 border-t border-gray-800 text-xs font-bold text-ttCyan flex items-center gap-1">
@@ -363,9 +374,10 @@
           <div class="w-12 h-12 rounded-xl bg-ttMagenta/10 border border-ttMagenta/30 text-ttMagenta flex items-center justify-center font-bold mb-6">
             <i data-lucide="activity" class="w-6 h-6"></i>
           </div>
+          <img src="/assets/anim-chart.webp" alt="Live queue analytics animation" width="320" height="240" loading="lazy" class="h-24 w-auto max-w-full object-contain mb-5 rounded-xl" style="aspect-ratio: 4/3;"/>
           <h3 class="text-xl font-extrabold text-white mb-2">Real-Time Queue Telemetry</h3>
           <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-            Live feed tracking video processing status, TikTok review queue status, and scheduled dispatch timestamps.
+            Live status for every video, from queue to published.
           </p>
         </div>
         <div class="mt-8 pt-4 border-t border-gray-800 text-xs font-bold text-ttMagenta flex items-center gap-1">
@@ -380,7 +392,7 @@
           <span class="text-xs font-black uppercase tracking-wider text-ttCyan">Action Required</span>
           <h3 class="text-2xl font-black text-white mt-2 mb-2">Connect Your Accounts</h3>
           <p class="text-xs md:text-sm text-gray-300 leading-relaxed">
-            Experience the automated workflow that top content creators use to scale their reach effortlessly.
+            Connect once. Post on autopilot.
           </p>
         </div>
         <div class="mt-8">
@@ -403,7 +415,7 @@
           Broadcast Calendar Architecture.
         </h2>
         <p class="text-sm md:text-base text-gray-300 leading-relaxed">
-          Inspired by Oriptos Broadcast and PandaPing. Visual calendar grids, multi-account filters, and 1-click video queuing.
+          Visual calendar, multi-account filters, 1-click queuing.
         </p>
         <div class="pt-4 flex flex-wrap gap-4">
           <a href="/login" class="px-8 py-3.5 rounded-full text-xs font-black tt-btn-primary">
@@ -442,7 +454,7 @@
         From Sign-In to Published in Four Steps.
       </h2>
       <p class="text-sm md:text-base text-gray-400 mt-4 leading-relaxed">
-        No emulators, no browser bots, no passwords shared. Connect once, then run your whole posting calendar from the queue.
+        Connect once — run your whole calendar from the queue.
       </p>
     </div>
 
@@ -458,7 +470,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Connect Your TikTok</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Sign in through TikTok's official authorization screen and approve the permissions. Your password is typed into TikTok only — never into Oriptos.
+          Approve on TikTok's own screen. Your password never touches Oriptos.
         </p>
       </div>
 
@@ -470,9 +482,10 @@
           </div>
           <span class="text-4xl font-black text-white/10">02</span>
         </div>
+        <img src="/assets/anim-upload.webp" alt="Bulk upload animation" width="320" height="240" loading="lazy" class="h-24 w-auto max-w-full object-contain mb-5 rounded-xl" style="aspect-ratio: 4/3;"/>
         <h3 class="text-xl font-extrabold text-white mb-2">Upload Videos in Bulk</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Drop in a whole batch of finished videos at once. They are held in secure cloud storage, ready to be placed on the calendar.
+          Drop in a whole batch — stored securely, ready to schedule.
         </p>
       </div>
 
@@ -484,9 +497,10 @@
           </div>
           <span class="text-4xl font-black text-white/10">03</span>
         </div>
+        <img src="/assets/cute-calendar.png" alt="Scheduling calendar" width="200" height="200" loading="lazy" class="cute-float h-20 w-20 object-contain mb-5" style="aspect-ratio: 1/1;"/>
         <h3 class="text-xl font-extrabold text-white mb-2">Schedule on the Calendar</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Pick the exact date, time and timezone for every video and every account — today, next week, or a full campaign ahead.
+          Pick date, time and timezone for every video.
         </p>
       </div>
 
@@ -498,9 +512,10 @@
           </div>
           <span class="text-4xl font-black text-white/10">04</span>
         </div>
+        <img src="/assets/cute-rocket.png" alt="Auto-publish rocket" width="200" height="200" loading="lazy" class="cute-float h-20 w-20 object-contain mb-5" style="aspect-ratio: 1/1;"/>
         <h3 class="text-xl font-extrabold text-white mb-2">Auto-Publish &amp; Track</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          At the scheduled moment the engine publishes for you, and every post's status stays visible until it is live — or flagged with the reason it was not.
+          Posts go out on time — every status tracked.
         </p>
       </div>
 
@@ -514,9 +529,6 @@
       <h2 class="text-3xl md:text-5xl font-black text-white mt-2 tracking-tight">
         Built for Serious Posting Volume.
       </h2>
-      <p class="text-sm md:text-base text-gray-400 mt-4 leading-relaxed">
-        The details that matter once posting becomes a daily operation, not a hobby.
-      </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
@@ -528,7 +540,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Cloud Storage for Large Files</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Big MP4 files upload to secure cloud storage first, then transfer to TikTok in chunks. No keeping a browser tab open while a large video crawls up.
+          Big files upload in chunks — no browser tab babysitting.
         </p>
       </div>
 
@@ -539,7 +551,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">A Timezone for Every Account</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Each connected account schedules in its own audience's timezone. Set the local time your viewers expect — the calendar handles the conversion.
+          Each account posts in its own audience's timezone.
         </p>
       </div>
 
@@ -550,7 +562,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Draft or Direct — Your Choice</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Send a video to your TikTok drafts so you can finish it in the app, or publish it directly at the scheduled time. Every queue item carries its own choice.
+          Send to drafts, or publish directly — per video.
         </p>
       </div>
 
@@ -561,7 +573,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Every Post, Accounted For</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Follow each individual video through the queue — queued, processing, published, or failed — with the failure reason shown right on the item when something goes wrong.
+          Every video tracked — failures show the reason.
         </p>
       </div>
 
@@ -572,7 +584,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">One Login, Every Handle</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Connected accounts stay connected. Move between handles in a click while you plan the week — no logging out, no logging back in, no session juggling.
+          Switch handles in a click — no re-logins.
         </p>
       </div>
 
@@ -583,7 +595,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Automatic Retry on Failure</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          If a publish attempt fails, the queue retries it automatically. If it still cannot go out, the item is marked failed with the reason — never silently dropped.
+          Failed posts retry automatically — never silently dropped.
         </p>
       </div>
 
@@ -608,7 +620,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Solo Creators</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Batch-film when inspiration strikes, queue the whole week in one sitting, and let posts go out on time while you shoot the next batch.
+          Queue a week of posts in one sitting.
         </p>
       </div>
 
@@ -619,7 +631,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Agencies &amp; Teams</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Run many client handles from one command center, plan each account in its own timezone, and see exactly what published, what is pending, and what needs attention.
+          Many client handles, one command center.
         </p>
       </div>
 
@@ -630,7 +642,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Brands &amp; Businesses</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Keep a consistent posting rhythm across campaigns and markets — without anyone babysitting the TikTok app at the exact moment a post is due.
+          A steady posting rhythm across every market.
         </p>
       </div>
 
@@ -663,8 +675,8 @@
           </tr>
           <tr>
             <td class="px-6 py-4 font-bold text-white">Scheduling ahead</td>
-            <td class="px-6 py-4"><span class="inline-flex items-center gap-2"><i data-lucide="x" class="w-4 h-4 text-ttMagenta"></i>Planned post-by-post, often at posting time</span></td>
-            <td class="px-6 py-4"><span class="inline-flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-ttCyan"></i>A visual calendar, planned days and weeks ahead</span></td>
+            <td class="px-6 py-4"><span class="inline-flex items-center gap-2"><i data-lucide="x" class="w-4 h-4 text-ttMagenta"></i>Planned one post at a time</span></td>
+            <td class="px-6 py-4"><span class="inline-flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-ttCyan"></i>Visual calendar, weeks ahead</span></td>
           </tr>
           <tr>
             <td class="px-6 py-4 font-bold text-white">Multiple accounts</td>
@@ -673,13 +685,13 @@
           </tr>
           <tr>
             <td class="px-6 py-4 font-bold text-white">Timezone planning</td>
-            <td class="px-6 py-4"><span class="inline-flex items-center gap-2"><i data-lucide="x" class="w-4 h-4 text-ttMagenta"></i>Converted by hand for every audience</span></td>
+            <td class="px-6 py-4"><span class="inline-flex items-center gap-2"><i data-lucide="x" class="w-4 h-4 text-ttMagenta"></i>Converted by hand</span></td>
             <td class="px-6 py-4"><span class="inline-flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-ttCyan"></i>Set per account, converted automatically</span></td>
           </tr>
           <tr>
             <td class="px-6 py-4 font-bold text-white">Status tracking</td>
             <td class="px-6 py-4"><span class="inline-flex items-center gap-2"><i data-lucide="x" class="w-4 h-4 text-ttMagenta"></i>Scroll your profile and check by eye</span></td>
-            <td class="px-6 py-4"><span class="inline-flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-ttCyan"></i>Every post tracked: queued &rarr; processing &rarr; published / failed</span></td>
+            <td class="px-6 py-4"><span class="inline-flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-ttCyan"></i>Tracked: queued &rarr; published / failed</span></td>
           </tr>
           <tr>
             <td class="px-6 py-4 font-bold text-white">Team workflow</td>
@@ -699,7 +711,7 @@
         Your Account Stays Yours.
       </h2>
       <p class="text-sm md:text-base text-gray-400 mt-4 leading-relaxed">
-        The engine works through TikTok's official sign-in — and you stay in control of the connection at every moment.
+        Official sign-in. You stay in control.
       </p>
     </div>
 
@@ -710,9 +722,10 @@
         <div class="w-12 h-12 rounded-xl bg-ttCyan/10 border border-ttCyan/30 text-ttCyan flex items-center justify-center font-bold mb-6">
           <i data-lucide="key-round" class="w-6 h-6"></i>
         </div>
+        <img src="/assets/cute-shield.png" alt="Account protection shield" width="200" height="200" loading="lazy" class="cute-float h-20 w-20 object-contain mb-5" style="aspect-ratio: 1/1;"/>
         <h3 class="text-xl font-extrabold text-white mb-2">Official OAuth Sign-In</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          You authorize on TikTok's own sign-in screen. Oriptos never sees, asks for, or stores your TikTok password.
+          You authorize on TikTok's screen — we never see your password.
         </p>
       </div>
 
@@ -723,7 +736,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Encrypted Tokens</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          The authorization tokens TikTok issues are stored encrypted, and used only to publish the videos you place in your queue.
+          Tokens stored encrypted, used only for your queue.
         </p>
       </div>
 
@@ -734,7 +747,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Disconnect Anytime</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Remove any connected account from your dashboard whenever you like — its stored authorization tokens are wiped with it.
+          Remove an account anytime — its tokens are wiped.
         </p>
       </div>
 
@@ -745,7 +758,7 @@
         </div>
         <h3 class="text-xl font-extrabold text-white mb-2">Delete Your Data</h3>
         <p class="text-xs md:text-sm text-gray-400 leading-relaxed">
-          Ask for your account data to be erased at any time, and it is permanently removed — no retention games, no dark patterns.
+          Request erasure anytime — permanently removed.
         </p>
       </div>
 
@@ -780,7 +793,7 @@
           <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
         </summary>
         <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          Connect your TikTok account with the official sign-in, upload your finished videos, and place them on the calendar with a date, time and timezone. At the scheduled moment the engine publishes each video for you and shows its status until it is live.
+          Connect your TikTok, upload videos, and place them on the calendar. The engine publishes each one at its scheduled time.
         </p>
       </details>
 
@@ -790,7 +803,7 @@
           <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
         </summary>
         <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          No. Sign-in happens on TikTok's own authorization screen (OAuth) — your password is entered there and nowhere else. Oriptos only receives authorization tokens, which are stored encrypted and can be revoked by you at any time.
+          No. Sign-in happens on TikTok's own screen — we only receive encrypted authorization tokens, revocable anytime.
         </p>
       </details>
 
@@ -800,7 +813,7 @@
           <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
         </summary>
         <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          Any TikTok account you can sign in to and authorize — your own handle, a brand account, or client accounts you manage. You can connect multiple accounts and run them side by side from one dashboard.
+          Any account you can sign in to — yours, a brand's, or clients'. Connect several and run them side by side.
         </p>
       </details>
 
@@ -810,7 +823,7 @@
           <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
         </summary>
         <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          Yes. Place videos anywhere on the calendar — days or weeks ahead — with a time and timezone per account, and the queue holds them until their moment arrives.
+          Yes — days or weeks ahead, with a time and timezone per account.
         </p>
       </details>
 
@@ -820,7 +833,7 @@
           <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
         </summary>
         <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          The queue retries the publish automatically. If it still cannot go out, the item is marked failed with the reason shown on it, so you can fix the problem and reschedule — a post is never silently dropped.
+          The queue retries automatically. If it still fails, the item shows the reason — never silently dropped.
         </p>
       </details>
 
@@ -830,7 +843,7 @@
           <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
         </summary>
         <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          Disconnect any account from Connected Accounts in your dashboard — its stored tokens are wiped instantly. For full erasure of your data, follow the steps on our <a href="/data-deletion" class="text-ttCyan font-bold hover:underline">Data Deletion page</a> or email our data protection team.
+          Disconnect from Connected Accounts in your dashboard — tokens are wiped instantly. Full erasure: follow the <a href="/data-deletion" class="text-ttCyan font-bold hover:underline">Data Deletion page</a>.
         </p>
       </details>
 
@@ -852,7 +865,7 @@
           </span>
         </a>
         <p class="max-w-md text-sm md:text-base text-gray-300 leading-relaxed font-medium pb-2">
-          Your TikTok accounts, connected the official way. Dominate video scheduling and automate growth with precision.
+          Your TikTok accounts, connected the official way.
         </p>
       </div>
     </section>
@@ -868,7 +881,7 @@
             <span class="text-2xl font-black text-gray-900 tracking-tight">Oriptos</span>
           </div>
           <p class="text-xs md:text-sm text-gray-600 max-w-sm leading-relaxed font-medium">
-            Oriptos Ltd provides enterprise-grade social media broadcasting, verified official TikTok content infrastructure, and automated video workflows.
+            Official TikTok scheduling and automated video workflows.
           </p>
 
           <!-- Social Media Icons (High Contrast Black with Pure White SVGs) -->
