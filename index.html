@@ -788,78 +788,490 @@
   </section>
 
   <!-- ==================== FAQ ==================== -->
-  <section id="faq" class="w-full px-6 md:px-12 py-20 border-b border-[#1A202C]">
-    <div class="max-w-3xl mb-16">
-      <span class="text-xs font-black uppercase tracking-widest text-ttMagenta">FAQ</span>
-      <h2 class="text-3xl md:text-5xl font-black text-white mt-2 tracking-tight">
-        Straight Answers, Before You Ask.
-      </h2>
+<!-- ============================================================
+     FAQ SECTION — REDESIGN FRAGMENT (self-contained)
+     Splice: replace the whole existing FAQ section element
+     in index.html with this fragment (style + section + script).
+     Copy is byte-identical to the current section; presentation only.
+     ============================================================ -->
+<style>
+  /* ---------- FAQ redesign (faq- prefixed, no collisions) ---------- */
+  .faq-section {
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Gradient word in the H2 */
+  .faq-grad-word {
+    background: linear-gradient(92deg, #25F4EE 0%, #FE2C55 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  /* Underline flourish under the H2 */
+  .faq-flourish {
+    margin-top: 18px;
+    width: 168px;
+    height: 10px;
+  }
+  .faq-flourish svg { display: block; width: 100%; height: 100%; }
+
+  /* Two-column layout: sticky intro / questions */
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: start;
+    max-width: 80rem;
+  }
+  @media (min-width: 1024px) {
+    .faq-layout {
+      grid-template-columns: 370px minmax(0, 1fr);
+      gap: 36px;
+    }
+  }
+
+  /* ---------- Left intro card ---------- */
+  .faq-intro {
+    border-radius: 28px;
+    border: 1px solid transparent;
+    background:
+      linear-gradient(#0D1119, #0D1119) padding-box,
+      linear-gradient(140deg, rgba(37, 244, 238, 0.65), rgba(255, 255, 255, 0.10) 45%, rgba(254, 44, 85, 0.65)) border-box;
+    padding: 30px 28px 28px;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
+  }
+  @media (min-width: 1024px) {
+    .faq-intro { position: sticky; top: 96px; }
+  }
+  .faq-intro-eyebrow {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #FE2C55;
+  }
+  .faq-intro-title {
+    margin-top: 10px;
+    font-size: 27px;
+    line-height: 1.16;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+  }
+  .faq-intro-text {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #9AA7B8;
+    font-weight: 500;
+  }
+
+  /* Playful speech-bubble / question chips (pure CSS shapes) */
+  .faq-chips {
+    position: relative;
+    height: 92px;
+    margin-bottom: 6px;
+  }
+  .faq-chip {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    color: #06080C;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    animation: faq-bob 5s ease-in-out infinite;
+  }
+  .faq-chip::after {
+    content: "";
+    position: absolute;
+    bottom: -7px;
+    width: 16px;
+    height: 16px;
+    background: inherit;
+    border-radius: 3px;
+    transform: rotate(45deg);
+  }
+  .faq-chip-1 {
+    left: 6px; top: 16px;
+    width: 62px; height: 62px;
+    border-radius: 20px;
+    background: #25F4EE;
+    font-size: 30px;
+    transform: rotate(-7deg);
+  }
+  .faq-chip-1::after { left: 14px; }
+  .faq-chip-2 {
+    left: 82px; top: 2px;
+    width: 74px; height: 74px;
+    border-radius: 24px;
+    background: #FE2C55;
+    color: #FFFFFF;
+    font-size: 36px;
+    transform: rotate(5deg);
+    animation-delay: -1.6s;
+  }
+  .faq-chip-2::after { left: 38px; }
+  .faq-chip-3 {
+    left: 168px; top: 22px;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    font-size: 25px;
+    transform: rotate(-3deg);
+    animation-delay: -3.1s;
+  }
+  .faq-chip-3::after { display: none; }
+  @keyframes faq-bob {
+    0%, 100% { margin-top: 0; }
+    50% { margin-top: -7px; }
+  }
+
+  /* "Still curious?" mini-block */
+  .faq-more {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+  }
+  .faq-more-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #FFFFFF;
+  }
+  .faq-more-text {
+    margin-top: 5px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #9AA7B8;
+    font-weight: 500;
+  }
+  .faq-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 11px 20px;
+    border-radius: 999px;
+    background: linear-gradient(92deg, #25F4EE, #FE2C55);
+    color: #06080C;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .faq-more-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(254, 44, 85, 0.28);
+  }
+  .faq-more-btn:focus-visible {
+    outline: 2px solid #25F4EE;
+    outline-offset: 3px;
+  }
+
+  /* ---------- Accordion cards ---------- */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+  .faq-card {
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .faq-q {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    padding: 20px 22px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .faq-q:focus-visible {
+    outline: 2px solid #25F4EE;
+    outline-offset: -2px;
+    border-radius: 24px;
+  }
+  .faq-num {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    padding: 0 8px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+  }
+  .faq-num-cyan {
+    background: rgba(37, 244, 238, 0.13);
+    color: #25F4EE;
+    border: 1px solid rgba(37, 244, 238, 0.35);
+  }
+  .faq-num-magenta {
+    background: rgba(254, 44, 85, 0.13);
+    color: #FE2C55;
+    border: 1px solid rgba(254, 44, 85, 0.38);
+  }
+  .faq-q-text {
+    flex: 1 1 auto;
+    font-size: 16px;
+    line-height: 1.35;
+    font-weight: 800;
+    color: #FFFFFF;
+  }
+  @media (min-width: 768px) {
+    .faq-q-text { font-size: 18px; }
+    .faq-q { padding: 22px 24px; }
+  }
+  .faq-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.05);
+    color: #FFFFFF;
+    transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), background 0.3s ease, border-color 0.3s ease;
+  }
+  .faq-icon svg { width: 17px; height: 17px; display: block; }
+  .faq-card.faq-open .faq-icon { transform: rotate(45deg); }
+  .faq-card[data-accent="cyan"].faq-open .faq-icon {
+    background: rgba(37, 244, 238, 0.16);
+    border-color: rgba(37, 244, 238, 0.55);
+    color: #25F4EE;
+  }
+  .faq-card[data-accent="magenta"].faq-open .faq-icon {
+    background: rgba(254, 44, 85, 0.16);
+    border-color: rgba(254, 44, 85, 0.55);
+    color: #FE2C55;
+  }
+
+  /* Open state: accent border glow + subtle inner tint */
+  .faq-card[data-accent="cyan"].faq-open {
+    border-color: rgba(37, 244, 238, 0.65);
+    box-shadow: 0 16px 40px rgba(37, 244, 238, 0.13);
+    background-image: linear-gradient(180deg, rgba(37, 244, 238, 0.055), rgba(37, 244, 238, 0) 55%);
+  }
+  .faq-card[data-accent="magenta"].faq-open {
+    border-color: rgba(254, 44, 85, 0.65);
+    box-shadow: 0 16px 40px rgba(254, 44, 85, 0.13);
+    background-image: linear-gradient(180deg, rgba(254, 44, 85, 0.055), rgba(254, 44, 85, 0) 55%);
+  }
+
+  /* Answer area: collapsed state applies only once JS enhances the section
+     (no-JS visitors see every answer). Grid 0fr -> 1fr animation. */
+  .faq-a { display: block; }
+  .faq-enhanced .faq-a {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .faq-enhanced .faq-card.faq-open .faq-a { grid-template-rows: 1fr; }
+  .faq-a-inner { overflow: hidden; min-height: 0; }
+  .faq-a-text {
+    padding: 0 24px 22px 78px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #D1D5DB;
+    font-weight: 500;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  .faq-enhanced .faq-a-text { opacity: 0; }
+  .faq-enhanced .faq-card.faq-open .faq-a-text { opacity: 1; }
+  @media (max-width: 767px) {
+    .faq-a-text { padding-left: 24px; }
+  }
+
+  /* Motion safety */
+  @media (prefers-reduced-motion: reduce) {
+    .faq-chip { animation: none !important; }
+    .faq-enhanced .faq-a,
+    .faq-icon,
+    .faq-a-text,
+    .faq-more-btn { transition: none !important; }
+  }
+</style>
+
+<section id="faq" class="faq-section w-full px-6 md:px-12 py-20 border-b border-[#1A202C]">
+  <div class="max-w-3xl mb-16">
+    <span class="text-xs font-black uppercase tracking-widest text-ttMagenta">FAQ</span>
+    <h2 class="text-3xl md:text-5xl font-black text-white mt-2 tracking-tight">
+      Straight <span class="faq-grad-word">Answers</span>, Before You Ask.
+    </h2>
+    <div class="faq-flourish" aria-hidden="true">
+      <svg viewBox="0 0 168 10" fill="none" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="faq-flourish-grad" x1="0" y1="0" x2="168" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#25F4EE"/>
+            <stop offset="1" stop-color="#FE2C55"/>
+          </linearGradient>
+        </defs>
+        <path d="M3 7 C 30 1, 52 9, 84 4 S 140 2, 165 5" stroke="url(#faq-flourish-grad)" stroke-width="4" stroke-linecap="round"/>
+      </svg>
     </div>
+  </div>
 
-    <div class="max-w-4xl space-y-4">
+  <div class="faq-layout">
 
-      <details class="feature-card rounded-card p-6">
-        <summary class="cursor-pointer list-none flex items-center justify-between gap-4 text-base md:text-lg font-extrabold text-white">
-          <span>How does Oriptos TikTok Planner work?</span>
-          <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
-        </summary>
-        <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          Connect your TikTok, upload videos, and place them on the calendar. The planner publishes each one at its scheduled time.
-        </p>
-      </details>
+    <!-- Left intro card -->
+    <aside class="faq-intro">
+      <div class="faq-chips" aria-hidden="true">
+        <span class="faq-chip faq-chip-1">?</span>
+        <span class="faq-chip faq-chip-2">?</span>
+        <span class="faq-chip faq-chip-3">?</span>
+      </div>
+      <span class="faq-intro-eyebrow">FAQ</span>
+      <h3 class="faq-intro-title">Straight Answers, Before You Ask.</h3>
+      <p class="faq-intro-text">The questions every creator asks before connecting an account — answered straight, no fine print.</p>
+      <div class="faq-more">
+        <p class="faq-more-title">Still curious?</p>
+        <p class="faq-more-text">Write to us and we will get back to you.</p>
+        <a class="faq-more-btn" href="mailto:oriptosltd@gmail.com">Email us
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </aside>
 
-      <details class="feature-card rounded-card p-6">
-        <summary class="cursor-pointer list-none flex items-center justify-between gap-4 text-base md:text-lg font-extrabold text-white">
-          <span>Is my TikTok password ever shared with Oriptos?</span>
-          <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
-        </summary>
-        <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          No. Sign-in happens on TikTok's own screen — we only receive encrypted authorization tokens, revocable anytime.
-        </p>
-      </details>
+    <!-- Questions -->
+    <div class="faq-list">
 
-      <details class="feature-card rounded-card p-6">
-        <summary class="cursor-pointer list-none flex items-center justify-between gap-4 text-base md:text-lg font-extrabold text-white">
-          <span>Which TikTok accounts can I connect?</span>
-          <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
-        </summary>
-        <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          Any account you can sign in to — yours, a brand's, or clients'. Connect several and run them side by side.
-        </p>
-      </details>
+      <article class="faq-card feature-card" data-faq-card data-accent="cyan">
+        <h3>
+          <button type="button" class="faq-q" id="faq-q-1" aria-expanded="true" aria-controls="faq-a-1">
+            <span class="faq-num faq-num-cyan text-ttCyan" aria-hidden="true">01</span>
+            <span class="faq-q-text">How does Oriptos TikTok Planner work?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
+          <div class="faq-a-inner">
+            <p class="faq-a-text">Connect your TikTok, upload videos, and place them on the calendar. The planner publishes each one at its scheduled time.</p>
+          </div>
+        </div>
+      </article>
 
-      <details class="feature-card rounded-card p-6">
-        <summary class="cursor-pointer list-none flex items-center justify-between gap-4 text-base md:text-lg font-extrabold text-white">
-          <span>Can I schedule posts weeks ahead?</span>
-          <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
-        </summary>
-        <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          Yes — days or weeks ahead, with a time and timezone per account.
-        </p>
-      </details>
+      <article class="faq-card feature-card" data-faq-card data-accent="magenta">
+        <h3>
+          <button type="button" class="faq-q" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
+            <span class="faq-num faq-num-magenta text-ttMagenta" aria-hidden="true">02</span>
+            <span class="faq-q-text">Is my TikTok password ever shared with Oriptos?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
+          <div class="faq-a-inner">
+            <p class="faq-a-text">No. Sign-in happens on TikTok's own screen — we only receive encrypted authorization tokens, revocable anytime.</p>
+          </div>
+        </div>
+      </article>
 
-      <details class="feature-card rounded-card p-6">
-        <summary class="cursor-pointer list-none flex items-center justify-between gap-4 text-base md:text-lg font-extrabold text-white">
-          <span>What happens if a post fails to publish?</span>
-          <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
-        </summary>
-        <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          The queue retries automatically. If it still fails, the item shows the reason — never silently dropped.
-        </p>
-      </details>
+      <article class="faq-card feature-card" data-faq-card data-accent="cyan">
+        <h3>
+          <button type="button" class="faq-q" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
+            <span class="faq-num faq-num-cyan text-ttCyan" aria-hidden="true">03</span>
+            <span class="faq-q-text">Which TikTok accounts can I connect?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
+          <div class="faq-a-inner">
+            <p class="faq-a-text">Any account you can sign in to — yours, a brand's, or clients'. Connect several and run them side by side.</p>
+          </div>
+        </div>
+      </article>
 
-      <details class="feature-card rounded-card p-6">
-        <summary class="cursor-pointer list-none flex items-center justify-between gap-4 text-base md:text-lg font-extrabold text-white">
-          <span>How do I disconnect an account or delete my data?</span>
-          <i data-lucide="chevron-down" class="w-5 h-5 text-ttCyan flex-shrink-0"></i>
-        </summary>
-        <p class="text-sm text-gray-400 leading-relaxed mt-4">
-          Disconnect from Connected Accounts in your dashboard — tokens are wiped instantly. Full erasure: follow the <a href="/data-deletion" class="text-ttCyan font-bold hover:underline">Data Deletion page</a>.
-        </p>
-      </details>
+      <article class="faq-card feature-card" data-faq-card data-accent="magenta">
+        <h3>
+          <button type="button" class="faq-q" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">
+            <span class="faq-num faq-num-magenta text-ttMagenta" aria-hidden="true">04</span>
+            <span class="faq-q-text">Can I schedule posts weeks ahead?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
+          <div class="faq-a-inner">
+            <p class="faq-a-text">Yes — days or weeks ahead, with a time and timezone per account.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="faq-card feature-card" data-faq-card data-accent="cyan">
+        <h3>
+          <button type="button" class="faq-q" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
+            <span class="faq-num faq-num-cyan text-ttCyan" aria-hidden="true">05</span>
+            <span class="faq-q-text">What happens if a post fails to publish?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
+          <div class="faq-a-inner">
+            <p class="faq-a-text">The queue retries automatically. If it still fails, the item shows the reason — never silently dropped.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="faq-card feature-card" data-faq-card data-accent="magenta">
+        <h3>
+          <button type="button" class="faq-q" id="faq-q-6" aria-expanded="false" aria-controls="faq-a-6">
+            <span class="faq-num faq-num-magenta text-ttMagenta" aria-hidden="true">06</span>
+            <span class="faq-q-text">How do I disconnect an account or delete my data?</span>
+            <span class="faq-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span>
+          </button>
+        </h3>
+        <div class="faq-a" id="faq-a-6" role="region" aria-labelledby="faq-q-6">
+          <div class="faq-a-inner">
+            <p class="faq-a-text">Disconnect from Connected Accounts in your dashboard — tokens are wiped instantly. Full erasure: follow the <a href="/data-deletion" class="text-ttCyan font-bold hover:underline">Data Deletion page</a>.</p>
+          </div>
+        </div>
+      </article>
 
     </div>
-  </section>
+  </div>
+</section>
+
+<script>
+  // FAQ accordion — one card open at a time; first card starts open.
+  (function () {
+    var section = document.getElementById('faq');
+    if (!section) return;
+    var cards = Array.prototype.slice.call(section.querySelectorAll('[data-faq-card]'));
+    if (!cards.length) return;
+
+    function faqSetOpen(card, open) {
+      var btn = card.querySelector('.faq-q');
+      card.classList.toggle('faq-open', open);
+      if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    // Enhance only now that JS is running: before this point every
+    // answer is visible (no-JS fallback). Then set the initial state.
+    section.classList.add('faq-enhanced');
+    cards.forEach(function (card, i) { faqSetOpen(card, i === 0); });
+
+    cards.forEach(function (card) {
+      var btn = card.querySelector('.faq-q');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var willOpen = !card.classList.contains('faq-open');
+        cards.forEach(function (c) { faqSetOpen(c, false); });
+        if (willOpen) faqSetOpen(card, true);
+      });
+    });
+  })();
+</script>
 
   <!-- ==================== BIG FOOTER (PANDAPING EXACT SPECIFICATION) ==================== -->
   <footer class="w-full mt-12 bg-[#0E072E]">
