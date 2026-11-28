@@ -94,8 +94,7 @@ export async function revokeToken(env, accessToken) {
 }
 
 /** Step 5: the connected account's public profile fields. */
-export async function fetchUserInfo(accessToken) {
-  const fields = 'open_id,union_id,avatar_url,avatar_url_100,display_name,username';
+async function fetchUserInfoFields(accessToken, fields) {
   const res = await fetch(
     `https://open.tiktokapis.com/v2/user/info/?fields=${encodeURIComponent(fields)}`,
     { headers: { Authorization: `Bearer ${accessToken}` } },
@@ -106,6 +105,18 @@ export async function fetchUserInfo(accessToken) {
     throw new Error(`TikTok user/info failed: ${msg}`);
   }
   return data.data.user;
+}
+
+export async function fetchUserInfo(accessToken) {
+  // Only fields covered by the granted scopes (user.info.basic): requesting a
+  // field outside the scopes (e.g. username, which needs user.info.username)
+  // makes TikTok reject the WHOLE call. Fall back to open_id alone so a
+  // profile-field hiccup can never block sign-in.
+  try {
+    return await fetchUserInfoFields(accessToken, 'open_id,union_id,avatar_url,display_name');
+  } catch (e) {
+    return fetchUserInfoFields(accessToken, 'open_id');
+  }
 }
 
 /** Normalise a TikTok token payload into stored expiry timestamps. */
