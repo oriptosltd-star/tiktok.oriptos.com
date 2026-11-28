@@ -92,6 +92,7 @@ export async function onRequestGet({ request, env }) {
   const mock = isMockMode(env) || code === MOCK_CODE;
   if (code === MOCK_CODE && !isMockMode(env)) return fail('tiktok_state');
 
+  let stage = 'exchange';
   try {
     let profile;
     let tokenPayload;
@@ -121,6 +122,7 @@ export async function onRequestGet({ request, env }) {
       // ========================== /MOCK MODE =============================
     } else {
       tokenPayload = await exchangeCode(env, base, code);
+      stage = 'userinfo';
       const info = await fetchUserInfo(tokenPayload.access_token);
       profile = {
         open_id: tokenPayload.open_id || info.open_id,
@@ -139,6 +141,7 @@ export async function onRequestGet({ request, env }) {
     // the user; otherwise a new auth user is created under the synthetic
     // email and its profiles row is inserted, before the shared
     // account/token upserts below run keyed on the resolved id.
+    stage = 'resolve';
     let resolvedUserId = userId;
     if (loginMode) {
       const existing = await svc.selectOne('tiktok_accounts', eq('open_id', profile.open_id));
@@ -167,6 +170,7 @@ export async function onRequestGet({ request, env }) {
       }
     }
 
+    stage = 'upsert';
     // --- Upsert the connected account (keyed on user_id + open_id) --------
     const nowIso = new Date().toISOString();
     const [account] = await svc.upsert(
@@ -210,11 +214,12 @@ export async function onRequestGet({ request, env }) {
     // exchanges it via verifyOtp and lands on the dashboard. The
     // user's email comes from their profiles row (the FK guarantees it
     // exists); the synthetic email is the fallback for safety.
+    stage = 'magiclink';
     if (loginMode) {
       const profileRow = await svc.selectOne('profiles', eq('id', resolvedUserId));
       const email = (profileRow && profileRow.email) || syntheticEmailForOpenId(profile.open_id);
       const hashedToken = await generateMagicLinkToken(env, email);
-      if (!hashedToken) return failLogin('tiktok_login_failed');
+      if (!hashedToken) return failLogin('tiktok_login_failed_magiclink');
       return redirect(`${base}/login#tt_session=${encodeURIComponent(hashedToken)}`, {
         'Set-Cookie': CLEAR_COOKIE,
       });
@@ -224,6 +229,6 @@ export async function onRequestGet({ request, env }) {
       'Set-Cookie': CLEAR_COOKIE,
     });
   } catch {
-    return loginMode ? failLogin('tiktok_login_failed') : fail('tiktok_exchange');
+    return loginMode ? failLogin(`tiktok_login_failed_${stage}`) : fail('tiktok_exchange');
   }
 }
